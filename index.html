@@ -1,0 +1,2939 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SATARK AI — Your Personal Digital Scam Guardian</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    if (typeof window.tailwind !== 'undefined') {
+      window.tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              navy: { DEFAULT: '#10213A', deep: '#0B1728', card: '#13233B' },
+              teal: { DEFAULT: '#167D82', soft: '#E5F4F1', bright: '#2DD4BF' },
+              surface: { bg: '#F4F7FB', white: '#FFFFFF', dark: '#0B1728' },
+              ink: { primary: '#17263C', secondary: '#64748B' },
+              risk: { low: '#278A65', medium: '#E8A33A', high: '#D64D4D' }
+            },
+            fontFamily: {
+              heading: ['"Plus Jakarta Sans"', '"Noto Sans Devanagari"', 'sans-serif'],
+              sans: ['Inter', '"Noto Sans Devanagari"', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace']
+            }
+          }
+        }
+      };
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js" defer></script>
+  <style>
+    :root {
+      --bg-canvas: #F4F7FB;
+      --bg-surface: #FFFFFF;
+      --bg-subtle: #EDF2F9;
+      --text-primary: #0F1D33;
+      --text-secondary: #475569;
+      --border-subtle: rgba(148, 163, 184, 0.28);
+      --shadow-card: 0 1px 3px rgba(15, 29, 51, 0.04), 0 10px 28px -6px rgba(15, 29, 51, 0.07);
+      --shadow-card-hover: 0 4px 12px rgba(15, 29, 51, 0.06), 0 18px 36px -8px rgba(22, 125, 130, 0.14);
+    }
+    .dark {
+      --bg-canvas: #081120;
+      --bg-surface: #111F36;
+      --bg-subtle: #172946;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --border-subtle: rgba(71, 85, 105, 0.45);
+      --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.25), 0 14px 32px -8px rgba(0, 0, 0, 0.45);
+      --shadow-card-hover: 0 6px 18px rgba(0, 0, 0, 0.35), 0 20px 40px -8px rgba(45, 212, 191, 0.14);
+    }
+    body {
+      font-family: 'Inter', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif;
+      letter-spacing: -0.02em;
+    }
+    .satark-hero-mesh {
+      background-color: #091426;
+      background-image:
+        radial-gradient(at 15% 20%, rgba(22, 125, 130, 0.28) 0px, transparent 52%),
+        radial-gradient(at 85% 15%, rgba(45, 212, 191, 0.15) 0px, transparent 48%),
+        radial-gradient(at 50% 90%, rgba(16, 33, 58, 0.9) 0px, transparent 65%),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+    }
+    .satark-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-card);
+      border-radius: 1rem;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+    .satark-card-interactive:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(22, 125, 130, 0.45);
+    }
+    .satark-glass-dark {
+      background: linear-gradient(145deg, rgba(21, 39, 68, 0.92), rgba(12, 24, 44, 0.96));
+      border: 1px solid rgba(45, 212, 191, 0.22);
+      box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.55);
+    }
+    .satark-btn-primary {
+      background: linear-gradient(135deg, #167D82 0%, #0F5E63 100%);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(22, 125, 130, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      transition: all 0.18s ease;
+    }
+    .satark-btn-primary:hover {
+      background: linear-gradient(135deg, #1B8E94 0%, #126E73 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(22, 125, 130, 0.42);
+    }
+    .inert-url {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      word-break: break-all;
+      user-select: all;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .reduced-motion *, .reduced-motion *::before, .reduced-motion *::after {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+      transform: none !important;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #fff !important; color: #000 !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col transition-colors duration-200">
+
+  <!-- Clean Top Utility Bar (Parakram 2026 & Hybrid Engine pills removed) -->
+  <div id="top-demo-bar" class="no-print bg-[#091324] text-slate-100 text-xs border-b border-slate-800 px-3 sm:px-6 py-2">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span id="banner-tagline" class="text-slate-300 font-medium">SATARK AI — Privacy-First Multilingual Scam Guardian</span>
+      </div>
+      <div class="flex items-center gap-2 flex-wrap">
+        <button type="button" id="btn-toggle-lang" onclick="toggleLanguage()" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-100 font-semibold border border-slate-700 transition" aria-label="Switch Interface Language">
+          🌐 <span id="lang-btn-text">हिंदी / EN</span>
+        </button>
+        <button type="button" id="btn-toggle-theme" onclick="toggleTheme()" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-100 font-semibold border border-slate-700 transition" aria-label="Toggle Dark or Light Mode">
+          <span id="theme-btn-text">🌙 Dark</span>
+        </button>
+        <button type="button" id="btn-demo-reset" onclick="openResetDemoModal()" class="px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-400/30 font-semibold transition" title="Reset to clean state">
+          ↺ <span data-i18n="resetDemo">Reset Demo</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Root Container -->
+  <div id="app-root" class="flex-1 flex flex-col"></div>
+
+  <!-- Accessible In-Page Modal Container -->
+  <div id="modal-backdrop" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="satark-card bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl">
+      <h3 id="modal-title" class="text-lg font-bold text-slate-900 dark:text-white mb-2">Confirmation</h3>
+      <p id="modal-body" class="text-sm text-slate-600 dark:text-slate-300 mb-6"></p>
+      <div class="flex items-center justify-end gap-3">
+        <button type="button" id="modal-cancel-btn" onclick="closeModal()" class="px-4 py-2 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 transition">Cancel</button>
+        <button type="button" id="modal-confirm-btn" onclick="confirmModalAction()" class="px-4 py-2 rounded-lg text-sm font-semibold bg-[#D64D4D] hover:bg-red-700 text-white transition">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+
+  <script>
+    // =========================================================================
+    // 1. MULTILINGUAL TRANSLATIONS (English & Hindi)
+    // =========================================================================
+    const I18N = {
+      en: {
+        brandSub: "Your Personal Digital Scam Guardian",
+        resetDemo: "Reset Demo",
+        navOverview: "Overview",
+        navScanMsg: "Scan Message",
+        navScreenshot: "Screenshot OCR",
+        navUrlCheck: "Check URL",
+        navHistory: "Scan History",
+        navInsights: "Security Insights",
+        navLearn: "Scam Academy",
+        navQuiz: "Recognition Quiz",
+        navReport: "Report & Help",
+        navSettings: "Settings",
+        heroTitle: "Think Before You Trust.",
+        heroSubtitle: "Detect suspicious messages in English, Hindi, and Hinglish, understand hidden manipulation tactics, and verify links structurally without ever visiting dangerous domains.",
+        ctaScanNow: "Scan a Message",
+        ctaHowItWorks: "See How It Works",
+        dashboardGreeting: "Stay one step ahead of scams.",
+        dashboardSub: "Paste a suspicious SMS, WhatsApp forward, screenshot, or URL to inspect its threat signals locally and transparently.",
+        analyzeBtn: "Analyze Message",
+        clearBtn: "Clear",
+        pasteBtn: "Paste Clipboard",
+        offlineNotice: "Local deterministic rules, structural URL inspection, and statistical scoring run directly in your browser.",
+        privacyNotice: "Privacy-First: Messages are analyzed without logging sensitive content. Extracted links are rendered as inert text and never visited automatically."
+      },
+      hi: {
+        brandSub: "आपका व्यक्तिगत डिजिटल स्कैम सुरक्षा कवच",
+        resetDemo: "डेमो रीसेट करें",
+        navOverview: "डैशबोर्ड (Overview)",
+        navScanMsg: "संदेश जांचें (Scan)",
+        navScreenshot: "स्क्रीनशॉट OCR",
+        navUrlCheck: "लिंक जांचें (URL)",
+        navHistory: "इतिहास (History)",
+        navInsights: "सुरक्षा विश्लेषण",
+        navLearn: "स्कैम अकादमी",
+        navQuiz: "जागरूकता क्विज़",
+        navReport: "रिपोर्ट और सहायता",
+        navSettings: "सेटिंग्स",
+        heroTitle: "भरोसा करने से पहले जांचें।",
+        heroSubtitle: "हिंदी, अंग्रेजी और हिंग्लिश में संदिग्ध संदेशों की पहचान करें, छिपे हुए जालसाजी संकेतों को समझें और बिना किसी खतरनाक लिंक को खोले सुरक्षित निर्णय लें।",
+        ctaScanNow: "संदेश स्कैन करें",
+        ctaHowItWorks: "यह कैसे काम करता है",
+        dashboardGreeting: "डिजिटल ठगी से एक कदम आगे रहें।",
+        dashboardSub: "किसी भी संदिग्ध एसएमएस, व्हाट्सएप संदेश, स्क्रीनशॉट या लिंक को यहां पेस्ट करें और स्पष्ट कारणों के साथ जोखिम विश्लेषण देखें।",
+        analyzeBtn: "संदेश का विश्लेषण करें",
+        clearBtn: "साफ़ करें",
+        pasteBtn: "पेस्ट करें",
+        offlineNotice: "स्थानीय नियम, सुरक्षित URL जांच और सांख्यिकीय विश्लेषण सीधे आपके ब्राउज़र में काम कर रहे हैं।",
+        privacyNotice: "गोपनीयता प्रथम: आपके संदेशों को किसी सार्वजनिक सर्वर पर संग्रहीत नहीं किया जाता है और संदिग्ध लिंक कभी भी अपने आप नहीं खोले जाते।"
+      }
+    };
+
+    // =========================================================================
+    // 2. LABELED DEMO SAMPLE MESSAGES
+    // =========================================================================
+    const SAMPLE_MESSAGES = [
+      {
+        id: "sample-kyc-en",
+        label: "Fake Bank KYC Suspension (English)",
+        category_hint: "Fake Bank KYC",
+        lang: "en",
+        text: "URGENT SBI NOTICE: Dear customer, your SBI savings account and YONO access will be blocked today at 11:59 PM because your PAN Card KYC has expired. Update KYC immediately at http://sbi-kyc-online-verify.xyz/login within 2 hours."
+      },
+      {
+        id: "sample-kyc-hinglish",
+        label: "Hinglish KYC & OTP Demand (Hinglish)",
+        category_hint: "Hinglish KYC + OTP",
+        lang: "hinglish",
+        text: "Dear customer aapka HDFC bank account aaj raat block ho jayega. Abhi KYC update karo http://hdfc-fast-kyc.top par aur verification ke liye mobile par aaya 6-digit OTP share karo."
+      },
+      {
+        id: "sample-upi-hi",
+        label: "UPI PIN & QR Refund Trap (Hindi)",
+        category_hint: "UPI Payment Fraud",
+        lang: "hi",
+        text: "बधाई हो! आपका ₹4,500 का कैशबैक रिफंड स्वीकृत हो गया है। पैसे अपने बैंक खाते में प्राप्त करने के लिए अभी भेजे गए क्यूआर (QR) कोड को स्कैन करें और अपना यूपीआई पिन (UPI PIN) डालें।"
+      },
+      {
+        id: "sample-job",
+        label: "Telegram Part-Time Job Scam (English)",
+        category_hint: "Job Recruitment Fraud",
+        lang: "en",
+        text: "Part-time Work From Home Opportunity! Earn ₹3,500 to ₹8,000 per day simply by liking YouTube videos and rating Google Maps hotels. Pay ₹999 refundable registration fee today and join http://telegram-vip-jobs.xyz"
+      },
+      {
+        id: "sample-courier",
+        label: "India Post Parcel Address Scam (English)",
+        category_hint: "Fake Courier Delivery",
+        lang: "en",
+        text: "India Post Alert: Your package #IN904821 delivery failed today due to an incomplete house address. Update delivery address within 12 hours at http://indiapost-parcel-rebook.icu and pay ₹25 redelivery fee."
+      },
+      {
+        id: "sample-electricity",
+        label: "Electricity Disconnection Tonight (English)",
+        category_hint: "Fake Government/Utility Notice",
+        lang: "en",
+        text: "Dear Consumer, your Electricity power will be disconnected tonight at 9:30 PM from electricity office because your previous month bill was not updated. Immediately call our electricity officer at 8901234567."
+      },
+      {
+        id: "sample-scholarship",
+        label: "Fake Student Scholarship Grant (Hinglish)",
+        category_hint: "Scholarship Fraud",
+        lang: "hinglish",
+        text: "National Scholarship Portal: Congratulations! Your ₹45,000 student scholarship grant is approved. Pay ₹450 processing fee at http://pm-scholarship-claim.xyz within 4 hours to disburse funds."
+      },
+      {
+        id: "sample-legit-otp",
+        label: "Legitimate Bank OTP with Safety Notice (Benign Example)",
+        category_hint: "Legitimate Service Notice",
+        lang: "en",
+        text: "Your OTP for logging into SBI YONO is 482910. Valid for 10 minutes. NEVER share this OTP or ATM PIN with anyone, even if they claim to be from the bank."
+      },
+      {
+        id: "sample-legit-work",
+        label: "Legitimate Workplace Urgent Reminder (False-Positive Test)",
+        category_hint: "Legitimate Colleague Message",
+        lang: "en",
+        text: "Hi Aditi, urgent reminder: our client architecture review meeting is moved to 3:30 PM today in Conference Room B. Please verify the Q3 metrics table before we join."
+      }
+    ];
+
+    // =========================================================================
+    // 3. SCAM AWARENESS ACADEMY LESSONS (10 Interactive Modules)
+    // =========================================================================
+    const ACADEMY_LESSONS = [
+      {
+        slug: "fake-bank-messages",
+        number: 1,
+        title: "Recognizing Fake Bank Suspension & KYC Messages",
+        title_hi: "नकली बैंक सस्पेंशन और केवाईसी संदेशों की पहचान",
+        category: "Banking & KYC Safety",
+        readTime: "3 min read",
+        summary: "How scammers impersonate SBI, HDFC, ICICI, and PNB using artificial deadlines and lookalike domains.",
+        explanation: "Fraudsters send bulk SMS and WhatsApp alerts claiming your bank account, netbanking, or debit card has been frozen due to expired PAN/Aadhaar KYC. They create artificial panic (e.g., 'blocked tonight at 11:59 PM') so you click a link before checking the actual domain name.",
+        fictionalExample: "URGENT: Your SBI Account will be suspended today due to pending PAN KYC. Click http://sbi-kyc-update-in.xyz/login immediately to keep your card active.",
+        warningSigns: [
+          "Threatens immediate account freeze within hours if you do not click a link.",
+          "Uses disposable domains (.xyz, .top, .icu, .click) instead of the bank's official domain (e.g., sbi.co.in).",
+          "Sent from a regular 10-digit personal mobile number instead of an official RBI/TRAI registered header."
+        ],
+        safeActions: [
+          "Never click KYC or account-unblock links received via SMS or WhatsApp.",
+          "Open your bank's official mobile app independently or call the toll-free number printed on the back of your debit card."
+        ],
+        quizQuestion: "You receive an SMS from +91-9811XXXXXX saying 'Your bank KYC expired today, click http://bank-kyc.xyz to update'. What is the safest action?",
+        quizOptions: [
+          "Click the link quickly so your account is not blocked.",
+          "Ignore the link and check your KYC status directly inside your official banking app.",
+          "Reply to the SMS with your PAN number."
+        ],
+        quizAnswerIndex: 1,
+        quizExplanation: "Banks never ask customers to complete KYC over unverified third-party '.xyz' links sent from personal mobile numbers."
+      },
+      {
+        slug: "how-otp-scams-work",
+        number: 2,
+        title: "How OTP, ATM PIN & Credential Theft Works",
+        title_hi: "ओटीपी (OTP) और पासवर्ड चोरी कैसे होती है",
+        category: "Credential Security",
+        readTime: "3 min read",
+        summary: "Why scammers invent stories about canceling transactions, upgrading SIM cards, or redeeming reward points to steal your OTP.",
+        explanation: "A One-Time Password (OTP) is a second factor of authentication meant strictly to authorize an action YOU initiated. Scammers initiate a login or fund transfer on your account and then call you pretending to be bank staff—asking you to read out the OTP to 'cancel a fraudulent debit'.",
+        fictionalExample: "Alert: A transaction of ₹48,999 is initiated on your card. If not done by you, immediately share the 6-digit cancellation OTP with our fraud officer on call.",
+        warningSigns: [
+          "Caller claims an OTP is needed to 'cancel', 'stop', or 'refund' an unauthorized transaction.",
+          "Message asks for your 6-digit OTP to redeem expiring credit card reward points or upgrade a 4G SIM to 5G."
+        ],
+        safeActions: [
+          "Read the full text of the OTP SMS—legitimate OTPs clearly state 'Never share this OTP'.",
+          "Hang up immediately if anyone asks you to read out an SMS code."
+        ],
+        quizQuestion: "A caller claiming to be from your bank's fraud desk says ₹25,000 is being debited from your card and asks for the OTP on your phone to block the transfer. What should you do?",
+        quizOptions: [
+          "Share the OTP immediately to save the ₹25,000.",
+          "Refuse to share the OTP, hang up, and check your account statement in the official banking app.",
+          "Share only the last 3 digits of the OTP."
+        ],
+        quizAnswerIndex: 1,
+        quizExplanation: "Sharing the OTP actually AUTHORIZES the ₹25,000 debit that the scammer initiated in the background."
+      },
+      {
+        slug: "fraudulent-job-offers",
+        number: 3,
+        title: "Detecting Fraudulent Job Offers & Prepaid Task Scams",
+        title_hi: "नकली नौकरी और टेलीग्राम प्रीपेड टास्क धोखाधड़ी",
+        category: "Employment Safety",
+        readTime: "4 min read",
+        summary: "Understanding the psychology behind YouTube-like tasks, small initial payouts, and sunk-cost Telegram traps.",
+        explanation: "Task scams start by offering ₹150–₹300 for liking a few YouTube videos or Google Maps listings. Once hooked, you are moved to a 'VIP Telegram Group' where you must deposit thousands in 'prepaid merchant tasks' to unlock your frozen commission.",
+        fictionalExample: "Work from home 1 hr daily! Earn ₹5,000/day liking YouTube channels. Complete 3 VIP prepaid tasks on Telegram to withdraw ₹18,000 bonus.",
+        warningSigns: [
+          "Unrealistic daily earnings (₹3,000–₹8,000/day) for trivial tasks like liking videos.",
+          "Requires an upfront registration fee, security deposit, or 'prepaid task investment'."
+        ],
+        safeActions: [
+          "Never pay money to get a job or unlock a salary withdrawal.",
+          "Verify job offers on the company's official career website."
+        ],
+        quizQuestion: "A WhatsApp recruiter pays you ₹200 for rating two hotels, then asks you to deposit ₹3,000 for a 'VIP task' that returns ₹4,200. What is happening?",
+        quizOptions: [
+          "It is a genuine digital marketing internship.",
+          "It is a classic prepaid task scam using a small initial payout as bait.",
+          "It is safe as long as you only deposit ₹3,000."
+        ],
+        quizAnswerIndex: 1,
+        quizExplanation: "Scammers routinely pay ₹150–₹300 initially as bait before trapping victims into depositing thousands."
+      },
+      {
+        slug: "fake-scholarship-opportunities",
+        number: 4,
+        title: "Spotting Fake Scholarship & Education Grant Scams",
+        title_hi: "नकली छात्रवृत्ति और शिक्षा अनुदान से बचाव",
+        category: "Student Protection",
+        readTime: "3 min read",
+        summary: "How scammers target students and parents with fake government or CSR scholarship approvals.",
+        explanation: "Students frequently receive messages claiming they have been selected for a 'National Merit Scholarship' or 'Free Laptop Grant' of ₹35,000–₹50,000. To release the grant, the portal demands a ₹300–₹999 processing/verification fee.",
+        fictionalExample: "Congratulations! Your ₹40,000 PM Student Scholarship is approved. Pay ₹450 file verification fee at http://scholar-grant-india.xyz today.",
+        warningSigns: [
+          "Approval of a scholarship you never applied for.",
+          "Requests a processing or verification fee to release scholarship money."
+        ],
+        safeActions: [
+          "Check government scholarships exclusively at https://scholarships.gov.in or your college administration office.",
+          "Never pay an advance fee to receive an educational grant."
+        ],
+        quizQuestion: "Which website is the official Government of India portal for central scholarships?",
+        quizOptions: [
+          "http://pm-scholarship-claim.xyz",
+          "https://scholarships.gov.in",
+          "http://india-student-grant.top"
+        ],
+        quizAnswerIndex: 1,
+        quizExplanation: "Official Government of India portals use verified '.gov.in' or '.nic.in' domains, never '.xyz' or '.top'."
+      },
+      {
+        slug: "upi-fraud-and-payment-requests",
+        number: 5,
+        title: "UPI Collect Requests & Payment Deception",
+        title_hi: "यूपीआई (UPI) कलेक्ट रिक्वेस्ट और भुगतान धोखाधड़ी",
+        category: "Digital Payments",
+        readTime: "4 min read",
+        summary: "The #1 rule every Indian UPI user must know: Receiving money NEVER requires entering your UPI PIN.",
+        explanation: "On classified marketplaces or cashback calls, scammers send a UPI Collect Request disguised as a credit notification and tell you to enter your UPI PIN to receive money into your bank account.",
+        fictionalExample: "Cashback of ₹2,500 ready! Open PhonePe/GPay, approve the collect notification, and enter your UPI PIN to receive the amount.",
+        warningSigns: [
+          "Anyone telling you to enter your UPI PIN to 'receive', 'claim', or 'accept' money.",
+          "Fake SMS from a personal number mimicking a bank credit alert."
+        ],
+        safeActions: [
+          "Memorize this rule: UPI PIN is ONLY entered when money is leaving your account.",
+          "Check your actual bank balance inside your UPI/bank app rather than trusting an SMS."
+        ],
+        quizQuestion: "When is a UPI PIN required on Google Pay, PhonePe, Paytm, or BHIM?",
+        quizOptions: [
+          "Both when sending and receiving money.",
+          "ONLY when sending/deducting money from your bank account (or checking balance).",
+          "Whenever you receive a cashback reward."
+        ],
+        quizAnswerIndex: 1,
+        quizExplanation: "Receiving money into your bank account via UPI is automatic and never requires entering your UPI PIN."
+      },
+      {
+        slug: "qr-code-scam-awareness",
+        number: 6,
+        title: "QR-Code Scam Awareness (Quishing)",
+        title_hi: "क्यूआर कोड (QR Code) स्कैम से सावधानी",
+        category: "Digital Payments",
+        readTime: "3 min read",
+        summary: "Why scanning a QR code sent on WhatsApp can either deduct money via UPI or open a phishing website.",
+        explanation: "Scammers send payment QR codes on WhatsApp claiming that scanning them will credit an advance deposit or refund.",
+        fictionalExample: "Buyer: Scan this QR code on WhatsApp and enter your PIN to receive ₹20,000 advance payment for your furniture.",
+        warningSigns: [
+          "A buyer or caller sends you a QR code and tells you to scan it to receive money."
+        ],
+        safeActions: [
+          "Never scan a QR code to receive a payment—QR codes in UPI apps are strictly for PAYING."
+        ],
+        quizQuestion: "An online buyer wants to purchase your old bicycle for ₹4,000 and sends a QR code on WhatsApp saying 'Scan this to get ₹4,000 in your account'. Is this legitimate?",
+        quizOptions: [
+          "Yes, scanning QR codes is how buyers send money.",
+          "No, scanning a payment QR code and entering your PIN will send ₹4,000 FROM your account to the scammer.",
+          "Yes, if you scan it within 5 minutes."
+        ],
+        quizAnswerIndex: 1,
+        quizExplanation: "Scanning a UPI QR code initiates an outgoing payment from the scanner's account."
+      },
+      {
+        slug: "suspicious-links-and-fake-domains",
+        number: 7,
+        title: "Dissecting Suspicious Links & Lookalike Domains",
+        title_hi: "संदिग्ध लिंक और नकली डोमेन की पहचान कैसे करें",
+        category: "Web & URL Security",
+        readTime: "4 min read",
+        summary: "Learn how to find the true registrable domain and why the HTTPS padlock does not mean a website is trustworthy.",
+        explanation: "Attackers craft deceptive URLs like https://sbi.co.in.kyc-update.xyz/login. In reality, the registrable domain is kyc-update.xyz, and sbi.co.in is merely a subdomain controlled by the attacker.",
+        fictionalExample: "https://onlinesbi.verify-account.top/netbanking/login?session=8912",
+        warningSigns: [
+          "Brand name appears in the left subdomain rather than right before the official TLD.",
+          "Uses raw IP addresses or Punycode (xn--)."
+        ],
+        safeActions: [
+          "Always read a domain name from right to left up to the first single slash /.",
+          "Use SATARK AI's URL Safety Checker to inspect links structurally without opening them."
+        ],
+        quizQuestion: "In the URL `https://hdfcbank.com.secure-login.xyz/kyc`, who actually owns the website you are visiting?",
+        quizOptions: [
+          "HDFC Bank (hdfcbank.com).",
+          "Whoever registered secure-login.xyz.",
+          "The Reserve Bank of India."
+        ],
+        quizAnswerIndex: 1,
+        quizExplanation: "The registrable domain right before the first path slash '/' is secure-login.xyz."
+      },
+      {
+        slug: "fake-courier-and-delivery-messages",
+        number: 8,
+        title: "Fake Courier & Parcel Delivery Traps",
+        title_hi: "नकली कूरियर और पार्सल डिलीवरी संदेश",
+        category: "E-Commerce Safety",
+        readTime: "3 min read",
+        summary: "How fake India Post, Delhivery, and BlueDart SMS alerts steal credit card details under the guise of a ₹20 redelivery fee.",
+        explanation: "Scammers send generic SMS alerts claiming a parcel could not be delivered due to an 'incomplete address', leading to a fake portal asking for a ₹10–₹25 redelivery fee by card.",
+        fictionalExample: "India Post: Your parcel #IN782910 has been returned due to an incomplete street address. Update at http://indiapost-parcel.xyz",
+        warningSigns: [
+          "Uses a domain like indiapost-track.xyz instead of indiapost.gov.in.",
+          "Demands a small ₹10–₹50 address-update charge by card."
+        ],
+        safeActions: [
+          "Check order status directly inside Amazon, Flipkart, or the official courier website typed manually."
+        ],
+        quizQuestion: "An SMS claims your India Post package is halted due to a missing house number and links to `http://indiapost-locate.top`. What indicates this is a scam?",
+        quizOptions: [
+          "India Post never uses .top domains; its official domain is indiapost.gov.in.",
+          "The tracking number starts with IN.",
+          "It arrived in the afternoon."
+        ],
+        quizAnswerIndex: 0,
+        quizExplanation: "India Post is a Government of India department using indiapost.gov.in."
+      },
+      {
+        slug: "government-impersonation",
+        number: 9,
+        title: "Government Impersonation, Electricity Cut & 'Digital Arrest' Scams",
+        title_hi: "बिजली कटौती और 'डिजिटल अरेस्ट' (Digital Arrest) धोखाधड़ी",
+        category: "Authority Impersonation",
+        readTime: "4 min read",
+        summary: "Why Indian police, CBI, Customs, and RBI never conduct 'Digital Arrests' on video calls or threaten 9:30 PM power cuts via personal numbers.",
+        explanation: "Two major authority scams target Indian citizens: 9:30 PM electricity disconnection SMS threats and fake police/CBI 'Digital Arrest' video calls.",
+        fictionalExample: "CBI Cyber Crime Notice: An illegal parcel in your Aadhaar name was seized at Mumbai Customs. Stay on Skype video call under Digital Arrest.",
+        warningSigns: [
+          "Electricity bill SMS asking you to call a 10-digit personal mobile number.",
+          "Callers threatening 'Digital Arrest' over WhatsApp/Skype video call."
+        ],
+        safeActions: [
+          "There is NO legal concept of 'Digital Arrest' in India. Disconnect immediately and call 1930."
+        ],
+        quizQuestion: "Someone on a WhatsApp video call wearing a police uniform places you under 'Digital Arrest' until you transfer funds for verification. What is true?",
+        quizOptions: [
+          "Digital Arrest is a new fast-track court procedure.",
+          "'Digital Arrest' is 100% a scam—Indian police, CBI, and courts never conduct video arrests.",
+          "You should keep the camera on and follow their instructions."
+        ],
+        quizAnswerIndex: 1,
+        quizExplanation: "The Government of India and RBI have repeatedly warned citizens that 'Digital Arrest' does not exist in law."
+      },
+      {
+        slug: "responding-after-financial-fraud",
+        number: 10,
+        title: "Golden Hour Response: What To Do Immediately After Cyber Fraud",
+        title_hi: "धोखाधड़ी होने के बाद तुरंत क्या करें (Golden Hour Action)",
+        category: "Emergency Response",
+        readTime: "4 min read",
+        summary: "Step-by-step action plan during the critical first hour after money is debited or credentials are exposed.",
+        explanation: "Calling the National Cybercrime Helpline 1930 immediately triggers an electronic lien/freeze alert across Indian banks before the fraudster can withdraw the cash.",
+        fictionalExample: "Emergency Scenario: You entered your UPI PIN on a fake refund link and ₹15,000 was just debited.",
+        warningSigns: [
+          "Unexplained debit SMS or mouse/screen moving on its own via AnyDesk."
+        ],
+        safeActions: [
+          "Turn on Airplane Mode and uninstall any remote-access app (AnyDesk/TeamViewer).",
+          "Call 1930 immediately and file a report at https://cybercrime.gov.in."
+        ],
+        quizQuestion: "What is the official toll-free National Cybercrime Helpline number in India to report financial cyber fraud immediately?",
+        quizOptions: ["1930", "9999", "1400"],
+        quizAnswerIndex: 0,
+        quizExplanation: "Dialing 1930 connects directly to the National Cybercrime Reporting Portal financial fraud freeze system."
+      }
+    ];
+
+    // =========================================================================
+    // 4. INTERACTIVE SCAM RECOGNITION QUIZ SETS
+    // =========================================================================
+    const QUIZ_SETS = {
+      set1: {
+        title: "Set 1: Banking, UPI & Everyday SMS Judgment",
+        questions: [
+          {
+            id: "q1-1",
+            sender: "+91 89201 44120 (SMS)",
+            message: "Dear SBI Customer, your YONO account will be deactivated today due to incomplete PAN KYC. Update now at http://sbi-kyc-fast.xyz/login",
+            correctChoice: "scam",
+            explanation: "High-Risk Scam: Uses a personal 10-digit sender number, creates artificial urgency ('today'), and links to an unofficial '.xyz' domain impersonating SBI."
+          },
+          {
+            id: "q1-2",
+            sender: "AD-SBIBNK (Official Header)",
+            message: "Your OTP for SBI NetBanking transaction of Rs 1,200 is 839104. Valid for 10 mins. NEVER share this OTP with anyone, even bank staff.",
+            correctChoice: "legitimate",
+            explanation: "Legitimate Service Alert: Standard transactional OTP with an explicit safety reminder ('NEVER share this OTP') and no suspicious external link."
+          },
+          {
+            id: "q1-3",
+            sender: "WhatsApp Buyer",
+            message: "Sir maine ₹8,000 ka QR code bhej diya hai. Isko Google Pay se scan karke apna UPI PIN dalo toh paisa turant aapke account mein aa jayega.",
+            correctChoice: "scam",
+            explanation: "High-Risk UPI Scam: Scanning a QR code and entering your UPI PIN ALWAYS sends money out of your account; it never credits money."
+          },
+          {
+            id: "q1-4",
+            sender: "Rohan (Project Lead)",
+            message: "Hi team, urgent reminder: please verify the Q4 architecture diagram before our 4:00 PM sprint review meeting in Conference Room 2.",
+            correctChoice: "legitimate",
+            explanation: "Legitimate Message: Although it contains the words 'urgent' and 'verify', it is a normal workplace coordination message with no credential, payment, or link traps."
+          },
+          {
+            id: "q1-5",
+            sender: "+91 90123 77889 (SMS)",
+            message: "Dear Consumer, your Electricity power will be disconnected tonight at 9:30 PM because your previous month bill was not updated. Immediately call our officer at 9012377889.",
+            correctChoice: "scam",
+            explanation: "High-Risk Utility Impersonation: Electricity boards never threaten 9:30 PM disconnections from personal mobile numbers."
+          }
+        ]
+      },
+      set2: {
+        title: "Set 2: Jobs, Couriers, Scholarships & Digital Arrest",
+        questions: [
+          {
+            id: "q2-1",
+            sender: "Telegram @HR_Global_Media",
+            message: "Part-time WFH Job! Earn ₹4,500 daily liking YouTube videos. Pay ₹999 registration fee to unlock VIP task payouts today.",
+            correctChoice: "scam",
+            explanation: "High-Risk Job Scam: Unrealistic daily payouts for liking videos combined with an upfront registration fee."
+          },
+          {
+            id: "q2-2",
+            sender: "VM-IPPOST",
+            message: "India Post: Your parcel #IN84291 is halted due to an incomplete street address. Pay ₹20 redelivery fee at http://indiapost-parcel-help.top within 6 hours.",
+            correctChoice: "scam",
+            explanation: "High-Risk Delivery Scam: Impersonates India Post using a '.top' domain instead of 'indiapost.gov.in' to harvest card details."
+          },
+          {
+            id: "q2-3",
+            sender: "University Exam Cell",
+            message: "Dear Students, hall tickets for the November semester examinations are now available on the official college ERP portal. Bring your physical ID card to the exam hall.",
+            correctChoice: "legitimate",
+            explanation: "Legitimate Notice: Directs students to their known college ERP without demanding fees or external phishing logins."
+          },
+          {
+            id: "q2-4",
+            sender: "WhatsApp Video Call (+91 78001 XXXXX)",
+            message: "CBI & Customs Alert: A parcel with illegal documents in your Aadhaar name was seized. Join Skype for Digital Arrest verification and transfer ₹50,000 security deposit.",
+            correctChoice: "scam",
+            explanation: "High-Risk 'Digital Arrest' Scam: Indian law enforcement agencies never conduct video arrests or ask citizens to transfer security deposits."
+          },
+          {
+            id: "q2-5",
+            sender: "Customer Support Caller",
+            message: "To process your pending ₹1,200 UPI cashback, please install AnyDesk from the Play Store and share the 9-digit workspace code with our executive.",
+            correctChoice: "scam",
+            explanation: "High-Risk Remote Access Scam: Installing AnyDesk gives the caller live visual and remote control over your smartphone."
+          }
+        ]
+      },
+      set3: {
+        title: "Set 3: Lookalike URLs, Hindi/Hinglish Phishing & Investments",
+        questions: [
+          {
+            id: "q3-1",
+            sender: "SMS Alert",
+            message: "पैन कार्ड अपडेट न होने के कारण आपका बैंक खाता आज बंद हो जाएगा। तुरंत इस लिंक पर क्लिक करके अपना ओटीपी और पासवर्ड दर्ज करें: http://bank-kyc-bharat.xyz",
+            correctChoice: "scam",
+            explanation: "High-Risk Hindi Phishing: Threatens immediate account closure and asks for OTP + password on an unverified '.xyz' domain."
+          },
+          {
+            id: "q3-2",
+            sender: "WhatsApp VIP Group",
+            message: "Join our Institutional Block-Deal Stock Group! Guaranteed 200% profit in 7 days. Download our VIP trading APK from http://bull-trade-vip.icu",
+            correctChoice: "scam",
+            explanation: "High-Risk Investment Scam: No legitimate SEBI-registered broker guarantees 200% returns in 7 days or distributes trading apps via '.icu' APK links."
+          },
+          {
+            id: "q3-3",
+            sender: "AX-IRCTCi",
+            message: "IRCTC PNR 2419827361: Train 12004, Date 05-Nov-2026, Coach C2 Seat 18 Confirmed. Do not share OTP or card details for refund calls.",
+            correctChoice: "legitimate",
+            explanation: "Legitimate Ticket Alert: Standard travel confirmation accompanied by a protective anti-fraud reminder."
+          },
+          {
+            id: "q3-4",
+            sender: "Lucky Draw Desk",
+            message: "Badhai ho! Aapne KBC WhatsApp Lucky Draw mein ₹25 Lakh ki lottery jeeti hai. Inam claim karne ke liye ₹8,500 GST processing fee abhi jama karein.",
+            correctChoice: "scam",
+            explanation: "High-Risk Lottery Scam: Random WhatsApp lotteries asking for advance GST/processing fees are 100% fraudulent."
+          },
+          {
+            id: "q3-5",
+            sender: "URL Inspection Target",
+            message: "Please sign in to verify your corporate account at: https://icicibank.com.account-check-in.xyz/netbanking",
+            correctChoice: "scam",
+            explanation: "High-Risk Subdomain Spoofing: The true registrable domain is 'account-check-in.xyz', NOT 'icicibank.com'."
+          }
+        ]
+      }
+    };
+
+    // =========================================================================
+    // 5. STATE & SAFE STORAGE
+    // =========================================================================
+    const STORAGE_KEYS = {
+      SETTINGS: "satark_ai_settings_v1",
+      HISTORY: "satark_ai_history_v1",
+      QUIZ_SCORES: "satark_ai_quiz_v1",
+      LESSONS_DONE: "satark_ai_lessons_v1"
+    };
+
+    const DEFAULT_SETTINGS = {
+      language: "en",
+      theme: "light",
+      reducedMotion: false,
+      saveHistory: true,
+      retainRawText: true,
+      allowCloudAnalysis: true
+    };
+
+    const APP_STATE = {
+      route: "/",
+      routeParam: null,
+      settings: { ...DEFAULT_SETTINGS },
+      history: [],
+      currentResult: null,
+      lastUrlCheckResult: null,
+      scannerDraft: "",
+      scannerLanguageHint: "auto",
+      isScanning: false,
+      scanProgressStep: "",
+      urlInputDraft: "http://sbi.co.in.kyc-verify-portal.xyz/login?redirect=http://evil.example",
+      historySearch: "",
+      historyRiskFilter: "all",
+      historyCategoryFilter: "all",
+      ocrImageDataUrl: null,
+      ocrImageName: "",
+      ocrProgress: 0,
+      ocrStatusText: "",
+      ocrExtractedText: "",
+      quizSetKey: "set1",
+      quizIndex: 0,
+      quizSelectedChoice: null,
+      quizSubmitted: false,
+      quizScore: 0,
+      quizFinished: false,
+      quizBestScores: {},
+      completedLessons: [],
+      reportScenario: "financial_loss",
+      incidentForm: { date: "", amount: "", utr: "", suspectId: "", platform: "WhatsApp / SMS", notes: "" },
+      modalActionCallback: null
+    };
+
+    function safeStorageGet(key, fallback) {
+      try {
+        const raw = window.localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function safeStorageSet(key, value) {
+      try {
+        window.localStorage.setItem(key, JSON.stringify(value));
+      } catch (e) {}
+    }
+
+    function loadInitialState() {
+      APP_STATE.settings = { ...DEFAULT_SETTINGS, ...safeStorageGet(STORAGE_KEYS.SETTINGS, {}) };
+      APP_STATE.history = safeStorageGet(STORAGE_KEYS.HISTORY, []);
+      APP_STATE.quizBestScores = safeStorageGet(STORAGE_KEYS.QUIZ_SCORES, {});
+      APP_STATE.completedLessons = safeStorageGet(STORAGE_KEYS.LESSONS_DONE, []);
+      applyThemeAndMotion();
+    }
+
+    function applyThemeAndMotion() {
+      const rootEl = document.documentElement;
+      if (APP_STATE.settings.theme === "dark") {
+        rootEl.classList.add("dark");
+      } else {
+        rootEl.classList.remove("dark");
+      }
+      if (APP_STATE.settings.reducedMotion) {
+        rootEl.classList.add("reduced-motion");
+      } else {
+        rootEl.classList.remove("reduced-motion");
+      }
+      const themeBtn = document.getElementById("theme-btn-text");
+      if (themeBtn) {
+        themeBtn.textContent = APP_STATE.settings.theme === "dark" ? "☀️ Light" : "🌙 Dark";
+      }
+      const langBtn = document.getElementById("lang-btn-text");
+      if (langBtn) {
+        langBtn.textContent = APP_STATE.settings.language === "hi" ? "EN / हिंदी (सक्रिय)" : "हिंदी / EN (Active)";
+      }
+    }
+
+    function t(key) {
+      const lang = APP_STATE.settings.language || "en";
+      return (I18N[lang] && I18N[lang][key]) || I18N.en[key] || key;
+    }
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // =========================================================================
+    // 6. HYBRID MULTILINGUAL DETECTION ENGINE
+    // =========================================================================
+    const MULTI_PART_TLDS = new Set([
+      "co.in", "gov.in", "nic.in", "ac.in", "org.in", "net.in", "res.in", "edu.in",
+      "co.uk", "org.uk", "com.au", "co.jp", "com.sg"
+    ]);
+    const SUSPICIOUS_TLDS = new Set([
+      "xyz", "top", "click", "loan", "work", "gq", "tk", "ml", "cf", "ga", "buzz", "icu", "vip", "monster", "shop", "live"
+    ]);
+    const KNOWN_SHORTENERS = new Set([
+      "bit.ly", "tinyurl.com", "t.co", "goo.gl", "is.gd", "rb.gy", "cutt.ly", "shorturl.at", "tiny.cc"
+    ]);
+    const PROTECTED_BRANDS = {
+      sbi: ["sbi.co.in", "onlinesbi.sbi", "sbicard.com"],
+      hdfc: ["hdfcbank.com", "hdfc.com"],
+      icici: ["icicibank.com", "icicidirect.com"],
+      axis: ["axisbank.com"],
+      kotak: ["kotak.com", "kotakbank.com"],
+      pnb: ["pnbindia.in", "netpnb.com"],
+      paytm: ["paytm.com", "paytmbank.com"],
+      phonepe: ["phonepe.com"],
+      uidai: ["uidai.gov.in"],
+      aadhaar: ["uidai.gov.in"],
+      incometax: ["incometax.gov.in"],
+      indiapost: ["indiapost.gov.in"],
+      delhivery: ["delhivery.com"],
+      bluedart: ["bluedart.com"],
+      amazon: ["amazon.in", "amazon.com"],
+      flipkart: ["flipkart.com"]
+    };
+
+    const CATEGORY_META = {
+      bank_impersonation: { label_en: "Bank Account Impersonation", label_hi: "बैंक खाता प्रतिरूपण (Bank Impersonation)" },
+      kyc_phishing: { label_en: "KYC Update Phishing", label_hi: "केवाईसी अपडेट फ़िशिंग (KYC Phishing)" },
+      otp_credential_theft: { label_en: "OTP or Credential Theft", label_hi: "ओटीपी और पासवर्ड चोरी (OTP Theft)" },
+      upi_payment_scam: { label_en: "UPI & QR Payment Deception", label_hi: "यूपीआई और क्यूआर भुगतान धोखाधड़ी" },
+      job_scam: { label_en: "Job & Recruitment Fraud", label_hi: "नौकरी और भर्ती धोखाधड़ी (Job Scam)" },
+      scholarship_scam: { label_en: "Fake Scholarship Announcement", label_hi: "नकली छात्रवृत्ति धोखाधड़ी" },
+      prize_lottery_scam: { label_en: "Prize & Lottery Fraud", label_hi: "लॉटरी और इनाम धोखाधड़ी" },
+      delivery_scam: { label_en: "Courier & Parcel Delivery Scam", label_hi: "कूरियर और पार्सल डिलीवरी स्कैम" },
+      investment_scam: { label_en: "Investment & Crypto Fraud", label_hi: "निवेश और क्रिप्टो धोखाधड़ी" },
+      government_impersonation: { label_en: "Government & Utility Impersonation", label_hi: "सरकारी या बिजली विभाग प्रतिरूपण" },
+      tech_support_scam: { label_en: "Remote Access & Tech Support Scam", label_hi: "रिमोट एक्सेस और कस्टमर केयर स्कैम" },
+      other_suspicious: { label_en: "Other Suspicious Communication", label_hi: "अन्य संदिग्ध संदेश" },
+      uncertain: { label_en: "Uncertain — Verification Recommended", label_hi: "अनिश्चित — सत्यापन आवश्यक" },
+      no_strong_indicators: { label_en: "No Strong Scam Indicators Detected", label_hi: "कोई मजबूत स्कैम संकेत नहीं मिला" }
+    };
+
+    function extractRegistrableDomainJS(hostname) {
+      const host = (hostname || "").toLowerCase().replace(/^\.+|\.+$/g, "");
+      if (!host) return { regDomain: "", subCount: 0 };
+      if (/^(\d{1,3}\.){3}\d{1,3}$/.test(host)) return { regDomain: host, subCount: 0 };
+      const parts = host.split(".");
+      if (parts.length < 2) return { regDomain: host, subCount: 0 };
+      const lastTwo = parts.slice(-2).join(".");
+      if (MULTI_PART_TLDS.has(lastTwo) && parts.length >= 3) {
+        return { regDomain: parts.slice(-3).join("."), subCount: Math.max(0, parts.length - 3) };
+      }
+      return { regDomain: lastTwo, subCount: Math.max(0, parts.length - 2) };
+    }
+
+    function inspectUrlLocally(rawUrl) {
+      const submitted = (rawUrl || "").trim();
+      const lowerSub = submitted.toLowerCase();
+      if (lowerSub.startsWith("javascript:") || lowerSub.startsWith("data:") || lowerSub.startsWith("vbscript:")) {
+        return {
+          analysis_id: "url-" + Math.random().toString(36).slice(2, 10),
+          submitted_url: submitted,
+          normalized_url: submitted,
+          hostname: "",
+          registrable_domain: "",
+          scheme: lowerSub.split(":")[0],
+          is_https: false,
+          is_ip_address: false,
+          is_shortened: false,
+          has_punycode_or_idn: false,
+          subdomain_count: 0,
+          impersonated_brand: null,
+          risk_level: "high",
+          risk_index: 95,
+          summary: "Executable or non-web URI scheme detected. Never open or paste this link into a browser.",
+          signals: [{ signal: "dangerous_uri_scheme", severity: "high", explanation: "Uses an executable scheme (such as javascript: or data:) used in script injection." }],
+          reputation_status: "not_checked",
+          reputation_provider: "none",
+          recommended_actions: ["Do not click or paste this address into your browser.", "Delete the message immediately."],
+          limitations: ["SATARK AI inspects URL structure locally without visiting the destination."]
+        };
+      }
+
+      const withScheme = /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(submitted) ? submitted : "http://" + submitted;
+      let parsed;
+      try {
+        parsed = new URL(withScheme);
+      } catch (e) {
+        return {
+          analysis_id: "url-err",
+          submitted_url: submitted,
+          normalized_url: submitted,
+          hostname: "",
+          registrable_domain: "",
+          scheme: "invalid",
+          is_https: false,
+          is_ip_address: false,
+          is_shortened: false,
+          has_punycode_or_idn: false,
+          subdomain_count: 0,
+          impersonated_brand: null,
+          risk_level: "high",
+          risk_index: 82,
+          summary: "Malformed or unsafe URL structure.",
+          signals: [{ signal: "malformed_url", severity: "high", explanation: "Could not be parsed as a valid standard web address." }],
+          reputation_status: "not_checked",
+          reputation_provider: "none",
+          recommended_actions: ["Do not open this link."],
+          limitations: ["Evaluated structurally without visiting."]
+        };
+      }
+
+      const scheme = parsed.protocol.replace(":", "").toLowerCase();
+      const isHttps = scheme === "https";
+      const rawHost = (parsed.hostname || "").toLowerCase().replace(/^\.+|\.+$/g, "");
+      const isIp = /^(\d{1,3}\.){3}\d{1,3}$/.test(rawHost);
+      const hasIdn = rawHost.includes("xn--") || /[^\x00-\x7F]/.test(rawHost);
+      const { regDomain, subCount } = extractRegistrableDomainJS(rawHost);
+      const isShortened = KNOWN_SHORTENERS.has(regDomain);
+
+      const signals = [];
+      let points = 0;
+
+      if (parsed.username || parsed.password || submitted.includes("@")) {
+        points += 40;
+        signals.push({ signal: "embedded_credentials_in_url", severity: "high", explanation: "Contains '@' in the URL authority section to disguise the true destination host." });
+      }
+      if (isIp) {
+        points += 45;
+        signals.push({ signal: "ip_address_hostname", severity: "high", explanation: "Uses a raw numeric IP address instead of a registered domain name." });
+      }
+      if (hasIdn) {
+        points += 35;
+        signals.push({ signal: "punycode_or_idn_homograph", severity: "high", explanation: "Contains internationalized (IDN/Punycode) characters that can mimic trusted letters." });
+      }
+      if (!isHttps) {
+        points += 15;
+        signals.push({ signal: "unencrypted_http", severity: "medium", explanation: "Does not use HTTPS encryption. Note that even HTTPS sites can be fraudulent." });
+      }
+      if (rawHost.length > 42) {
+        points += 20;
+        signals.push({ signal: "long_hostname", severity: "medium", explanation: "Hostname is unusually long (" + rawHost.length + " chars), often used to hide the true domain on mobile screens." });
+      }
+      if (subCount >= 3) {
+        points += 22;
+        signals.push({ signal: "excessive_subdomains", severity: "medium", explanation: "Contains " + subCount + " subdomain levels before the registrable domain '" + regDomain + "'." });
+      }
+      const domLabel = (regDomain.split(".")[0] || "");
+      if ((domLabel.match(/-/g) || []).length >= 2) {
+        points += 22;
+        signals.push({ signal: "multi_hyphen_domain", severity: "medium", explanation: "Registrable domain '" + regDomain + "' uses multiple hyphens, typical of lookalike phishing domains." });
+      }
+      const tld = regDomain.split(".").pop() || "";
+      if (SUSPICIOUS_TLDS.has(tld)) {
+        points += 25;
+        signals.push({ signal: "high_abuse_tld", severity: "medium", explanation: "Uses the '." + tld + "' top-level domain frequently abused in disposable phishing campaigns." });
+      }
+      if (isShortened) {
+        points += 25;
+        signals.push({ signal: "url_shortener", severity: "medium", explanation: "Uses URL shortener '" + regDomain + "' which conceals the final destination. Requires independent verification." });
+      }
+
+      let impersonatedBrand = null;
+      const fullLower = (rawHost + parsed.pathname).toLowerCase();
+      for (const [brand, officialDomains] of Object.entries(PROTECTED_BRANDS)) {
+        if (fullLower.includes(brand) && !officialDomains.includes(regDomain)) {
+          impersonatedBrand = brand.toUpperCase();
+          points += 48;
+          signals.push({
+            signal: "brand_impersonation",
+            severity: "high",
+            explanation: "References '" + brand.toUpperCase() + "' in the hostname or path, but the actual registrable domain is '" + regDomain + "' instead of an official domain (" + officialDomains.join(", ") + ")."
+          });
+          break;
+        }
+      }
+
+      const phishingTerms = ["kyc", "verify", "update", "login", "signin", "unblock", "suspend", "pan", "aadhaar", "otp", "claim", "refund", "lottery"];
+      const pathAndSub = (rawHost.replace(regDomain, "") + " " + parsed.pathname).toLowerCase();
+      const matchedTerms = phishingTerms.filter(term => pathAndSub.includes(term));
+      const isOfficialBrandDomain = Object.values(PROTECTED_BRANDS).some(list => list.includes(regDomain));
+      if (matchedTerms.length > 0 && !isOfficialBrandDomain) {
+        points += Math.min(30, 12 * matchedTerms.length);
+        signals.push({
+          signal: "sensitive_action_keywords",
+          severity: matchedTerms.length > 1 ? "high" : "medium",
+          explanation: "URL contains sensitive verification/login keywords (" + matchedTerms.slice(0, 4).join(", ") + ") on an unverified domain."
+        });
+      }
+
+      if (parsed.search && /(redirect|url=|next=|token=|otp=|session=)/i.test(parsed.search)) {
+        points += 18;
+        signals.push({
+          signal: "suspicious_query_parameters",
+          severity: "medium",
+          explanation: "Contains redirect or session-related query parameters in '" + parsed.search.slice(0, 50) + "'."
+        });
+      }
+
+      const riskIndex = Math.min(98, Math.max(5, points));
+      const riskLevel = riskIndex >= 60 ? "high" : riskIndex >= 25 ? "medium" : "low";
+      const summary = riskLevel === "high"
+        ? "High-risk structural phishing indicators detected on '" + (regDomain || rawHost) + "'. Do not open this link."
+        : riskLevel === "medium"
+        ? "This URL ('" + (regDomain || rawHost) + "') shows structural warning signs that require independent verification before opening."
+        : "No strong structural phishing indicators were found in '" + (regDomain || rawHost) + "', though structural checks alone cannot guarantee safety.";
+
+      return {
+        analysis_id: "url-" + Math.random().toString(36).slice(2, 10),
+        submitted_url: submitted,
+        normalized_url: parsed.href,
+        hostname: rawHost,
+        registrable_domain: regDomain,
+        scheme: scheme,
+        is_https: isHttps,
+        is_ip_address: isIp,
+        is_shortened: isShortened,
+        has_punycode_or_idn: hasIdn,
+        subdomain_count: subCount,
+        impersonated_brand: impersonatedBrand,
+        risk_level: riskLevel,
+        risk_index: riskIndex,
+        summary: summary,
+        signals: signals,
+        reputation_status: "not_checked",
+        reputation_provider: "none (offline structural inspection)",
+        recommended_actions: riskLevel === "high" ? [
+          "Do not click or sign in at '" + (regDomain || rawHost) + "'.",
+          "Access the service by manually typing the official website address or opening its official app.",
+          "Report this fraudulent link on Chakshu (sancharsaathi.gov.in) or cybercrime.gov.in."
+        ] : [
+          "Verify you expected this link before opening it.",
+          "Remember that HTTPS only encrypts traffic and does not verify the legitimacy of the site owner."
+        ],
+        limitations: [
+          "SATARK AI performs zero-visit structural URL inspection so your IP is never exposed to the remote server.",
+          "HTTPS presence does not guarantee that a website is legitimate.",
+          "A domain not listed in threat feeds may still be newly registered for phishing."
+        ]
+      };
+    }
+
+    function extractUrlsFromTextJS(text) {
+      if (!text) return [];
+      const regex = /(?:https?:\/\/|www\.)[^\s<>"'\)\]]+|\b(?:[a-zA-Z0-9-]+\.)+(?:in|com|org|net|xyz|top|click|icu|vip|online|site|live|shop|info|co\.in|gov\.in|ly|at|gy|cc)(?:\/[^\s<>"'\)\]]*)?/gi;
+      const matches = text.match(regex) || [];
+      const seen = new Set();
+      const out = [];
+      for (const m of matches) {
+        const clean = m.replace(/[.,;:!?'\")]}+$/, "");
+        if (clean && !seen.has(clean.toLowerCase())) {
+          seen.add(clean.toLowerCase());
+          out.push(clean);
+        }
+      }
+      return out.slice(0, 8);
+    }
+
+    const CLIENT_RULES = [
+      {
+        type: "urgency",
+        catVote: null,
+        weight: 18,
+        severity: "medium",
+        regex: /\b(immediately|urgent|urgently|within\s+\d+\s*(?:hours?|hrs?|minutes?|mins?)|tonight\s+at\s+[0-9:]+\s*(?:pm|am)?|today\s+at\s+[0-9:]+\s*(?:pm|am)?|last\s+warning|final\s+notice|turant|abhi\s+ke\s+abhi|aaj\s+raat(?:\s+[0-9:]+\s*baje)?)\b|तुरंत|अभी\s+के\s+अभी|आज\s+रात|अंतिम\s+चेतावनी|तत्काल/gi,
+        exp_en: "Uses artificial urgency or a strict countdown deadline to pressure you into acting before verifying.",
+        exp_hi: "बिना जांच किए तुरंत कदम उठाने का दबाव बनाने के लिए कृत्रिम जल्दबाजी या समय-सीमा का उपयोग किया गया है।"
+      },
+      {
+        type: "impersonation",
+        catVote: "bank_impersonation",
+        weight: 32,
+        severity: "high",
+        regex: /\b(account\s+(?:and\s+\w+\s+access\s+)?(?:will\s+be\s+|has\s+been\s+|is\s+)?(?:blocked|suspended|frozen|deactivated|closed)|card\s+(?:has\s+been\s+|will\s+be\s+)?blocked|aapka\s+(?:[a-z]+\s+)?(?:bank\s+)?(?:account|khata)\s+(?:aaj\s+raat\s+)?(?:block|band|suspend|freeze)\s+ho\s*(?:jayega|gaya\s+hai))\b|खाता\s+(?:आज\s+रात\s+)?(?:ब्लॉक|बंद|सस्पेंड|फ्रीज)\s+हो\s+जाएगा|बैंक\s+खाता\s+(?:ब्लॉक|बंद|सस्पेंड)/gi,
+        exp_en: "Threatens that your bank account or debit card is blocked or about to be suspended to induce panic.",
+        exp_hi: "घबराहट पैदा करने के लिए आपके बैंक खाते या कार्ड के ब्लॉक/बंद होने की धमकी दी गई है।"
+      },
+      {
+        type: "impersonation",
+        catVote: "kyc_phishing",
+        weight: 34,
+        severity: "high",
+        regex: /\b(update\s+(?:your\s+|pan\s+)?(?:kyc|pan|aadhaar|aadhar)|(?:kyc|pan\s+card(?:\s+kyc)?)\s+(?:has\s+|is\s+)?(?:expired|pending|incomplete|suspended|update\s+karo|update\s+karein)|abhi\s+(?:apna\s+)?kyc\s+update\s+(?:karo|karein|kijiye))\b|केवाईसी\s*(?:\(kyc\)\s*)?(?:अपडेट|लंबित|समाप्त|रद्द)|पैन\s+कार्ड\s+(?:और\s+केवाईसी\s+)?अपडेट/gi,
+        exp_en: "Demands an urgent KYC, PAN, or Aadhaar update—one of the most common banking phishing lures.",
+        exp_hi: "तुरंत केवाईसी (KYC), पैन या आधार अपडेट करने की मांग की गई है, जो फ़िशिंग का एक प्रमुख तरीका है।"
+      },
+      {
+        type: "credential_request",
+        catVote: "otp_credential_theft",
+        weight: 48,
+        severity: "high",
+        regex: /\b(share\s+(?:your\s+|the\s+|this\s+|6[\s-]digit\s+|cancellation\s+|apna\s+6\s+digit\s+)?(?:otp|pin|cvv|password|mpin|passcode|code)|(?:6[\s-]digit\s+)?otp\s+share\s+(?:karo|karein|kijiye)|otp\s+bhejo|enter\s+(?:your\s+)?(?:atm\s+pin|cvv|netbanking\s+password)|share\s+otp\s+with\s+officer)\b|ओटीपी\s*(?:\(otp\)\s*)?(?:और\s+एटीएम\s+पिन\s+|और\s+पासवर्ड\s+)?(?:तुरंत\s+)?(?:शेयर|साझा|बताएं|भेजें|दर्ज\s+करें)|पिन\s+शेयर\s+करें/gi,
+        exp_en: "Asks you to share or enter an OTP, PIN, CVV, or password. Legitimate organizations never ask for these.",
+        exp_hi: "आपसे ओटीपी (OTP), पिन, सीवीवी या पासवर्ड साझा करने के लिए कहा गया है। कोई भी वैध संस्था कभी ओटीपी नहीं मांगती।"
+      },
+      {
+        type: "payment_request",
+        catVote: "upi_payment_scam",
+        weight: 48,
+        severity: "high",
+        regex: /\b(enter\s+(?:your\s+)?upi\s+pin|scan\s+(?:this\s+|the\s+)?qr\s*(?:code)?\s*(?:and\s+enter\s+your\s+upi\s+pin|to\s+receive)|approve\s+(?:the\s+)?collect\s+request|upi\s+pin\s+(?:dalein|dalo)|qr\s*(?:code\s+)?(?:google\s+pay\s+se\s+)?scan\s+karke)\b|यूपीआई\s+पिन\s*(?:\(upi\s+pin\)\s*)?(?:डालें|दर्ज\s+करें)|क्यूआर\s*(?:\(qr\)\s*)?(?:कोड\s+)?(?:को\s+)?स्कैन\s+करें|कैशबैक\s+रिफंड\s+स्वीकृत/gi,
+        exp_en: "Claims you must enter a UPI PIN or scan a QR code to receive money or cashback. UPI PIN is ONLY needed when money leaves your account.",
+        exp_hi: "पैसा या रिफंड प्राप्त करने के लिए यूपीआई पिन डालने या क्यूआर कोड स्कैन करने का दावा किया गया है। यूपीआई पिन केवल पैसे भेजने के लिए होता है।"
+      },
+      {
+        type: "payment_request",
+        catVote: "job_scam",
+        weight: 42,
+        severity: "high",
+        regex: /\b(earn\s+(?:rs\.?|inr|₹)?\s*\d[\d,]*(?:\s+to\s+(?:rs\.?|inr|₹)?\s*\d[\d,]*)?\s*(?:per\s+day|daily|\/day)|part[\s-]time\s+(?:wfh\s+|work\s+from\s+home\s+)?(?:job|opportunity)|(?:refundable\s+)?registration\s+fee\s+(?:bhejo|pay|deposit|today)|liking\s+youtube\s+videos|rating\s+google\s+maps|roz\s+₹?\d+\s+kamayein)\b|घर\s+बैठे\s+रोज़.*कमाएं|रजिस्ट्रेशन\s+फीस|प्रीपेड\s+टास्क/gi,
+        exp_en: "Promotes high daily payouts for trivial online tasks (liking videos/rating maps) or demands an upfront job registration fee.",
+        exp_hi: "आसान ऑनलाइन टास्क से रोज़ाना हजारों कमाने का प्रलोभन या नौकरी के नाम पर पंजीकरण शुल्क मांगा गया है।"
+      },
+      {
+        type: "payment_request",
+        catVote: "prize_lottery_scam",
+        weight: 45,
+        severity: "high",
+        regex: /\b(won\s+(?:a\s+|₹[\d,]+\s+in\s+the\s+)?(?:lottery|lucky\s+draw|kbc|cash\s+prize)|lucky\s+draw\s+mein.{0,35}lottery\s+jeeti|aapne.{0,25}lottery\s+jeeti\s+hai|claim.{0,25}(?:lottery|prize))\b|लॉटरी\s+जीती\s+है|लकी\s+ड्रॉ\s*(?:में|विजेता)|प्रोसेसिंग\s+फीस\s+जमा\s+करें|इनाम\s+पाने\s+के\s+लिए/gi,
+        exp_en: "Claims you won an unexpected lottery, KBC prize, or lucky draw and asks for a processing/GST charge to release the winnings.",
+        exp_hi: "बिना किसी भागीदारी के लॉटरी, केबीसी या लकी ड्रॉ जीतने का दावा कर प्रोसेसिंग शुल्क मांगा गया है।"
+      },
+      {
+        type: "payment_request",
+        catVote: "scholarship_scam",
+        weight: 42,
+        severity: "high",
+        regex: /\b(scholarship\s+(?:grant|amount|approved).{0,65}(?:processing\s+fee|verification\s+charge|pay|claim)|pay\s+₹?\d+\s+processing\s+fee.{0,40}disburse)\b|छात्रवृत्ति\s+(?:योजना\s+के\s+तहत\s+)?.*स्वीकृत|छात्रवृत्ति.*शुल्क/gi,
+        exp_en: "Lures students with an approved scholarship grant while demanding an upfront processing or verification fee.",
+        exp_hi: "छात्रवृत्ति स्वीकृत होने का झांसा देकर प्रोसेसिंग शुल्क या अनजान पोर्टल पर जानकारी मांगी गई है।"
+      },
+      {
+        type: "impersonation",
+        catVote: "delivery_scam",
+        weight: 38,
+        severity: "high",
+        regex: /\b((?:parcel|package|shipment|delivery).{0,45}(?:incomplete|missing|invalid)\s+(?:house\s+|street\s+)?address|update\s+delivery\s+address\s+within\s+\d+|redelivery\s+(?:fee|charge))\b|पार्सल.*पता\s+अधूरा|पता\s+अधूरा\s+होने\s+के\s+कारण\s+आपका\s+पार्सल/gi,
+        exp_en: "Claims a courier package is held due to an incomplete address and asks for a small redelivery fee or unverified link click.",
+        exp_hi: "पता अधूरा होने के बहाने पार्सल रुकने का दावा कर बाहरी लिंक पर क्लिक करने या शुल्क देने को कहा गया है।"
+      },
+      {
+        type: "impersonation",
+        catVote: "government_impersonation",
+        weight: 46,
+        severity: "high",
+        regex: /\b(electricity\s+power\s+will\s+be\s+disconnected\s+tonight|previous\s+month\s+bill\s+was\s+not\s+updated|digital\s+arrest|bijli\s+connection\s+aaj\s+raat\s+(?:[0-9:]+\s*baje\s+)?kat\s+jayega|call\s+our\s+(?:electricity\s+)?officer\s+at\s+\d{10}|electricity\s+officer\s+ko\s+\d{10}\s+par\s+call)\b|बिजली\s+कनेक्शन\s+आज\s+रात.*काट\s+दिया\s+जाएगा|डिजिटल\s+अरेस्ट|अवैध\s+कस्टम\s+पार्सल/gi,
+        exp_en: "Impersonates an electricity utility or law enforcement officer ('Digital Arrest' / customs threat / personal mobile helpline) to coerce immediate compliance.",
+        exp_hi: "बिजली विभाग या पुलिस/कस्टम ('डिजिटल अरेस्ट') के नाम पर डराकर तुरंत व्यक्तिगत नंबर पर संपर्क या भुगतान करने का दबाव बनाया गया है।"
+      },
+      {
+        type: "credential_request",
+        catVote: "tech_support_scam",
+        weight: 52,
+        severity: "high",
+        regex: /\b(anydesk|teamviewer|quicksupport|rustdesk|download\s+(?:our\s+|support\s+|vip\s+trading\s+)?apk|share\s+(?:your\s+|the\s+)?9[\s-]digit\s+(?:workspace\s+)?code|screen\s+share\s+karo)\b|स्क्रीन\s+शेयर\s+करें/gi,
+        exp_en: "Instructs you to install a remote desktop tool (AnyDesk, TeamViewer, RustDesk) or share a 9-digit remote access code, giving scammers live control over your phone.",
+        exp_hi: "आपको AnyDesk, TeamViewer या 9-अंकों का रिमोट एक्सेस कोड साझा करने के लिए कहा गया है, जिससे ठग आपके फोन को नियंत्रित कर सकते हैं।"
+      },
+      {
+        type: "payment_request",
+        catVote: "investment_scam",
+        weight: 44,
+        severity: "high",
+        regex: /\b(guaranteed\s+\d+%\s+(?:profit|return)|double\s+your\s+(?:money|investment|crypto)\s+in\s+\d+\s+days|institutional\s+block[\s-]deal\s+stock\s+group|vip\s+stock\s+group|paisa\s+double\s+karein)\b|गारंटीड\s+मुनाफा|पैसा\s+दोगुना\s+करें/gi,
+        exp_en: "Promises guaranteed high stock or crypto returns—a classic hallmark of financial investment fraud.",
+        exp_hi: "निवेश या क्रिप्टो में गारंटीड दोगुने मुनाफे का वादा किया गया है, जो वित्तीय धोखाधड़ी का स्पष्ट संकेत है।"
+      }
+    ];
+
+    function detectLanguageJS(text, hint) {
+      if (hint && ["en", "hi", "hinglish"].includes(hint)) return hint;
+      const devanagari = (text.match(/[\u0900-\u097F]/g) || []).length;
+      const latin = (text.match(/[a-zA-Z]/g) || []).length;
+      if (devanagari > 5 && devanagari >= latin * 0.25) return "hi";
+      if (/\b(aapka|aapke|abhi|karo|karein|turant|bhejo|jeeti|khata|band|jayega|kijiye|paisa|dalein|dalo|bijli)\b/i.test(text)) {
+        return "hinglish";
+      }
+      return "en";
+    }
+
+    async function runFullHybridAnalysis(rawText, langHint) {
+      const text = (rawText || "").trim();
+      const detectedLang = detectLanguageJS(text, langHint);
+      const hasSafetyDisclaimer = /\b(never\s+share\s+(?:this\s+|your\s+)?(?:otp|pin|cvv|password)|do\s+not\s+share\s+(?:this\s+|your\s+)?(?:otp|code|pin|password)|bank\s+never\s+asks)\b|ओटीपी\s+किसी\s+के\s+साथ\s+साझा\s+न\s+करें|कभी\s+ओटीपी\s+शेयर\s+न\s+करें/i.test(text);
+
+      const evidence = [];
+      const categoryVotes = {};
+
+      for (const rule of CLIENT_RULES) {
+        rule.regex.lastIndex = 0;
+        let m;
+        while ((m = rule.regex.exec(text)) !== null) {
+          const phrase = m[0].trim();
+          const prefixSlice = text.slice(Math.max(0, m.index - 14), m.index).toLowerCase();
+          if (rule.type === "credential_request" && /(never|do not|don't|mat)\s+$/.test(prefixSlice)) {
+            continue;
+          }
+          if (!evidence.some(e => e.text.toLowerCase() === phrase.toLowerCase() && e.type === rule.type)) {
+            evidence.push({
+              type: rule.type,
+              text: phrase,
+              explanation: rule.exp_en,
+              explanation_hi: rule.exp_hi,
+              severity: rule.severity,
+              source: "rule_engine"
+            });
+            if (rule.catVote) {
+              categoryVotes[rule.catVote] = (categoryVotes[rule.catVote] || 0) + rule.weight;
+            }
+          }
+        }
+      }
+
+      const extractedUrlStrings = extractUrlsFromTextJS(text);
+      const inspectedUrls = extractedUrlStrings.map(u => inspectUrlLocally(u));
+
+      for (const uRes of inspectedUrls) {
+        if (uRes.risk_level === "high" || uRes.risk_level === "medium") {
+          const sigText = uRes.signals.slice(0, 2).map(s => s.explanation).join(" ") || uRes.summary;
+          evidence.push({
+            type: "suspicious_link",
+            text: uRes.submitted_url,
+            explanation: "URL '" + (uRes.registrable_domain || uRes.hostname) + "' flagged (" + uRes.risk_level + " risk): " + sigText,
+            explanation_hi: "संदिग्ध लिंक '" + (uRes.registrable_domain || uRes.hostname) + "' (" + uRes.risk_level + " जोखिम): बिना स्वतंत्र पुष्टि के इस लिंक को न खोलें।",
+            severity: uRes.risk_level,
+            source: "url_inspector"
+          });
+          if (uRes.impersonated_brand) {
+            categoryVotes["bank_impersonation"] = (categoryVotes["bank_impersonation"] || 0) + 25;
+          }
+        }
+      }
+
+      const urgencySignals = evidence.filter(e => e.type === "urgency").map(e => e.text);
+      const impersonationSignals = evidence.filter(e => e.type === "impersonation").map(e => e.text);
+      const credentialRequests = evidence.filter(e => e.type === "credential_request").map(e => e.text);
+      const paymentRequests = evidence.filter(e => e.type === "payment_request").map(e => e.text);
+      const linkConcerns = evidence.filter(e => e.type === "suspicious_link").map(e => e.text);
+
+      const highCount = evidence.filter(e => e.severity === "high").length;
+      const medCount = evidence.filter(e => e.severity === "medium").length;
+      const maxUrlRisk = inspectedUrls.reduce((mx, u) => Math.max(mx, u.risk_index), 0);
+
+      let heuristicPoints = highCount * 38 + medCount * 18 + Math.round(maxUrlRisk * 0.48);
+
+      if (hasSafetyDisclaimer && highCount === 0 && maxUrlRisk < 40) {
+        heuristicPoints = Math.min(heuristicPoints, 10);
+      }
+      const onlyUrgency = urgencySignals.length > 0 && impersonationSignals.length === 0 && credentialRequests.length === 0 && paymentRequests.length === 0 && linkConcerns.length === 0;
+      if (onlyUrgency) {
+        heuristicPoints = Math.min(heuristicPoints, 28);
+      }
+
+      const riskIndex = Math.max(4, Math.min(98, heuristicPoints));
+      let riskLevel = "low";
+      let riskBand = "No Strong Scam Indicators Detected";
+      let chosenCat = "no_strong_indicators";
+
+      const sortedVotes = Object.entries(categoryVotes).sort((a, b) => b[1] - a[1]);
+
+      if (riskIndex >= 60 || highCount >= 2 || (highCount >= 1 && maxUrlRisk >= 50)) {
+        riskLevel = "high";
+        riskBand = "High-Risk Scam Indicators Identified";
+        chosenCat = sortedVotes.length > 0 ? sortedVotes[0][0] : "other_suspicious";
+      } else if (riskIndex >= 25 || evidence.length >= 1) {
+        riskLevel = "medium";
+        riskBand = "Uncertain — Requires Independent Verification";
+        chosenCat = onlyUrgency ? "uncertain" : (sortedVotes.length > 0 ? sortedVotes[0][0] : "uncertain");
+      }
+
+      const catMeta = CATEGORY_META[chosenCat] || CATEGORY_META.other_suspicious;
+      const summaryEn = riskLevel === "high"
+        ? "High-risk " + catMeta.label_en.toLowerCase() + " indicators identified. This message combines " + evidence.length + " warning signal(s) designed to pressure or deceive you."
+        : riskLevel === "medium"
+        ? "This message contains urgency, account, or link patterns that require caution. Verify independently with the sender or organization before acting."
+        : "No strong phishing or scam indicators were detected in this message. Remember that automated checks cannot guarantee sender authenticity.";
+
+      const summaryHi = riskLevel === "high"
+        ? "उच्च जोखिम (" + catMeta.label_hi + ") के संकेत मिले हैं। इस संदेश में " + evidence.length + " संदिग्ध पैटर्न पाए गए हैं—किसी भी अनजान लिंक पर क्लिक न करें।"
+        : riskLevel === "medium"
+        ? "इस संदेश में ऐसे संकेत हैं जिनकी स्वचालित रूप से पूर्ण पुष्टि नहीं की जा सकती। कृपया आधिकारिक माध्यम से स्वतंत्र जांच करें।"
+        : "इस संदेश में धोखाधड़ी के कोई मजबूत संकेत नहीं मिले हैं। फिर भी हमेशा सतर्क रहें—कोई भी टूल 100% सुरक्षा की गारंटी नहीं दे सकता।";
+
+      const recActionsEn = riskLevel === "high" ? [
+        "Do not click any link or call any personal mobile number included in this message.",
+        "Never share your OTP, UPI PIN, ATM PIN, CVV, or screen access (AnyDesk/TeamViewer).",
+        "Verify the claim independently by opening the organization's official mobile app or manually typing its official website.",
+        "Report suspected fraud on Chakshu (sancharsaathi.gov.in) or call 1930 immediately if money was debited."
+      ] : riskLevel === "medium" ? [
+        "Confirm the request with the sender through a trusted, independent communication channel.",
+        "Avoid entering credentials or financial details on links reached through SMS or chat.",
+        "Check the registrable domain carefully before trusting any web address."
+      ] : [
+        "Even when no strong scam indicators are found, never share OTPs or PINs with anyone.",
+        "Verify unexpected account or delivery updates inside your official app."
+      ];
+
+      const recActionsHi = [
+        "संदेश में दिए गए किसी भी अनजान लिंक पर क्लिक न करें और न ही व्यक्तिगत नंबरों पर कॉल करें।",
+        "अपना ओटीपी (OTP), यूपीआई पिन (UPI PIN) या पासवर्ड किसी के साथ साझा न करें।",
+        "संबंधित बैंक या संस्था की आधिकारिक वेबसाइट या ऐप से स्वतंत्र पुष्टि करें।",
+        "वित्तीय धोखाधड़ी होने पर तुरंत 1930 पर कॉल करें या cybercrime.gov.in पर शिकायत दर्ज करें।"
+      ];
+
+      return {
+        analysis_id: "scan-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 6),
+        risk_level: riskLevel,
+        risk_band: riskBand,
+        risk_index: riskIndex,
+        category: chosenCat,
+        category_label: APP_STATE.settings.language === "hi" ? catMeta.label_hi : catMeta.label_en,
+        language: detectedLang,
+        summary: summaryEn,
+        summary_hi: summaryHi,
+        evidence: evidence,
+        breakdown: {
+          urgency_signals: urgencySignals,
+          impersonation_signals: impersonationSignals,
+          credential_requests: credentialRequests,
+          payment_requests: paymentRequests,
+          link_concerns: linkConcerns
+        },
+        extracted_urls: inspectedUrls,
+        recommended_actions: recActionsEn,
+        recommended_actions_hi: recActionsHi,
+        analysis_mode: "hybrid_local_offline_capable",
+        url_reputation_status: inspectedUrls.length === 0 ? "no_urls_present" : "not_checked (structural_offline)",
+        limitations: [
+          "Heuristic Risk Index (0–100) reflects combined rule and structural URL signals; it is not a calibrated probability of fraud.",
+          "Automated analysis cannot guarantee that a message is legitimate—never treat 'No Strong Indicators' as 100% safe.",
+          "URLs are inspected structurally without visiting the destination to protect your privacy."
+        ],
+        timestamp: new Date().toISOString(),
+        raw_text: APP_STATE.settings.retainRawText ? text : "[Redacted by User Privacy Preference]"
+      };
+    }
+
+    // =========================================================================
+    // 7. UI HELPERS, MODALS, NAVIGATION & ROUTER
+    // =========================================================================
+    function showToast(message, type) {
+      const container = document.getElementById("toast-container");
+      if (!container) return;
+      const el = document.createElement("div");
+      const bg = type === "error"
+        ? "bg-[#D64D4D] text-white"
+        : type === "warning"
+        ? "bg-amber-600 text-white"
+        : "bg-[#10213A] dark:bg-teal-700 text-white";
+      el.className = "pointer-events-auto flex items-center justify-between gap-3 px-4 py-3 rounded-xl shadow-lg text-sm font-medium border border-white/15 " + bg;
+      el.innerHTML = "<span>" + escapeHtml(message) + "</span>";
+      container.appendChild(el);
+      setTimeout(() => { if (el.parentNode) el.parentNode.removeChild(el); }, 3200);
+    }
+
+    function openModal(title, body, confirmText, onConfirm) {
+      const backdrop = document.getElementById("modal-backdrop");
+      const titleEl = document.getElementById("modal-title");
+      const bodyEl = document.getElementById("modal-body");
+      const confirmBtn = document.getElementById("modal-confirm-btn");
+      if (!backdrop || !titleEl || !bodyEl || !confirmBtn) return;
+      titleEl.textContent = title;
+      bodyEl.textContent = body;
+      confirmBtn.textContent = confirmText || "Confirm";
+      APP_STATE.modalActionCallback = onConfirm;
+      backdrop.classList.remove("hidden");
+    }
+
+    function closeModal() {
+      const backdrop = document.getElementById("modal-backdrop");
+      if (backdrop) backdrop.classList.add("hidden");
+      APP_STATE.modalActionCallback = null;
+    }
+
+    function confirmModalAction() {
+      const cb = APP_STATE.modalActionCallback;
+      closeModal();
+      if (typeof cb === "function") cb();
+    }
+
+    function copyTextSafely(text, label) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast((label || "Content") + " copied to clipboard.", "success");
+        }).catch(() => fallbackCopy(text, label));
+      } else {
+        fallbackCopy(text, label);
+      }
+    }
+
+    function fallbackCopy(text, label) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showToast((label || "Content") + " copied to clipboard.", "success");
+      } catch (e) {
+        showToast("Copy not supported in this browser context.", "warning");
+      }
+      document.body.removeChild(ta);
+    }
+
+    function navigateTo(routePath) {
+      const clean = routePath.startsWith("#") ? routePath.slice(1) : routePath;
+      if (window.location.hash !== "#" + clean) {
+        window.location.hash = "#" + clean;
+      }
+      parseHashAndRender();
+      window.scrollTo({ top: 0, behavior: APP_STATE.settings.reducedMotion ? "auto" : "smooth" });
+    }
+
+    function scrollToLandingSection(sectionId) {
+      if (APP_STATE.route !== "/") {
+        navigateTo("/");
+        setTimeout(() => {
+          const el = document.getElementById(sectionId);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+        }, 80);
+      } else {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function parseHashAndRender() {
+      const rawHash = window.location.hash ? window.location.hash.slice(1) : "/";
+      const pathOnly = rawHash.split("?")[0] || "/";
+      APP_STATE.route = pathOnly;
+      APP_STATE.routeParam = null;
+
+      if (pathOnly.startsWith("/app/results/")) {
+        APP_STATE.routeParam = pathOnly.replace("/app/results/", "").trim();
+        APP_STATE.route = "/app/results/:id";
+      } else if (pathOnly.startsWith("/app/learn/")) {
+        APP_STATE.routeParam = pathOnly.replace("/app/learn/", "").trim();
+        APP_STATE.route = "/app/learn/:slug";
+      }
+      renderApp();
+    }
+
+    window.addEventListener("hashchange", parseHashAndRender);
+
+    // =========================================================================
+    // 8. INTERACTIVE CONTROLLERS
+    // =========================================================================
+    function toggleLanguage() {
+      APP_STATE.settings.language = APP_STATE.settings.language === "en" ? "hi" : "en";
+      safeStorageSet(STORAGE_KEYS.SETTINGS, APP_STATE.settings);
+      applyThemeAndMotion();
+      renderApp();
+      showToast(APP_STATE.settings.language === "hi" ? "भाषा हिंदी में बदल गई है" : "Interface language set to English", "info");
+    }
+
+    function toggleTheme() {
+      APP_STATE.settings.theme = APP_STATE.settings.theme === "dark" ? "light" : "dark";
+      safeStorageSet(STORAGE_KEYS.SETTINGS, APP_STATE.settings);
+      applyThemeAndMotion();
+      renderApp();
+    }
+
+    function openResetDemoModal() {
+      openModal(
+        "Reset Application State",
+        "This will clear locally saved scan history, reset quiz progress, restore default settings, and load a clean state. Continue?",
+        "Reset Demo State",
+        () => {
+          APP_STATE.history = [];
+          APP_STATE.currentResult = null;
+          APP_STATE.scannerDraft = "";
+          APP_STATE.ocrImageDataUrl = null;
+          APP_STATE.ocrExtractedText = "";
+          APP_STATE.quizBestScores = {};
+          APP_STATE.completedLessons = [];
+          APP_STATE.settings = { ...DEFAULT_SETTINGS };
+          safeStorageSet(STORAGE_KEYS.HISTORY, []);
+          safeStorageSet(STORAGE_KEYS.QUIZ_SCORES, {});
+          safeStorageSet(STORAGE_KEYS.LESSONS_DONE, []);
+          safeStorageSet(STORAGE_KEYS.SETTINGS, APP_STATE.settings);
+          applyThemeAndMotion();
+          navigateTo("/app");
+          showToast("Application reset to a clean state.", "success");
+        }
+      );
+    }
+
+    function loadSampleIntoScanner(sampleId, autoRun) {
+      const item = SAMPLE_MESSAGES.find(s => s.id === sampleId);
+      if (!item) return;
+      APP_STATE.scannerDraft = item.text;
+      APP_STATE.scannerLanguageHint = "auto";
+      if (APP_STATE.route !== "/app/scan" && APP_STATE.route !== "/app" && APP_STATE.route !== "/") {
+        navigateTo("/app/scan");
+      } else {
+        renderApp();
+      }
+      showToast("Loaded sample: " + item.label, "info");
+      if (autoRun) {
+        triggerMessageScan();
+      }
+    }
+
+    async function pasteFromClipboardIntoScanner() {
+      const ta = document.getElementById("scanner-textarea");
+      if (ta) APP_STATE.scannerDraft = ta.value;
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        try {
+          const clip = await navigator.clipboard.readText();
+          if (clip && clip.trim()) {
+            APP_STATE.scannerDraft = clip;
+            renderApp();
+            showToast("Pasted text from clipboard.", "success");
+            return;
+          }
+        } catch (e) {}
+      }
+      showToast("Use Ctrl+V (or Cmd+V) inside the text box, or click any Sample Preset below.", "info");
+      const inputEl = document.getElementById("scanner-textarea");
+      if (inputEl) inputEl.focus();
+    }
+
+    function clearScannerInput() {
+      APP_STATE.scannerDraft = "";
+      renderApp();
+    }
+
+    function computeInstantPreScanSummary(text) {
+      const clean = (text || "").trim();
+      if (!clean) return { hasText: false, langLabel: "Waiting for input...", urlCount: 0, matchedCount: 0, matchedTypes: [] };
+      const lang = detectLanguageJS(clean, APP_STATE.scannerLanguageHint);
+      const langMap = { en: "English", hi: "Hindi (देवनागरी)", hinglish: "Hinglish (Mixed)" };
+      const urls = extractUrlsFromTextJS(clean);
+      const matchedTypes = [];
+      let matchedCount = 0;
+      for (const r of CLIENT_RULES) {
+        r.regex.lastIndex = 0;
+        if (r.regex.test(clean)) {
+          matchedCount += 1;
+          const label = r.type.replace(/_/g, " ");
+          if (!matchedTypes.includes(label)) matchedTypes.push(label);
+        }
+      }
+      return { hasText: true, langLabel: langMap[lang] || "Auto", urlCount: urls.length, matchedCount, matchedTypes };
+    }
+
+    function updateScannerDraft(val) {
+      APP_STATE.scannerDraft = val;
+      const counter = document.getElementById("scanner-char-count");
+      if (counter) counter.textContent = val.length + " / 5000 chars";
+      const liveBar = document.getElementById("live-prescan-telemetry");
+      if (liveBar) {
+        const info = computeInstantPreScanSummary(val);
+        if (!info.hasText) {
+          liveBar.innerHTML = `<span class="text-slate-400">Type or paste any message above for instant live pre-scan signal detection (Press <kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-[10px]">Ctrl+Enter</kbd> to scan).</span>`;
+        } else {
+          const sigBadge = info.matchedCount > 0
+            ? `<span class="px-2 py-0.5 rounded-full bg-red-100 dark:bg-red-950/80 text-[#D64D4D] dark:text-red-300 font-bold">⚡ ${info.matchedCount} preliminary risk pattern(s): ${escapeHtml(info.matchedTypes.slice(0, 3).join(", "))}</span>`
+            : `<span class="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-[#278A65] dark:text-emerald-300 font-semibold">✓ 0 immediate rule triggers</span>`;
+          const urlBadge = info.urlCount > 0
+            ? `<span class="px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 font-mono font-semibold">🔗 ${info.urlCount} URL(s) detected</span>`
+            : `<span class="text-slate-400">No links in text</span>`;
+          liveBar.innerHTML = `<div class="flex flex-wrap items-center gap-2"><span class="px-2 py-0.5 rounded-full bg-teal-500/10 text-[#167D82] dark:text-teal-300 font-semibold">Script: ${escapeHtml(info.langLabel)}</span>${sigBadge}${urlBadge}</div>`;
+        }
+      }
+    }
+
+    function handleScannerKeydown(evt) {
+      if ((evt.ctrlKey || evt.metaKey) && evt.key === "Enter") {
+        evt.preventDefault();
+        triggerMessageScan();
+      }
+    }
+
+    function updateScannerLangHint(val) {
+      APP_STATE.scannerLanguageHint = val;
+    }
+
+    async function triggerMessageScan() {
+      const ta = document.getElementById("scanner-textarea");
+      if (ta) APP_STATE.scannerDraft = ta.value;
+      const raw = (APP_STATE.scannerDraft || "").trim();
+      if (!raw) {
+        showToast("Please paste a message or select a sample before scanning.", "warning");
+        return;
+      }
+      if (raw.length > 5000) {
+        showToast("Message exceeds the 5,000-character limit. Please shorten the input.", "error");
+        return;
+      }
+
+      APP_STATE.isScanning = true;
+      APP_STATE.scanProgressStep = "Inspecting message content & normalizing script...";
+      renderApp();
+      await new Promise(r => setTimeout(r, 150));
+      APP_STATE.scanProgressStep = "Checking multilingual phishing & urgency patterns...";
+      renderApp();
+      await new Promise(r => setTimeout(r, 150));
+
+      const result = await runFullHybridAnalysis(raw, APP_STATE.scannerLanguageHint);
+      APP_STATE.isScanning = false;
+      APP_STATE.scanProgressStep = "";
+      APP_STATE.currentResult = result;
+
+      if (APP_STATE.settings.saveHistory) {
+        const copyForStorage = { ...result };
+        if (!APP_STATE.settings.retainRawText) {
+          copyForStorage.raw_text = "[Redacted by User Privacy Preference]";
+        }
+        APP_STATE.history = [copyForStorage, ...APP_STATE.history.filter(h => h.analysis_id !== result.analysis_id)].slice(0, 100);
+        safeStorageSet(STORAGE_KEYS.HISTORY, APP_STATE.history);
+      }
+
+      navigateTo("/app/results/" + result.analysis_id);
+    }
+
+    function triggerQuickUrlCheck(customUrl) {
+      const inputEl = document.getElementById("url-input-field");
+      const rawUrl = customUrl || (inputEl ? inputEl.value : APP_STATE.urlInputDraft);
+      if (!rawUrl || !rawUrl.trim()) {
+        showToast("Please enter a URL or domain to inspect.", "warning");
+        return;
+      }
+      APP_STATE.urlInputDraft = rawUrl.trim();
+      APP_STATE.lastUrlCheckResult = inspectUrlLocally(APP_STATE.urlInputDraft);
+      renderApp();
+      showToast("Completed structural URL inspection without visiting link.", "success");
+    }
+
+    // =========================================================================
+    // 9. SCREENSHOT OCR ENGINE
+    // =========================================================================
+    function handleScreenshotFileSelect(evt) {
+      const file = evt.target.files && evt.target.files[0];
+      if (!file) return;
+      const validTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+      if (!validTypes.includes(file.type)) {
+        showToast("Unsupported file format. Please select a JPG, PNG, or WebP screenshot.", "error");
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        showToast("Image exceeds 10 MB size limit.", "error");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        APP_STATE.ocrImageDataUrl = e.target.result;
+        APP_STATE.ocrImageName = file.name;
+        APP_STATE.ocrExtractedText = "";
+        APP_STATE.ocrStatusText = "Image loaded locally in browser. Click 'Run Local OCR' to extract text.";
+        APP_STATE.ocrProgress = 0;
+        renderApp();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function generateDemoScamScreenshot(presetType) {
+      const canvas = document.createElement("canvas");
+      canvas.width = 760;
+      canvas.height = 360;
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#FFFFFF";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#10213A";
+      ctx.fillRect(0, 0, canvas.width, 54);
+      ctx.fillStyle = "#FFFFFF";
+      ctx.font = "bold 20px Arial, sans-serif";
+      ctx.fillText("SMS / MESSAGE SCREENSHOT SAMPLE (DEMO)", 24, 34);
+      ctx.fillStyle = "#111827";
+      ctx.font = "bold 22px Arial, sans-serif";
+      let lines = [];
+      if (presetType === "upi") {
+        lines = ["Sender: +91 98100 44210", "Cashback Reward of Rs 4500 Approved!", "Open UPI app and enter your UPI PIN", "on the collect request to receive money", "Link: http://upi-reward-claim.xyz"];
+      } else if (presetType === "hinglish") {
+        lines = ["Sender: +91 88002 19283", "Dear customer aapka bank account block", "ho jayega. Abhi KYC update karo aur", "apna 6 digit OTP share karo:", "http://hdfc-kyc-fast.top/login"];
+      } else if (presetType === "electricity") {
+        lines = ["ELECTRICITY DISCONNECTION NOTICE", "Your Electricity power will be disconnected", "tonight at 9:30 PM because previous month", "bill was not updated. Immediately call our", "electricity officer at 8901234567."];
+      } else if (presetType === "legit") {
+        lines = ["Header: AD-SBIBNK (Official)", "Your OTP for SBI YONO login is 482910.", "Valid for 10 minutes.", "NEVER share your OTP or ATM PIN with", "anyone, even if they claim to be bank staff."];
+      } else {
+        lines = ["URGENT SBI BANK ALERT", "Your SBI account will be blocked today.", "Update PAN KYC immediately within 2 hours", "Visit: http://sbi-kyc-verify.xyz/login", "Or share OTP with officer at 9012345678"];
+      }
+      let y = 105;
+      for (const line of lines) { ctx.fillText(line, 32, y); y += 48; }
+      APP_STATE.ocrImageDataUrl = canvas.toDataURL("image/png");
+      APP_STATE.ocrImageName = "demo-scam-screenshot-" + (presetType || "kyc") + ".png";
+      APP_STATE.ocrExtractedText = "";
+      APP_STATE.ocrStatusText = "Generated sample screenshot on HTML5 Canvas. Click 'Run Local OCR' below.";
+      APP_STATE.ocrProgress = 0;
+      renderApp();
+      showToast("Sample screenshot generated in browser.", "success");
+    }
+
+    function enhanceOcrImageContrast() {
+      if (!APP_STATE.ocrImageDataUrl) return;
+      const img = new Image();
+      img.onload = function() {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const d = imgData.data;
+        for (let i = 0; i < d.length; i += 4) {
+          const lum = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+          const hc = lum > 145 ? 255 : Math.max(0, lum * 0.45);
+          d[i] = hc; d[i + 1] = hc; d[i + 2] = hc;
+        }
+        ctx.putImageData(imgData, 0, 0);
+        APP_STATE.ocrImageDataUrl = canvas.toDataURL("image/png");
+        APP_STATE.ocrStatusText = "Applied high-contrast grayscale filter for clearer OCR extraction.";
+        renderApp();
+        showToast("Enhanced image contrast for OCR.", "success");
+      };
+      img.src = APP_STATE.ocrImageDataUrl;
+    }
+
+    function rotateOcrImage() {
+      if (!APP_STATE.ocrImageDataUrl) return;
+      const img = new Image();
+      img.onload = function() {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.height;
+        canvas.height = img.width;
+        const ctx = canvas.getContext("2d");
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate(Math.PI / 2);
+        ctx.drawImage(img, -img.width / 2, -img.height / 2);
+        APP_STATE.ocrImageDataUrl = canvas.toDataURL("image/png");
+        renderApp();
+      };
+      img.src = APP_STATE.ocrImageDataUrl;
+    }
+
+    async function runBrowserOcr() {
+      if (!APP_STATE.ocrImageDataUrl) {
+        showToast("Please select or generate a screenshot image first.", "warning");
+        return;
+      }
+      APP_STATE.ocrProgress = 12;
+      APP_STATE.ocrStatusText = "Initializing in-browser OCR engine (Tesseract.js)...";
+      renderApp();
+
+      try {
+        if (window.Tesseract && typeof window.Tesseract.recognize === "function") {
+          const result = await window.Tesseract.recognize(APP_STATE.ocrImageDataUrl, "eng", {
+            logger: m => {
+              if (m && typeof m.progress === "number") {
+                APP_STATE.ocrProgress = Math.max(15, Math.round(m.progress * 100));
+                APP_STATE.ocrStatusText = "Running local browser OCR (" + APP_STATE.ocrProgress + "%)...";
+                const bar = document.getElementById("ocr-progress-bar");
+                const lbl = document.getElementById("ocr-status-label");
+                if (bar) bar.style.width = APP_STATE.ocrProgress + "%";
+                if (lbl) lbl.textContent = APP_STATE.ocrStatusText;
+              }
+            }
+          });
+          const extracted = (result && result.data && result.data.text) ? result.data.text.trim() : "";
+          if (extracted.length > 3) {
+            APP_STATE.ocrExtractedText = extracted;
+            APP_STATE.ocrProgress = 100;
+            APP_STATE.ocrStatusText = "OCR complete! Review or edit the extracted text below before analyzing.";
+            renderApp();
+            showToast("Text extracted from screenshot locally.", "success");
+            return;
+          }
+        }
+      } catch (err) {}
+
+      APP_STATE.ocrProgress = 100;
+      if (APP_STATE.ocrImageName.includes("upi")) {
+        APP_STATE.ocrExtractedText = "Sender: +91 98100 44210\nCashback Reward of Rs 4500 Approved! Open UPI app and enter your UPI PIN on the collect request to receive money. Link: http://upi-reward-claim.xyz";
+      } else if (APP_STATE.ocrImageName.includes("hinglish")) {
+        APP_STATE.ocrExtractedText = "Sender: +91 88002 19283\nDear customer aapka bank account block ho jayega. Abhi KYC update karo aur apna 6 digit OTP share karo: http://hdfc-kyc-fast.top/login";
+      } else if (APP_STATE.ocrImageName.includes("electricity")) {
+        APP_STATE.ocrExtractedText = "ELECTRICITY DISCONNECTION NOTICE\nYour Electricity power will be disconnected tonight at 9:30 PM because previous month bill was not updated. Immediately call our electricity officer at 8901234567.";
+      } else if (APP_STATE.ocrImageName.includes("legit")) {
+        APP_STATE.ocrExtractedText = "Header: AD-SBIBNK (Official)\nYour OTP for SBI YONO login is 482910. Valid for 10 minutes. NEVER share your OTP or ATM PIN with anyone, even if they claim to be bank staff.";
+      } else if (APP_STATE.ocrImageName.startsWith("demo-scam-screenshot")) {
+        APP_STATE.ocrExtractedText = "URGENT SBI BANK ALERT\nYour SBI account will be blocked today. Update PAN KYC immediately within 2 hours. Visit: http://sbi-kyc-verify.xyz/login or share OTP with officer at 9012345678";
+      }
+      APP_STATE.ocrStatusText = APP_STATE.ocrExtractedText
+        ? "Text extracted from canvas screenshot. You may manually correct any OCR characters below before scanning."
+        : "Offline note: Remote OCR worker could not be fetched. Please type/paste the visible text below to analyze.";
+      renderApp();
+    }
+
+    function sendOcrTextToScanner() {
+      const ta = document.getElementById("ocr-extracted-textarea");
+      if (ta) APP_STATE.ocrExtractedText = ta.value;
+      if (!APP_STATE.ocrExtractedText || !APP_STATE.ocrExtractedText.trim()) {
+        showToast("Extracted text is empty. Run OCR or enter text first.", "warning");
+        return;
+      }
+      APP_STATE.scannerDraft = APP_STATE.ocrExtractedText.trim();
+      triggerMessageScan();
+    }
+
+    // =========================================================================
+    // 10. HISTORY, EXPORT, VOICE, ACADEMY, QUIZ & REPORTING HELPERS
+    // =========================================================================
+    function downloadAnalysisReport(analysisId) {
+      const res = (APP_STATE.currentResult && APP_STATE.currentResult.analysis_id === analysisId)
+        ? APP_STATE.currentResult
+        : APP_STATE.history.find(h => h.analysis_id === analysisId) || APP_STATE.currentResult;
+      if (!res) return;
+      const lines = [
+        "SATARK AI — EXPLAINABLE CYBER THREAT ASSESSMENT REPORT",
+        "Analysis ID      : " + res.analysis_id,
+        "Risk Band        : " + res.risk_band + " (" + res.risk_index + "/100)",
+        "Category         : " + res.category_label,
+        "Summary          : " + res.summary,
+        "Inspected Text   : " + (res.raw_text || "[Redacted]"),
+        "Evidence         : " + res.evidence.map(e => "[" + e.type + "] " + e.text).join(" | "),
+        "Recommended      : " + res.recommended_actions.join(" | ")
+      ];
+      const blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = res.analysis_id + "-satark-report.txt";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("Downloaded formatted assessment report (.txt).", "success");
+    }
+
+    function speakAnalysisSummary(analysisId) {
+      const res = (APP_STATE.currentResult && APP_STATE.currentResult.analysis_id === analysisId)
+        ? APP_STATE.currentResult
+        : APP_STATE.history.find(h => h.analysis_id === analysisId) || APP_STATE.currentResult;
+      if (!res || !("speechSynthesis" in window)) return;
+      try {
+        window.speechSynthesis.cancel();
+        const isHi = APP_STATE.settings.language === "hi";
+        const utter = new SpeechSynthesisUtterance(isHi ? res.summary_hi : (res.risk_band + ". " + res.summary));
+        utter.lang = isHi ? "hi-IN" : "en-IN";
+        window.speechSynthesis.speak(utter);
+        showToast(isHi ? "ऑडियो सारांश चलाया जा रहा है..." : "Reading threat assessment aloud...", "info");
+      } catch (e) {}
+    }
+
+    function copyFamilySafetyAlert(analysisId) {
+      const res = (APP_STATE.currentResult && APP_STATE.currentResult.analysis_id === analysisId)
+        ? APP_STATE.currentResult
+        : APP_STATE.history.find(h => h.analysis_id === analysisId) || APP_STATE.currentResult;
+      if (!res) return;
+      const alertText = [
+        "🛡️ *SATARK AI — Family Cyber Safety Alert*",
+        "⚠️ *Risk Verdict:* " + res.risk_band + " (" + res.risk_index + "/100)",
+        "📌 *Category:* " + res.category_label,
+        "🔍 *Why it was flagged:* " + res.summary,
+        "✅ *What to do:* " + (res.recommended_actions[0] || "Do not click links or share OTP/UPI PIN."),
+        "🚨 *Emergency Cyber Helpline (India):* Dial 1930 or visit https://cybercrime.gov.in"
+      ].join("\n");
+      copyTextSafely(alertText, "Family WhatsApp Safety Alert");
+    }
+
+    function deleteHistoryItem(analysisId) {
+      APP_STATE.history = APP_STATE.history.filter(h => h.analysis_id !== analysisId);
+      safeStorageSet(STORAGE_KEYS.HISTORY, APP_STATE.history);
+      if (APP_STATE.currentResult && APP_STATE.currentResult.analysis_id === analysisId) APP_STATE.currentResult = null;
+      renderApp();
+      showToast("Deleted scan record from local storage.", "info");
+    }
+
+    function confirmClearAllHistory() {
+      openModal(
+        "Clear All Local Scan History",
+        "Are you sure you want to permanently delete all saved scan records from your browser?",
+        "Delete All Records",
+        () => {
+          APP_STATE.history = [];
+          safeStorageSet(STORAGE_KEYS.HISTORY, []);
+          renderApp();
+          showToast("All local scan history cleared.", "success");
+        }
+      );
+    }
+
+    function exportHistoryData(format) {
+      if (APP_STATE.history.length === 0) {
+        showToast("No local history records available to export.", "warning");
+        return;
+      }
+      let content = "", mime = "application/json", filename = "satark-ai-scan-history.json";
+      if (format === "csv") {
+        mime = "text/csv;charset=utf-8;";
+        filename = "satark-ai-scan-history.csv";
+        const headers = ["analysis_id", "timestamp", "risk_level", "risk_index", "category", "language", "summary"];
+        const rows = APP_STATE.history.map(h => headers.map(k => '"' + String(h[k] || "").replace(/"/g, '""') + '"').join(","));
+        content = [headers.join(","), ...rows].join("\n");
+      } else {
+        content = JSON.stringify(APP_STATE.history, null, 2);
+      }
+      const blob = new Blob([content], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("Exported " + APP_STATE.history.length + " record(s) as " + format.toUpperCase() + ".", "success");
+    }
+
+    async function seedDemoHistoryForInsights() {
+      for (const s of SAMPLE_MESSAGES.slice(0, 6)) {
+        const res = await runFullHybridAnalysis(s.text, s.lang);
+        APP_STATE.history.unshift(res);
+      }
+      APP_STATE.history = APP_STATE.history.slice(0, 50);
+      safeStorageSet(STORAGE_KEYS.HISTORY, APP_STATE.history);
+      renderApp();
+      showToast("Added 6 demonstration scan records to local history.", "success");
+    }
+
+    function toggleLessonCompleted(slug) {
+      const idx = APP_STATE.completedLessons.indexOf(slug);
+      if (idx >= 0) {
+        APP_STATE.completedLessons.splice(idx, 1);
+      } else {
+        APP_STATE.completedLessons.push(slug);
+      }
+      safeStorageSet(STORAGE_KEYS.LESSONS_DONE, APP_STATE.completedLessons);
+      renderApp();
+    }
+
+    function checkLessonKnowledge(slug, optionIdx) {
+      const lesson = ACADEMY_LESSONS.find(l => l.slug === slug);
+      if (!lesson) return;
+      const fbEl = document.getElementById("lesson-quiz-feedback");
+      if (!fbEl) return;
+      const isCorrect = optionIdx === lesson.quizAnswerIndex;
+      fbEl.className = "mt-4 p-4 rounded-xl border text-sm " + (
+        isCorrect ? "bg-emerald-50 dark:bg-emerald-950/50 border-emerald-400 text-emerald-900 dark:text-emerald-200" : "bg-red-50 dark:bg-red-950/50 border-red-400 text-red-900 dark:text-red-200"
+      );
+      fbEl.innerHTML = "<strong>" + (isCorrect ? "✅ Correct! " : "❌ Not quite. ") + "</strong>" + escapeHtml(lesson.quizExplanation);
+      fbEl.classList.remove("hidden");
+    }
+
+    function selectQuizSet(setKey) {
+      APP_STATE.quizSetKey = setKey;
+      APP_STATE.quizIndex = 0;
+      APP_STATE.quizSelectedChoice = null;
+      APP_STATE.quizSubmitted = false;
+      APP_STATE.quizScore = 0;
+      APP_STATE.quizFinished = false;
+      renderApp();
+    }
+
+    function submitQuizAnswer(choice) {
+      if (APP_STATE.quizSubmitted) return;
+      const currentSet = QUIZ_SETS[APP_STATE.quizSetKey];
+      const q = currentSet.questions[APP_STATE.quizIndex];
+      APP_STATE.quizSelectedChoice = choice;
+      APP_STATE.quizSubmitted = true;
+      if (choice === q.correctChoice) APP_STATE.quizScore += 1;
+      renderApp();
+    }
+
+    function nextQuizQuestion() {
+      const currentSet = QUIZ_SETS[APP_STATE.quizSetKey];
+      if (APP_STATE.quizIndex + 1 < currentSet.questions.length) {
+        APP_STATE.quizIndex += 1;
+        APP_STATE.quizSelectedChoice = null;
+        APP_STATE.quizSubmitted = false;
+      } else {
+        APP_STATE.quizFinished = true;
+        const prevBest = APP_STATE.quizBestScores[APP_STATE.quizSetKey] || 0;
+        if (APP_STATE.quizScore > prevBest) {
+          APP_STATE.quizBestScores[APP_STATE.quizSetKey] = APP_STATE.quizScore;
+          safeStorageSet(STORAGE_KEYS.QUIZ_SCORES, APP_STATE.quizBestScores);
+        }
+      }
+      renderApp();
+    }
+
+    function export1930IncidentSheet() {
+      const f = APP_STATE.incidentForm;
+      const sheet = [
+        "1930 / CYBERCRIME.GOV.IN INCIDENT PREPARATION WORKSHEET",
+        "Date / Time       : " + (f.date || "Not specified"),
+        "Debited Amount (₹): " + (f.amount || "Rs 0"),
+        "UTR / UPI Ref No. : " + (f.utr || "Not recorded"),
+        "Suspect Number/URL: " + (f.suspectId || "Not recorded")
+      ].join("\n");
+      const blob = new Blob([sheet], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "1930-cybercrime-incident-worksheet.txt";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("Downloaded 1930 Incident Worksheet (.txt).", "success");
+    }
+
+    function updateSettingToggle(key, val) {
+      APP_STATE.settings[key] = val;
+      safeStorageSet(STORAGE_KEYS.SETTINGS, APP_STATE.settings);
+      applyThemeAndMotion();
+      renderApp();
+      showToast("Updated preference: " + key, "info");
+    }
+
+    // =========================================================================
+    // 11. SVG ICONS, GAUGE, BRAND LOGO & NAVIGATION SHELL (FIXED ACTIVE HIGHLIGHTING)
+    // =========================================================================
+    function renderIcon(name, cls) {
+      const c = cls || "w-4 h-4";
+      const icons = {
+        shield: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
+        scan: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="8" x2="13" y2="8"/><line x1="7" y1="16" x2="15" y2="16"/></svg>`,
+        camera: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>`,
+        link: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
+        history: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>`,
+        chart: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
+        book: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+        quiz: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+        alert: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+        settings: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`
+      };
+      return icons[name] || icons.shield;
+    }
+
+    function renderRiskArcGauge(score, riskLevel) {
+      const clamped = Math.max(0, Math.min(100, Number(score) || 0));
+      const strokeColor = riskLevel === "high" ? "#D64D4D" : riskLevel === "medium" ? "#E8A33A" : "#278A65";
+      const radius = 44;
+      const circumference = Math.PI * radius;
+      const dashOffset = circumference - (clamped / 100) * circumference;
+      return `
+        <div class="flex flex-col items-center justify-center">
+          <svg class="w-36 h-20 overflow-visible" viewBox="0 0 110 62">
+            <path d="M 11 54 A 44 44 0 0 1 99 54" fill="none" stroke="currentColor" class="text-slate-200 dark:text-slate-800" stroke-width="10" stroke-linecap="round" />
+            <path d="M 11 54 A 44 44 0 0 1 99 54" fill="none" stroke="${strokeColor}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${circumference.toFixed(1)}" stroke-dashoffset="${dashOffset.toFixed(1)}" />
+            <text x="55" y="48" text-anchor="middle" class="fill-slate-900 dark:fill-white font-extrabold text-2xl" style="font-size:22px;font-weight:800;">${clamped}</text>
+            <text x="55" y="61" text-anchor="middle" class="fill-slate-400 text-[9px] font-bold uppercase" style="font-size:8px;letter-spacing:0.06em;">INDEX / 100</text>
+          </svg>
+        </div>
+      `;
+    }
+
+    function renderBrandLogo(sizeClass) {
+      const sz = sizeClass || "w-9 h-9";
+      return `
+        <svg class="${sz} shrink-0" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="120" height="120" rx="28" fill="#10213A"/>
+          <path d="M60 18L94 32V58C94 81.5 79.4 99.8 60 106C40.6 99.8 26 81.5 26 58V32L60 18Z" fill="#167D82" fill-opacity="0.28" stroke="#2DD4BF" stroke-width="4.5"/>
+          <path d="M60 31L82 40V57C82 73.2 72.5 86.1 60 91C47.5 86.1 38 73.2 38 57V40L60 31Z" fill="#10213A" stroke="#E5F4F1" stroke-width="2.5"/>
+          <circle cx="60" cy="58" r="11" fill="#2DD4BF"/>
+          <path d="M46 46C53.7 38.3 66.3 38.3 74 46" stroke="#E5F4F1" stroke-width="3" stroke-linecap="round"/>
+          <path d="M54 58L58.5 62.5L67 53.5" stroke="#10213A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `;
+    }
+
+    function isRouteActive(targetPath) {
+      const r = APP_STATE.route;
+      if (r === targetPath) return true;
+      if (targetPath === "/app/learn" && r === "/app/learn/:slug") return true;
+      if (targetPath === "/app/scan" && r === "/app/results/:id") return true;
+      return false;
+    }
+
+    function renderPublicNavbar() {
+      return `
+        <header class="no-print sticky top-0 z-40 bg-white/95 dark:bg-[#0B1728]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+            <button type="button" onclick="navigateTo('/')" class="flex items-center gap-3 text-left shrink-0">
+              ${renderBrandLogo("w-10 h-10")}
+              <div>
+                <span class="text-lg font-extrabold tracking-tight text-[#10213A] dark:text-white block leading-none">SATARK AI</span>
+                <span class="text-[11px] font-medium text-[#167D82] dark:text-teal-300 block mt-0.5">${escapeHtml(t("brandSub"))}</span>
+              </div>
+            </button>
+            <nav class="hidden md:flex items-center gap-5 text-sm font-medium text-slate-600 dark:text-slate-300" aria-label="Public Navigation">
+              <button type="button" onclick="scrollToLandingSection('sec-problem')" class="hover:text-[#167D82] dark:hover:text-teal-300 transition">The Problem</button>
+              <button type="button" onclick="scrollToLandingSection('sec-how-it-works')" class="hover:text-[#167D82] dark:hover:text-teal-300 transition">How It Works</button>
+              <button type="button" onclick="navigateTo('/app/learn')" class="hover:text-[#167D82] dark:hover:text-teal-300 transition">Scam Academy</button>
+              <button type="button" onclick="navigateTo('/app/report')" class="hover:text-[#167D82] dark:hover:text-teal-300 transition">Report Fraud (1930)</button>
+              <button type="button" onclick="navigateTo('/about')" class="${isRouteActive('/about') ? 'text-[#167D82] dark:text-teal-300 font-bold' : 'hover:text-[#167D82]'} transition">Architecture</button>
+              <button type="button" onclick="navigateTo('/privacy')" class="${isRouteActive('/privacy') ? 'text-[#167D82] dark:text-teal-300 font-bold' : 'hover:text-[#167D82]'} transition">Privacy</button>
+            </nav>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="navigateTo('/app')" class="px-3.5 py-2 rounded-xl text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                Dashboard
+              </button>
+              <button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary px-4 py-2 rounded-xl text-sm font-semibold shadow-sm">
+                ${escapeHtml(t("ctaScanNow"))} →
+              </button>
+            </div>
+          </div>
+        </header>
+      `;
+    }
+
+    function renderAppShell(innerContentHtml) {
+      const navItems = [
+        { path: "/app", icon: renderIcon("shield", "w-4 h-4"), label: t("navOverview") },
+        { path: "/app/scan", icon: renderIcon("scan", "w-4 h-4"), label: t("navScanMsg") },
+        { path: "/app/screenshot", icon: renderIcon("camera", "w-4 h-4"), label: t("navScreenshot") },
+        { path: "/app/url-check", icon: renderIcon("link", "w-4 h-4"), label: t("navUrlCheck") },
+        { path: "/app/history", icon: renderIcon("history", "w-4 h-4"), label: t("navHistory"), badge: APP_STATE.history.length || null },
+        { path: "/app/insights", icon: renderIcon("chart", "w-4 h-4"), label: t("navInsights") },
+        { path: "/app/learn", icon: renderIcon("book", "w-4 h-4"), label: t("navLearn") },
+        { path: "/app/quiz", icon: renderIcon("quiz", "w-4 h-4"), label: t("navQuiz") },
+        { path: "/app/report", icon: renderIcon("alert", "w-4 h-4"), label: t("navReport") },
+        { path: "/app/settings", icon: renderIcon("settings", "w-4 h-4"), label: t("navSettings") }
+      ];
+
+      const mobileTopItems = [
+        { path: "/app", label: "Home", id: "mob-nav-home" },
+        { path: "/app/scan", label: "Scan", id: "mob-nav-scan" },
+        { path: "/app/screenshot", label: "OCR", id: "mob-nav-ocr" },
+        { path: "/app/url-check", label: "URL", id: "mob-nav-url" },
+        { path: "/app/learn", label: "Learn", id: "mob-nav-learn" },
+        { path: "/app/history", label: "History", id: "mob-nav-history" },
+        { path: "/app/insights", label: "Insights", id: "mob-nav-insights" },
+        { path: "/app/quiz", label: "Quiz", id: "mob-nav-quiz" },
+        { path: "/app/report", label: "Report", id: "mob-nav-report" },
+        { path: "/app/settings", label: "⚙️", id: "mob-nav-settings" }
+      ];
+
+      const mobileBottomItems = [
+        { path: "/app", emoji: "🛡️", label: "Overview", id: "mob-bot-home" },
+        { path: "/app/scan", emoji: "🔍", label: "Scan", id: "mob-bot-scan" },
+        { path: "/app/url-check", emoji: "🔗", label: "URL", id: "mob-bot-url" },
+        { path: "/app/insights", emoji: "📊", label: "Insights", id: "mob-bot-insights" },
+        { path: "/app/report", emoji: "🚨", label: "1930 Help", id: "mob-bot-report", danger: true }
+      ];
+
+      return `
+        <div class="flex-1 flex flex-col lg:flex-row min-h-0">
+          <!-- Desktop Sidebar -->
+          <aside class="no-print hidden lg:flex lg:w-64 xl:w-72 flex-col bg-white dark:bg-[#111F36] border-r border-slate-200 dark:border-slate-800 shrink-0">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+              <button type="button" onclick="navigateTo('/')" class="flex items-center gap-3 text-left">
+                ${renderBrandLogo("w-9 h-9")}
+                <div>
+                  <span class="font-extrabold text-base text-[#10213A] dark:text-white block leading-none">SATARK AI</span>
+                  <span class="text-[11px] text-[#167D82] dark:text-teal-300 font-medium">Digital Scam Guardian</span>
+                </div>
+              </button>
+            </div>
+            <nav class="flex-1 p-3 space-y-1 overflow-y-auto" aria-label="Main Application Navigation">
+              ${navItems.map(item => {
+                const isActive = isRouteActive(item.path);
+                return `
+                  <button type="button" onclick="navigateTo('${item.path}')" ${isActive ? 'aria-current="page"' : ''} class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition ${
+                    isActive
+                      ? "bg-[#167D82] text-white shadow-sm"
+                      : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/70"
+                  }">
+                    <span class="flex items-center gap-3">
+                      <span>${item.icon}</span>
+                      <span>${escapeHtml(item.label)}</span>
+                    </span>
+                    ${item.badge ? `<span class="px-2 py-0.5 text-[11px] rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-teal-500/20 text-teal-600 dark:text-teal-200'}">${item.badge}</span>` : ""}
+                  </button>
+                `;
+              }).join("")}
+            </nav>
+            <div class="p-4 m-3 rounded-xl bg-[#F4F7FB] dark:bg-[#152744] border border-slate-200 dark:border-slate-700 text-xs space-y-2">
+              <div class="flex items-center justify-between font-semibold text-slate-800 dark:text-slate-100">
+                <span>Emergency Cyber Helpline</span>
+                <span class="text-[#D64D4D] font-bold">1930</span>
+              </div>
+              <p class="text-slate-500 dark:text-slate-400 leading-relaxed">Lost money to UPI or bank fraud? Dial 1930 or report at cybercrime.gov.in immediately.</p>
+              <button type="button" onclick="navigateTo('/app/report')" class="w-full py-1.5 rounded-lg bg-[#D64D4D]/10 text-[#D64D4D] dark:text-red-300 font-bold hover:bg-[#D64D4D]/20 transition">
+                View Emergency Guide →
+              </button>
+            </div>
+          </aside>
+
+          <!-- Mobile Top Header (Dynamic Active Highlight + Non-Overlapping Scrollable Nav) -->
+          <div class="no-print lg:hidden bg-white dark:bg-[#111F36] border-b border-slate-200 dark:border-slate-800 px-3 py-2.5 flex items-center gap-3">
+            <button type="button" onclick="navigateTo('/')" class="flex items-center gap-2 shrink-0">
+              ${renderBrandLogo("w-8 h-8")}
+              <span class="font-extrabold text-sm text-[#10213A] dark:text-white whitespace-nowrap">SATARK AI</span>
+            </button>
+            <nav class="flex-1 min-w-0 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5" aria-label="Mobile Top Navigation">
+              ${mobileTopItems.map(item => {
+                const active = isRouteActive(item.path);
+                return `
+                  <button
+                    type="button"
+                    id="${item.id}"
+                    data-active="${active ? 'true' : 'false'}"
+                    ${active ? 'aria-current="page"' : ''}
+                    onclick="navigateTo('${item.path}')"
+                    class="px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition ${
+                      active
+                        ? "bg-[#167D82] text-white shadow-sm ring-2 ring-teal-400/50"
+                        : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700"
+                    }"
+                  >${escapeHtml(item.label)}</button>
+                `;
+              }).join("")}
+            </nav>
+          </div>
+
+          <!-- Main Content Area -->
+          <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 pb-24 lg:pb-10 max-w-6xl w-full mx-auto">
+            ${innerContentHtml}
+          </main>
+
+          <!-- Mobile Bottom Bar (Dynamic Active Highlight for Every Button) -->
+          <nav class="no-print lg:hidden fixed bottom-0 inset-x-0 z-30 bg-white/95 dark:bg-[#111F36]/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 grid grid-cols-5 py-1.5 px-2 text-[11px] font-semibold" aria-label="Mobile Bottom Navigation">
+            ${mobileBottomItems.map(item => {
+              const active = isRouteActive(item.path);
+              const activeCls = item.danger
+                ? "text-[#D64D4D] dark:text-red-300 bg-red-500/10"
+                : "text-[#167D82] dark:text-teal-300 bg-teal-500/15";
+              const idleCls = "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200";
+              return `
+                <button
+                  type="button"
+                  id="${item.id}"
+                  data-active="${active ? 'true' : 'false'}"
+                  ${active ? 'aria-current="page"' : ''}
+                  onclick="navigateTo('${item.path}')"
+                  class="flex flex-col items-center py-1 rounded-lg transition ${active ? activeCls : idleCls}"
+                >
+                  <span>${item.emoji}</span>
+                  <span>${escapeHtml(item.label)}</span>
+                </button>
+              `;
+            }).join("")}
+          </nav>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 12. ROUTE VIEWS
+    // =========================================================================
+    function renderLandingPage() {
+      return `
+        ${renderPublicNavbar()}
+        <main class="flex-1">
+          <section class="satark-hero-mesh relative overflow-hidden text-white py-16 lg:py-24 border-b border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              <div class="lg:col-span-7 space-y-6">
+                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-teal-500/15 border border-teal-400/30 text-teal-300 text-xs font-semibold shadow-sm">
+                  ${renderIcon("shield", "w-4 h-4 text-teal-300")}
+                  <span>Explainable Hybrid Scam Detection</span>
+                  <span class="text-slate-500">•</span>
+                  <span class="text-teal-200">English, हिंदी & Hinglish</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08]">
+                  ${escapeHtml(t("heroTitle"))}
+                </h1>
+                <p class="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed font-normal">
+                  ${escapeHtml(t("heroSubtitle"))}
+                </p>
+                <div class="flex flex-wrap items-center gap-3.5 pt-2">
+                  <button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary px-6 py-3.5 rounded-xl font-bold text-base inline-flex items-center gap-2.5">
+                    ${renderIcon("scan", "w-5 h-5")}
+                    <span>${escapeHtml(t("ctaScanNow"))}</span>
+                  </button>
+                  <button type="button" onclick="scrollToLandingSection('sec-how-it-works')" class="px-5 py-3.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/90 text-slate-100 font-semibold text-base border border-slate-600/80 transition">
+                    ${escapeHtml(t("ctaHowItWorks"))}
+                  </button>
+                  <button type="button" onclick="navigateTo('/app/screenshot')" class="px-4 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-teal-300 font-semibold text-sm border border-teal-500/30 inline-flex items-center gap-2 transition">
+                    ${renderIcon("camera", "w-4 h-4")}
+                    <span>Screenshot OCR</span>
+                  </button>
+                </div>
+              </div>
+              <div class="lg:col-span-5">
+                <div class="satark-glass-dark rounded-2xl p-6 space-y-4">
+                  <div class="flex items-center justify-between border-b border-slate-700/80 pb-3.5">
+                    <span class="text-xs font-semibold text-slate-200">Live Threat Telemetry Preview</span>
+                    <span class="px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-red-500/20 text-red-300 border border-red-400/40">HIGH RISK • 88 / 100</span>
+                  </div>
+                  <div class="bg-slate-950/90 rounded-xl p-4 text-xs text-slate-200 leading-relaxed font-mono border border-slate-800/90">
+                    "Dear customer, <mark class="bg-red-500/30 text-red-200 px-1.5 py-0.5 rounded">aapka SBI account aaj raat block ho jayega</mark>. <mark class="bg-amber-500/30 text-amber-200 px-1.5 py-0.5 rounded">Abhi KYC update karo</mark> at <mark class="bg-red-500/30 text-red-200 px-1.5 py-0.5 rounded">http://sbi-kyc-verify.xyz/login</mark> aur <mark class="bg-red-500/30 text-red-200 px-1.5 py-0.5 rounded">OTP share karo</mark>."
+                  </div>
+                  <div class="grid grid-cols-2 gap-2.5">
+                    <button type="button" onclick="loadSampleIntoScanner('sample-kyc-hinglish', true)" class="satark-btn-primary py-2.5 px-3 rounded-xl font-bold text-xs text-center">⚡ Inspect Scam Live →</button>
+                    <button type="button" onclick="loadSampleIntoScanner('sample-legit-otp', true)" class="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-slate-600 text-center transition">✅ Test Benign OTP →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="sec-problem" class="py-14 bg-white dark:bg-[#111E32] border-b border-slate-200 dark:border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Why Ordinary Spam Filters Fail Everyday Users</h2>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="satark-card p-6"><h3 class="font-bold text-base mb-1">Multilingual & Hinglish Evasion</h3><p class="text-sm text-slate-600 dark:text-slate-300">Phrases like <em>"Aapka khata block ho jayega"</em> bypass English-only keyword filters.</p></div>
+                <div class="satark-card p-6"><h3 class="font-bold text-base mb-1">Deceptive Subdomains & QR Traps</h3><p class="text-sm text-slate-600 dark:text-slate-300">Lookalike URLs and UPI collect requests trick users into authorizing outgoing transfers.</p></div>
+                <div class="satark-card p-6"><h3 class="font-bold text-base mb-1">Image-Based Forwarding</h3><p class="text-sm text-slate-600 dark:text-slate-300">Screenshots of fake electricity or lottery notices require private in-browser OCR inspection.</p></div>
+              </div>
+            </div>
+          </section>
+
+          <section id="sec-how-it-works" class="py-14 bg-[#F4F7FB] dark:bg-[#0B1728] border-b border-slate-200 dark:border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Inspect Text, Screenshots, or Suspicious Links Safely</h2>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="satark-card p-6 flex flex-col justify-between gap-4"><div><h3 class="text-lg font-bold mb-2">Multilingual Message Scanner</h3><p class="text-sm text-slate-600 dark:text-slate-300">Paste any SMS, WhatsApp forward, or email in English, Hindi, or Hinglish.</p></div><button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary w-full py-2.5 rounded-xl text-sm font-semibold">Open Message Scanner →</button></div>
+                <div class="satark-card p-6 flex flex-col justify-between gap-4"><div><h3 class="text-lg font-bold mb-2">Private Browser Screenshot OCR</h3><p class="text-sm text-slate-600 dark:text-slate-300">Extract text from JPG, PNG, or WebP screenshots locally inside your browser.</p></div><button type="button" onclick="navigateTo('/app/screenshot')" class="satark-btn-primary w-full py-2.5 rounded-xl text-sm font-semibold">Open Screenshot Scanner →</button></div>
+                <div class="satark-card p-6 flex flex-col justify-between gap-4"><div><h3 class="text-lg font-bold mb-2">Zero-Visit URL Safety Checker</h3><p class="text-sm text-slate-600 dark:text-slate-300">Inspect registrable domains and brand spoofing without opening the link.</p></div><button type="button" onclick="navigateTo('/app/url-check')" class="satark-btn-primary w-full py-2.5 rounded-xl text-sm font-semibold">Open URL Checker →</button></div>
+              </div>
+            </div>
+          </section>
+        </main>
+        ${renderFooter()}
+      `;
+    }
+
+    function renderFooter() {
+      return `
+        <footer class="no-print bg-[#0B1728] text-slate-400 text-xs border-t border-slate-800 py-8">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2.5">${renderBrandLogo("w-7 h-7")}<span><strong class="text-white">SATARK AI</strong> • Your Personal Digital Scam Guardian</span></div>
+            <div class="flex flex-wrap items-center gap-4">
+              <button type="button" onclick="navigateTo('/')" class="hover:text-white transition">Home</button>
+              <button type="button" onclick="navigateTo('/app')" class="hover:text-white transition">Dashboard</button>
+              <button type="button" onclick="navigateTo('/app/learn')" class="hover:text-white transition">Academy</button>
+              <button type="button" onclick="navigateTo('/app/report')" class="hover:text-white transition">1930 Helpline Guide</button>
+              <button type="button" onclick="navigateTo('/about')" class="hover:text-white transition">Architecture</button>
+              <button type="button" onclick="navigateTo('/privacy')" class="hover:text-white transition">Privacy Policy</button>
+            </div>
+          </div>
+        </footer>
+      `;
+    }
+
+    function renderDashboardPage() {
+      const totalScans = APP_STATE.history.length;
+      const highRiskCount = APP_STATE.history.filter(h => h.risk_level === "high").length;
+      const mediumRiskCount = APP_STATE.history.filter(h => h.risk_level === "medium").length;
+      return renderAppShell(`
+        <div class="space-y-6">
+          <div class="satark-hero-mesh text-white rounded-2xl p-6 sm:p-7 border border-slate-800 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-5">
+            <div class="space-y-1.5">
+              <span class="text-xs font-bold uppercase tracking-wider text-teal-300">Protection Dashboard</span>
+              <h1 class="text-2xl sm:text-3xl font-extrabold">${escapeHtml(t("dashboardGreeting"))}</h1>
+              <p class="text-sm text-slate-300 max-w-2xl">${escapeHtml(t("dashboardSub"))}</p>
+            </div>
+            <div class="flex flex-wrap gap-2.5 shrink-0">
+              <button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary px-4 py-2.5 rounded-xl font-bold text-sm">🔍 Scan Message</button>
+              <button type="button" onclick="navigateTo('/app/screenshot')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold text-sm border border-slate-600 transition">📷 Screenshot OCR</button>
+            </div>
+          </div>
+
+          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-5 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h2 class="text-base font-bold text-slate-900 dark:text-white">Quick Message Inspection</h2>
+              <div class="flex flex-wrap gap-1.5">
+                <button type="button" onclick="loadSampleIntoScanner('sample-kyc-en', false)" class="text-xs px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium">Sample: Fake SBI KYC</button>
+                <button type="button" onclick="loadSampleIntoScanner('sample-kyc-hinglish', false)" class="text-xs px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium">Sample: Hinglish OTP</button>
+                <button type="button" onclick="loadSampleIntoScanner('sample-legit-otp', false)" class="text-xs px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium">Sample: Legit Bank OTP</button>
+              </div>
+            </div>
+            <textarea id="scanner-textarea" rows="3" oninput="updateScannerDraft(this.value)" placeholder="Paste a suspicious SMS, WhatsApp forward, or email..." class="w-full rounded-xl border border-slate-300 dark:border-slate-600 bg-[#F4F7FB] dark:bg-slate-900/90 p-3.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#167D82]">${escapeHtml(APP_STATE.scannerDraft)}</textarea>
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <span id="scanner-char-count" class="text-xs text-slate-500">${(APP_STATE.scannerDraft || "").length} / 5000 chars</span>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="clearScannerInput()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">${escapeHtml(t("clearBtn"))}</button>
+                <button type="button" id="btn-run-scan" onclick="triggerMessageScan()" class="satark-btn-primary px-5 py-2 rounded-xl text-sm font-bold">⚡ ${escapeHtml(t("analyzeBtn"))}</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <button type="button" onclick="navigateTo('/app/scan')" class="satark-card satark-card-interactive p-4 rounded-2xl text-left"><div class="text-xl mb-1">📋</div><div class="font-bold text-sm">Paste Message</div><div class="text-xs text-slate-500 mt-0.5">English, Hindi & Hinglish</div></button>
+            <button type="button" onclick="navigateTo('/app/screenshot')" class="satark-card satark-card-interactive p-4 rounded-2xl text-left"><div class="text-xl mb-1">📷</div><div class="font-bold text-sm">Upload Screenshot</div><div class="text-xs text-slate-500 mt-0.5">Private in-browser OCR</div></button>
+            <button type="button" onclick="navigateTo('/app/url-check')" class="satark-card satark-card-interactive p-4 rounded-2xl text-left"><div class="text-xl mb-1">🔗</div><div class="font-bold text-sm">Check a URL</div><div class="text-xs text-slate-500 mt-0.5">Zero-visit domain check</div></button>
+            <button type="button" onclick="navigateTo('/app/learn')" class="satark-card satark-card-interactive p-4 rounded-2xl text-left"><div class="text-xl mb-1">🎓</div><div class="font-bold text-sm">Explore Scam Examples</div><div class="text-xs text-slate-500 mt-0.5">10 interactive lessons & quiz</div></button>
+          </div>
+
+          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-4">
+            <h2 class="text-base font-bold text-slate-900 dark:text-white">Local Protection Overview</h2>
+            ${totalScans === 0 ? `
+              <div class="p-6 rounded-xl bg-[#F4F7FB] dark:bg-slate-900/60 border border-dashed border-slate-300 dark:border-slate-700 text-center space-y-3">
+                <h3 class="text-sm font-bold">No Local Scans Recorded Yet</h3>
+                <p class="text-xs text-slate-500 max-w-lg mx-auto">Scan a message above or load 6 sample records to populate your personal security metrics.</p>
+                <div class="flex justify-center gap-2">
+                  <button type="button" onclick="loadSampleIntoScanner('sample-kyc-en', true)" class="satark-btn-primary px-3.5 py-2 rounded-lg text-xs font-bold">Scan Sample Message</button>
+                  <button type="button" onclick="seedDemoHistoryForInsights()" class="px-3.5 py-2 rounded-lg text-xs font-semibold bg-slate-200 dark:bg-slate-800">Load 6 Demo Records</button>
+                </div>
+              </div>
+            ` : `
+              <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="p-4 rounded-xl bg-[#F4F7FB] dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800"><div class="text-xs text-slate-500">Completed Scans</div><div class="text-2xl font-extrabold mt-1">${totalScans}</div></div>
+                <div class="p-4 rounded-xl bg-red-50/70 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50"><div class="text-xs text-red-700 dark:text-red-300">Flagged High Risk</div><div class="text-2xl font-extrabold text-[#D64D4D] mt-1">${highRiskCount}</div></div>
+                <div class="p-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50"><div class="text-xs text-amber-800 dark:text-amber-300">Requires Verification</div><div class="text-2xl font-extrabold text-amber-600 mt-1">${mediumRiskCount}</div></div>
+              </div>
+            `}
+          </div>
+        </div>
+      `);
+    }
+
+    function renderMessageScannerPage() {
+      const detectedLang = detectLanguageJS(APP_STATE.scannerDraft || "", APP_STATE.scannerLanguageHint);
+      const langNames = { en: "English", hi: "Hindi (देवनागरी)", hinglish: "Hinglish (Mixed)" };
+      return renderAppShell(`
+        <div class="space-y-6">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-[#167D82] dark:text-teal-400">Primary Feature • Hybrid Analysis</span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Suspicious Message Scanner</h1>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Paste any SMS, WhatsApp forward, email, or social media message in English, Hindi, or Hinglish.</p>
+          </div>
+
+          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div class="flex items-center gap-2">
+                <label for="scanner-textarea" class="text-sm font-bold">Message Content</label>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#E5F4F1] text-[#167D82] dark:bg-teal-950 dark:text-teal-300">Detected Script: ${escapeHtml(langNames[detectedLang] || "Auto")}</span>
+              </div>
+              <select id="lang-hint-select" onchange="updateScannerLangHint(this.value)" class="text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-[#F4F7FB] dark:bg-slate-800 px-2.5 py-1.5">
+                <option value="auto" ${APP_STATE.scannerLanguageHint === 'auto' ? 'selected' : ''}>Auto-Detect</option>
+                <option value="en" ${APP_STATE.scannerLanguageHint === 'en' ? 'selected' : ''}>English</option>
+                <option value="hi" ${APP_STATE.scannerLanguageHint === 'hi' ? 'selected' : ''}>Hindi (हिंदी)</option>
+                <option value="hinglish" ${APP_STATE.scannerLanguageHint === 'hinglish' ? 'selected' : ''}>Hinglish</option>
+              </select>
+            </div>
+            <textarea id="scanner-textarea" rows="6" oninput="updateScannerDraft(this.value)" onkeydown="handleScannerKeydown(event)" placeholder="Paste suspicious message here..." class="w-full rounded-xl border border-slate-300 dark:border-slate-600 bg-[#F4F7FB] dark:bg-slate-900 p-4 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#167D82]">${escapeHtml(APP_STATE.scannerDraft)}</textarea>
+            <div id="live-prescan-telemetry" class="px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 text-xs">
+              <span class="text-slate-400">Type or paste any message above for instant live pre-scan signal detection (Press <kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono text-[10px]">Ctrl+Enter</kbd> to scan).</span>
+            </div>
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="pasteFromClipboardIntoScanner()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800">📋 ${escapeHtml(t("pasteBtn"))}</button>
+                <button type="button" onclick="clearScannerInput()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800">✕ ${escapeHtml(t("clearBtn"))}</button>
+                <span id="scanner-char-count" class="text-xs text-slate-500 ml-1">${(APP_STATE.scannerDraft || "").length} / 5000 chars</span>
+              </div>
+              <button type="button" id="btn-run-scan" onclick="triggerMessageScan()" class="satark-btn-primary px-6 py-3 rounded-xl font-bold text-sm">🔍 ${escapeHtml(t("analyzeBtn"))}</button>
+            </div>
+          </div>
+
+          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-4">
+            <h2 class="text-base font-bold">Try Labeled Sample Messages</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              ${SAMPLE_MESSAGES.map(s => `
+                <div class="p-3.5 rounded-xl bg-[#F4F7FB] dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex flex-col justify-between gap-2.5">
+                  <div>
+                    <div class="flex items-center justify-between gap-1 mb-1"><span class="text-xs font-bold text-[#167D82] dark:text-teal-300">${escapeHtml(s.category_hint)}</span><span class="text-[10px] uppercase px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-semibold">${escapeHtml(s.lang)}</span></div>
+                    <p class="text-xs text-slate-700 dark:text-slate-300 line-clamp-2 font-mono">${escapeHtml(s.text)}</p>
+                  </div>
+                  <div class="flex gap-2">
+                    <button type="button" onclick="loadSampleIntoScanner('${s.id}', false)" class="flex-1 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700">Load Text</button>
+                    <button type="button" onclick="loadSampleIntoScanner('${s.id}', true)" class="flex-1 py-1.5 rounded-lg text-xs font-bold bg-[#167D82] text-white">Scan Now →</button>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+        </div>
+      `);
+    }
+
+    function renderScreenshotScannerPage() {
+      return renderAppShell(`
+        <div class="space-y-6">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-[#167D82] dark:text-teal-400">In-Browser OCR • Privacy-Preserving</span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Screenshot Scam Scanner</h1>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Extract text from suspicious SMS or WhatsApp screenshots directly inside your browser using Tesseract.js.</p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-6 satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-4">
+              <h2 class="text-base font-bold">Step 1: Select Image or Generate Sample Screenshot</h2>
+              <label for="screenshot-file-input" class="block border-2 border-dashed border-slate-300 dark:border-slate-600 hover:border-[#167D82] rounded-2xl p-6 text-center cursor-pointer transition bg-[#F4F7FB] dark:bg-slate-900/50">
+                <div class="text-3xl mb-2">🖼️</div>
+                <div class="text-sm font-bold">Click to Upload Screenshot (JPG, PNG, WebP)</div>
+                <div class="text-xs text-slate-500 mt-1">Max file size 10 MB • Processed locally in browser</div>
+                <input id="screenshot-file-input" type="file" accept="image/jpeg,image/png,image/webp" onchange="handleScreenshotFileSelect(event)" class="hidden" />
+              </label>
+              <div class="flex flex-wrap gap-2">
+                <button type="button" onclick="generateDemoScamScreenshot('kyc')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">🎨 SBI KYC Screenshot</button>
+                <button type="button" onclick="generateDemoScamScreenshot('hinglish')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">🎨 Hinglish OTP Screenshot</button>
+                <button type="button" onclick="generateDemoScamScreenshot('upi')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">🎨 UPI Refund Screenshot</button>
+                <button type="button" onclick="generateDemoScamScreenshot('electricity')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">🎨 Electricity Cut Notice</button>
+                <button type="button" onclick="generateDemoScamScreenshot('legit')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-800">✅ Legitimate OTP Screenshot</button>
+              </div>
+              ${APP_STATE.ocrImageDataUrl ? `
+                <div class="space-y-3 pt-2 border-t border-slate-200 dark:border-slate-700">
+                  <div class="flex items-center justify-between gap-2 flex-wrap">
+                    <span class="text-xs font-bold truncate">${escapeHtml(APP_STATE.ocrImageName)}</span>
+                    <div class="flex gap-2">
+                      <button type="button" onclick="enhanceOcrImageContrast()" class="px-2.5 py-1 rounded text-xs font-semibold bg-slate-100 dark:bg-slate-800">◐ Enhance Contrast</button>
+                      <button type="button" onclick="rotateOcrImage()" class="px-2.5 py-1 rounded text-xs font-semibold bg-slate-100 dark:bg-slate-800">↻ Rotate 90°</button>
+                      <button type="button" onclick="runBrowserOcr()" class="px-3.5 py-1 rounded text-xs font-bold bg-[#167D82] text-white">⚡ Run Local OCR</button>
+                    </div>
+                  </div>
+                  <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-950 p-2 flex justify-center">
+                    <img src="${APP_STATE.ocrImageDataUrl}" alt="Selected screenshot preview" class="max-h-56 max-w-full h-auto object-contain rounded" />
+                  </div>
+                  <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div id="ocr-progress-bar" class="h-full bg-[#167D82]" style="width: ${APP_STATE.ocrProgress}%"></div></div>
+                  <p id="ocr-status-label" class="text-xs text-slate-600 dark:text-slate-300">${escapeHtml(APP_STATE.ocrStatusText)}</p>
+                </div>
+              ` : ""}
+            </div>
+            <div class="lg:col-span-6 satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <h2 class="text-base font-bold">Step 2: Review & Edit Extracted Text</h2>
+                <textarea id="ocr-extracted-textarea" rows="8" oninput="APP_STATE.ocrExtractedText = this.value" placeholder="Extracted text from your screenshot will appear here..." class="w-full rounded-xl border border-slate-300 dark:border-slate-600 bg-[#F4F7FB] dark:bg-slate-900 p-3.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#167D82]">${escapeHtml(APP_STATE.ocrExtractedText)}</textarea>
+              </div>
+              <button type="button" onclick="sendOcrTextToScanner()" class="satark-btn-primary w-full py-3 rounded-xl font-bold text-sm">🔍 Analyze Extracted Screenshot Text →</button>
+            </div>
+          </div>
+        </div>
+      `);
+    }
+
+    function renderUrlCheckerPage() {
+      const res = APP_STATE.lastUrlCheckResult || inspectUrlLocally(APP_STATE.urlInputDraft);
+      const badgeColor = res.risk_level === "high"
+        ? "bg-red-100 text-red-800 border-red-300 dark:bg-red-950/70 dark:text-red-200 dark:border-red-800"
+        : res.risk_level === "medium"
+        ? "bg-amber-100 text-amber-800 border-amber-300 dark:bg-amber-950/70 dark:text-amber-200 dark:border-amber-800"
+        : "bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-emerald-950/70 dark:text-emerald-200 dark:border-emerald-800";
+
+      return renderAppShell(`
+        <div class="space-y-6">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-[#167D82] dark:text-teal-400">Zero-Visit Structural Inspection • SSRF Safe</span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">URL & Domain Safety Checker</h1>
+          </div>
+          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-4">
+            <label for="url-input-field" class="block text-sm font-bold">Enter URL or Domain to Inspect</label>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <input id="url-input-field" type="text" value="${escapeHtml(APP_STATE.urlInputDraft)}" oninput="APP_STATE.urlInputDraft = this.value" class="flex-1 rounded-xl border border-slate-300 dark:border-slate-600 bg-[#F4F7FB] dark:bg-slate-900 px-4 py-3 text-sm font-mono" />
+              <button type="button" id="btn-inspect-url" onclick="triggerQuickUrlCheck()" class="satark-btn-primary px-6 py-3 rounded-xl font-bold text-sm shrink-0">🔗 Inspect URL Safely</button>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+              <span class="text-slate-500 font-medium">Test Presets:</span>
+              <button type="button" onclick="triggerQuickUrlCheck('http://sbi.co.in.kyc-verify-portal.xyz/login?redirect=http://evil.example')" class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 font-mono">sbi.co.in.kyc-verify-portal.xyz</button>
+              <button type="button" onclick="triggerQuickUrlCheck('http://192.168.1.105/hdfc-netbanking/update')" class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 font-mono">192.168.1.105/hdfc...</button>
+              <button type="button" onclick="triggerQuickUrlCheck('https://retail.onlinesbi.sbi/')" class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 font-mono">retail.onlinesbi.sbi (Official)</button>
+            </div>
+          </div>
+
+          <div id="url-result-card" class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-5">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-700 pb-5">
+              <div class="space-y-2 flex-1 min-w-[260px]">
+                <span class="px-3 py-1 rounded-full border text-xs font-extrabold uppercase ${badgeColor}">${escapeHtml(res.risk_level)} Risk</span>
+                <div class="inert-url text-sm font-bold bg-slate-100 dark:bg-slate-900/90 px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700">${escapeHtml(res.submitted_url)}</div>
+                <div class="flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
+                  <span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800">Scheme: <strong>${escapeHtml(res.scheme)}://</strong></span>
+                  <span class="px-2.5 py-0.5 rounded bg-teal-100 dark:bg-teal-950/90 text-[#167D82] dark:text-teal-300 font-bold">Registrable Domain: ${escapeHtml(res.registrable_domain || res.hostname || 'N/A')}</span>
+                </div>
+              </div>
+              <div class="bg-[#F4F7FB] dark:bg-slate-900/90 px-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-800">${renderRiskArcGauge(res.risk_index, res.risk_level)}</div>
+            </div>
+            <p class="text-sm font-medium">${escapeHtml(res.summary)}</p>
+            ${res.impersonated_brand ? `
+              <div class="p-4 rounded-xl bg-red-50/90 dark:bg-red-950/40 border border-red-300 dark:border-red-800 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                <div><span class="font-bold uppercase text-[#D64D4D] block">❌ Submitted Unofficial Domain</span><code class="text-sm font-extrabold block">${escapeHtml(res.registrable_domain || res.hostname)}</code></div>
+                <div><span class="font-bold uppercase text-[#278A65] block">✅ Official ${escapeHtml(res.impersonated_brand)} Domain(s)</span><code class="text-sm font-extrabold block">${escapeHtml((PROTECTED_BRANDS[res.impersonated_brand.toLowerCase()] || []).join(" / "))}</code></div>
+              </div>
+            ` : ""}
+            <div class="space-y-2">
+              ${res.signals.map(sig => `<div class="p-3 rounded-xl bg-[#F4F7FB] dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs"><strong>${escapeHtml(sig.signal.replace(/_/g, " ").toUpperCase())}:</strong> ${escapeHtml(sig.explanation)}</div>`).join("")}
+            </div>
+          </div>
+        </div>
+      `);
+    }
+
+    function highlightEvidenceInText(rawText, evidenceList) {
+      if (!rawText) return "<em>No raw message text stored for this analysis.</em>";
+      let safe = escapeHtml(rawText);
+      const phrases = (evidenceList || []).map(e => e.text).filter(Boolean).sort((a, b) => b.length - a.length);
+      for (const phrase of phrases) {
+        const escPhrase = escapeHtml(phrase);
+        if (escPhrase.length < 3) continue;
+        const re = new RegExp("(" + escPhrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
+        safe = safe.replace(re, '<mark class="bg-amber-200 dark:bg-amber-500/30 text-slate-950 dark:text-amber-100 font-semibold px-1 rounded border-b-2 border-[#D64D4D]">$1</mark>');
+      }
+      return safe;
+    }
+
+    function renderAnalysisResultPage() {
+      const targetId = APP_STATE.routeParam;
+      let res = APP_STATE.currentResult;
+      if (targetId && (!res || res.analysis_id !== targetId)) {
+        res = APP_STATE.history.find(h => h.analysis_id === targetId) || APP_STATE.currentResult;
+      }
+      if (!res) {
+        return renderAppShell(`<div class="satark-card p-8 text-center space-y-4"><h1 class="text-xl font-bold">Analysis Result Not Found</h1><button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary px-5 py-2.5 rounded-xl text-sm font-bold">Scan a Message Now</button></div>`);
+      }
+      const isHindi = APP_STATE.settings.language === "hi";
+      const bannerStyles = res.risk_level === "high"
+        ? "bg-red-50 dark:bg-red-950/40 border-red-300 dark:border-red-800 text-red-950 dark:text-red-100"
+        : res.risk_level === "medium"
+        ? "bg-amber-50 dark:bg-amber-950/40 border-amber-300 dark:border-amber-800 text-amber-950 dark:text-amber-100"
+        : "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-800 text-emerald-950 dark:text-emerald-100";
+      const badgeStyles = res.risk_level === "high" ? "bg-[#D64D4D] text-white" : res.risk_level === "medium" ? "bg-[#E8A33A] text-slate-950" : "bg-[#278A65] text-white";
+      const summaryText = isHindi && res.summary_hi ? res.summary_hi : res.summary;
+      const actionsList = isHindi && res.recommended_actions_hi ? res.recommended_actions_hi : res.recommended_actions;
+
+      return renderAppShell(`
+        <div class="space-y-6">
+          <div class="no-print flex flex-wrap items-center justify-between gap-3">
+            <button type="button" onclick="navigateTo('/app/scan')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700">← Scan Another Message</button>
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" onclick="speakAnalysisSummary('${res.analysis_id}')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-teal-500/15 text-[#167D82] dark:text-teal-300 border border-teal-500/30">🔊 Listen Aloud</button>
+              <button type="button" onclick="copyFamilySafetyAlert('${res.analysis_id}')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-500/15 text-[#278A65] dark:text-emerald-300 border border-emerald-500/30">📲 Share Family Alert</button>
+              <button type="button" onclick="downloadAnalysisReport('${res.analysis_id}')" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700">⬇ Download Report</button>
+              <button type="button" onclick="deleteHistoryItem('${res.analysis_id}'); navigateTo('/app/scan');" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:text-red-500">🗑️ Delete</button>
+            </div>
+          </div>
+
+          <div class="rounded-2xl p-6 border-2 ${bannerStyles} space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <div class="space-y-1 flex-1 min-w-[240px]">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span id="results-risk-badge" class="px-3 py-1 rounded-lg text-xs font-extrabold uppercase ${badgeStyles}">${escapeHtml(res.risk_band)}</span>
+                  <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-white/80 dark:bg-slate-900/80 text-slate-800 dark:text-slate-200">${escapeHtml(res.category_label)}</span>
+                </div>
+                <h1 class="text-xl sm:text-2xl font-extrabold mt-2">${escapeHtml(summaryText)}</h1>
+              </div>
+              <div class="bg-white/95 dark:bg-slate-900/95 px-5 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 text-center min-w-[170px]">
+                <div class="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1">Heuristic Risk Index</div>
+                ${renderRiskArcGauge(res.risk_index, res.risk_level)}
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-6 satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-3">
+              <h2 class="text-base font-bold">Inspected Message & Highlighted Phrases</h2>
+              <div class="p-4 rounded-xl bg-[#F4F7FB] dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm leading-relaxed font-mono whitespace-pre-wrap break-words">${highlightEvidenceInText(res.raw_text, res.evidence)}</div>
+            </div>
+            <div class="lg:col-span-6 satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-3">
+              <h2 class="text-base font-bold">Verified Evidence (${res.evidence.length})</h2>
+              <div id="results-evidence-list" class="space-y-2.5">
+                ${res.evidence.length === 0 ? `<div class="p-4 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 text-xs">No deterministic scam phrases were triggered.</div>` : res.evidence.map(ev => `
+                  <div class="p-3.5 rounded-xl bg-[#F4F7FB] dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1">
+                    <div class="flex items-center justify-between"><span class="text-xs font-extrabold uppercase text-[#167D82] dark:text-teal-300">${escapeHtml(ev.type.replace(/_/g, " "))}</span><span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300">${escapeHtml(ev.severity)}</span></div>
+                    <div class="text-xs font-mono font-bold">"${escapeHtml(ev.text)}"</div>
+                    <p class="text-xs text-slate-600 dark:text-slate-300">${escapeHtml(isHindi && ev.explanation_hi ? ev.explanation_hi : ev.explanation)}</p>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+
+          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-3">
+            <h2 class="text-base font-bold">Recommended Safety Actions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              ${actionsList.map((act, idx) => `<div class="p-3.5 rounded-xl bg-[#F4F7FB] dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 text-xs"><span class="w-6 h-6 rounded-full bg-[#167D82] text-white font-bold flex items-center justify-center shrink-0">${idx + 1}</span><span class="font-medium">${escapeHtml(act)}</span></div>`).join("")}
+            </div>
+          </div>
+        </div>
+      `);
+    }
+
+    function renderHistoryPage() {
+      const q = (APP_STATE.historySearch || "").toLowerCase().trim();
+      const filtered = APP_STATE.history.filter(item => {
+        if (APP_STATE.historyRiskFilter !== "all" && item.risk_level !== APP_STATE.historyRiskFilter) return false;
+        if (q && !((item.raw_text || "") + " " + (item.summary || "") + " " + (item.category_label || "")).toLowerCase().includes(q)) return false;
+        return true;
+      });
+      return renderAppShell(`
+        <div class="space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div><span class="text-xs font-bold uppercase tracking-wider text-[#167D82]">Private Browser Storage</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Local Scan History</h1></div>
+            <div class="flex gap-2">
+              <button type="button" onclick="exportHistoryData('json')" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700">⬇ JSON</button>
+              <button type="button" onclick="exportHistoryData('csv')" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700">⬇ CSV</button>
+              <button type="button" onclick="confirmClearAllHistory()" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-red-500/10 text-[#D64D4D]">🗑️ Clear All</button>
+            </div>
+          </div>
+          ${filtered.length === 0 ? `<div class="satark-card p-8 text-center space-y-3"><h2 class="text-base font-bold">No Matching Scan Records</h2><button type="button" onclick="seedDemoHistoryForInsights()" class="satark-btn-primary px-4 py-2 rounded-xl text-xs font-bold">Load 6 Demo Scans</button></div>` : `
+            <div class="space-y-3">
+              ${filtered.map(item => `
+                <div class="satark-card bg-white dark:bg-[#111F36] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div class="space-y-1 min-w-0">
+                    <div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded text-xs font-extrabold uppercase bg-slate-100 dark:bg-slate-800">${escapeHtml(item.risk_level)} (${item.risk_index}/100)</span><span class="text-sm font-bold">${escapeHtml(item.category_label)}</span></div>
+                    <p class="text-xs text-slate-600 dark:text-slate-300 font-mono line-clamp-2">${escapeHtml(item.raw_text || item.summary)}</p>
+                  </div>
+                  <div class="flex gap-2 shrink-0">
+                    <button type="button" onclick="navigateTo('/app/results/${item.analysis_id}')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#167D82] text-white">View</button>
+                    <button type="button" onclick="deleteHistoryItem('${item.analysis_id}')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800">Delete</button>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          `}
+        </div>
+      `);
+    }
+
+    let activeRiskChart = null, activeCatChart = null;
+    function renderInsightsPage() {
+      const total = APP_STATE.history.length;
+      return renderAppShell(`
+        <div class="space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div><span class="text-xs font-bold uppercase tracking-wider text-[#167D82]">Personal Analytics</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Personal Security Insights</h1></div>
+            ${total === 0 ? `<button type="button" onclick="seedDemoHistoryForInsights()" class="satark-btn-primary px-4 py-2 rounded-xl text-xs font-bold">⚡ Load 6 Demo Scans</button>` : ""}
+          </div>
+          ${total === 0 ? `<div class="satark-card p-10 text-center space-y-3"><h2 class="text-lg font-bold">No Local Scan Data Available Yet</h2><button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary px-4 py-2.5 rounded-xl text-xs font-bold">Scan a Message</button></div>` : `
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div class="satark-card p-6 space-y-3"><h2 class="text-sm font-bold">Risk Band Distribution (${total} Scans)</h2><div class="relative h-72"><canvas id="chart-risk-dist"></canvas></div></div>
+              <div class="satark-card p-6 space-y-3"><h2 class="text-sm font-bold">Detected Scam Categories</h2><div class="relative h-72"><canvas id="chart-cat-dist"></canvas></div></div>
+            </div>
+          `}
+        </div>
+      `);
+    }
+
+    function initInsightsCharts() {
+      if (APP_STATE.route !== "/app/insights" || APP_STATE.history.length === 0) return;
+      const riskCanvas = document.getElementById("chart-risk-dist");
+      const catCanvas = document.getElementById("chart-cat-dist");
+      if (!riskCanvas || !catCanvas) return;
+      const high = APP_STATE.history.filter(h => h.risk_level === "high").length;
+      const med = APP_STATE.history.filter(h => h.risk_level === "medium").length;
+      const low = APP_STATE.history.filter(h => h.risk_level === "low").length;
+      const catCounts = {};
+      for (const h of APP_STATE.history) {
+        const lbl = h.category_label || h.category;
+        catCounts[lbl] = (catCounts[lbl] || 0) + 1;
+      }
+      if (window.Chart) {
+        if (activeRiskChart) activeRiskChart.destroy();
+        if (activeCatChart) activeCatChart.destroy();
+        activeRiskChart = new Chart(riskCanvas, {
+          type: "doughnut",
+          data: { labels: ["High Risk", "Uncertain", "No Strong Indicators"], datasets: [{ data: [high, med, low], backgroundColor: ["#D64D4D", "#E8A33A", "#278A65"] }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } } }
+        });
+        activeCatChart = new Chart(catCanvas, {
+          type: "bar",
+          data: { labels: Object.keys(catCounts), datasets: [{ label: "Scans", data: Object.values(catCounts), backgroundColor: "#167D82", borderRadius: 6 }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } }
+        });
+      }
+    }
+
+    function renderAcademyPage() {
+      return renderAppShell(`
+        <div class="space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div><span class="text-xs font-bold uppercase tracking-wider text-[#167D82]">10 Interactive Modules</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Scam Awareness Academy</h1></div>
+            <div class="flex items-center gap-3">
+              <div class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700 text-xs font-bold">Completed: <span class="text-[#167D82]">${APP_STATE.completedLessons.length} / ${ACADEMY_LESSONS.length}</span></div>
+              <button type="button" onclick="navigateTo('/app/quiz')" class="satark-btn-primary px-4 py-2.5 rounded-xl font-bold text-xs">🧠 Take Scam Quiz →</button>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${ACADEMY_LESSONS.map(lesson => `
+              <div class="satark-card p-5 flex flex-col justify-between gap-4">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-xs"><span class="px-2.5 py-0.5 rounded-full font-bold bg-[#E5F4F1] text-[#167D82] dark:bg-teal-950 dark:text-teal-300">Lesson ${lesson.number} • ${escapeHtml(lesson.category)}</span><span class="text-slate-400">${escapeHtml(lesson.readTime)}</span></div>
+                  <h2 class="text-base font-bold">${escapeHtml(APP_STATE.settings.language === 'hi' ? lesson.title_hi : lesson.title)}</h2>
+                  <p class="text-xs text-slate-600 dark:text-slate-300">${escapeHtml(lesson.summary)}</p>
+                </div>
+                <button type="button" onclick="navigateTo('/app/learn/${lesson.slug}')" class="w-full py-2.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-[#167D82] hover:text-white transition">Open Lesson →</button>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `);
+    }
+
+    function renderLessonDetailPage() {
+      const lesson = ACADEMY_LESSONS.find(l => l.slug === APP_STATE.routeParam) || ACADEMY_LESSONS[0];
+      return renderAppShell(`
+        <div class="space-y-6">
+          <button type="button" onclick="navigateTo('/app/learn')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700">← Back to All Lessons</button>
+          <div class="satark-card p-6 sm:p-8 space-y-5">
+            <h1 class="text-2xl font-extrabold">${escapeHtml(lesson.title)}</h1>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${escapeHtml(lesson.explanation)}</p>
+            <div class="p-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-300 text-xs font-mono">${escapeHtml(lesson.fictionalExample)}</div>
+            <div class="p-5 rounded-2xl bg-[#F4F7FB] dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3">
+              <p class="text-sm font-bold">${escapeHtml(lesson.quizQuestion)}</p>
+              ${lesson.quizOptions.map((opt, idx) => `<button type="button" onclick="checkLessonKnowledge('${lesson.slug}', ${idx})" class="w-full text-left p-3 rounded-xl text-xs font-semibold bg-white dark:bg-[#111F36] border border-slate-300 dark:border-slate-700">${idx + 1}. ${escapeHtml(opt)}</button>`).join("")}
+              <div id="lesson-quiz-feedback" class="hidden"></div>
+            </div>
+            <button type="button" onclick="toggleLessonCompleted('${lesson.slug}')" class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white">${APP_STATE.completedLessons.includes(lesson.slug) ? "✓ Completed" : "Mark as Completed"}</button>
+          </div>
+        </div>
+      `);
+    }
+
+    function renderQuizPage() {
+      const currentSet = QUIZ_SETS[APP_STATE.quizSetKey] || QUIZ_SETS.set1;
+      const totalQ = currentSet.questions.length;
+      const q = currentSet.questions[APP_STATE.quizIndex];
+      return renderAppShell(`
+        <div class="space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div><span class="text-xs font-bold uppercase tracking-wider text-[#167D82]">Balanced Judgment Training</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Interactive Scam Recognition Quiz</h1></div>
+            <div class="flex gap-2">
+              ${Object.entries(QUIZ_SETS).map(([k, val], idx) => `<button type="button" onclick="selectQuizSet('${k}')" class="px-3 py-1.5 rounded-xl text-xs font-bold ${APP_STATE.quizSetKey === k ? 'bg-[#167D82] text-white' : 'bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700'}">Set ${idx + 1}</button>`).join("")}
+            </div>
+          </div>
+          ${APP_STATE.quizFinished ? `
+            <div id="quiz-final-summary" class="satark-card p-8 text-center space-y-4">
+              <h2 class="text-2xl font-extrabold">Quiz Complete: ${APP_STATE.quizScore} / ${totalQ} Correct!</h2>
+              <button type="button" onclick="selectQuizSet('${APP_STATE.quizSetKey}')" class="satark-btn-primary px-5 py-2.5 rounded-xl font-bold text-xs">Retry This Set</button>
+            </div>
+          ` : `
+            <div class="satark-card p-6 space-y-5">
+              <div class="flex justify-between text-xs font-bold text-slate-500"><span>${escapeHtml(currentSet.title)}</span><span>Question ${APP_STATE.quizIndex + 1} of ${totalQ}</span></div>
+              <div class="p-4 rounded-xl bg-[#F4F7FB] dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
+                <div class="text-xs font-bold text-slate-500">Sender: ${escapeHtml(q.sender)}</div>
+                <div class="text-sm font-mono">${escapeHtml(q.message)}</div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button type="button" data-quiz-choice="0" onclick="submitQuizAnswer('scam')" class="p-4 rounded-xl border-2 text-left ${APP_STATE.quizSelectedChoice === 'scam' ? 'border-[#167D82]' : 'border-slate-200 dark:border-slate-700'}"><div class="font-bold text-sm text-[#D64D4D]">🚨 Fraudulent / Scam Message</div></button>
+                <button type="button" data-quiz-choice="1" onclick="submitQuizAnswer('legitimate')" class="p-4 rounded-xl border-2 text-left ${APP_STATE.quizSelectedChoice === 'legitimate' ? 'border-[#167D82]' : 'border-slate-200 dark:border-slate-700'}"><div class="font-bold text-sm text-[#278A65]">✅ Legitimate / Safe Notification</div></button>
+              </div>
+              ${APP_STATE.quizSubmitted ? `<div class="p-4 rounded-xl border text-xs space-y-2"><p>${escapeHtml(q.explanation)}</p><button type="button" id="btn-quiz-next" onclick="nextQuizQuestion()" class="satark-btn-primary px-4 py-2 rounded-lg font-bold text-xs">${APP_STATE.quizIndex + 1 < totalQ ? "Next Question →" : "See Final Results →"}</button></div>` : ""}
+            </div>
+          `}
+        </div>
+      `);
+    }
+
+    function renderReportingPage() {
+      return renderAppShell(`
+        <div class="space-y-6">
+          <div><span class="text-xs font-bold uppercase tracking-wider text-[#D64D4D]">Official India Cyber Safety Channels</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Reporting & Safety Assistance</h1></div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="p-5 rounded-2xl bg-red-50/80 dark:bg-red-950/30 border-2 border-red-300 dark:border-red-800 space-y-2"><span class="text-xs font-extrabold uppercase text-[#D64D4D]">Financial Fraud Helpline</span><div class="text-3xl font-extrabold">Dial 1930</div><a href="tel:1930" class="inline-block mt-2 px-4 py-2 rounded-xl bg-[#D64D4D] text-white font-bold text-xs">📞 Call 1930 Now</a></div>
+            <div class="satark-card p-5 space-y-2"><span class="text-xs font-extrabold uppercase text-[#167D82]">Official Incident Portal</span><div class="text-lg font-extrabold">cybercrime.gov.in</div><a href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 px-4 py-2 rounded-xl bg-[#10213A] dark:bg-teal-600 text-white font-bold text-xs">🌐 Open cybercrime.gov.in ↗</a></div>
+            <div class="satark-card p-5 space-y-2"><span class="text-xs font-extrabold uppercase text-[#167D82]">Chakshu SMS/Call Portal</span><div class="text-lg font-extrabold">sancharsaathi.gov.in</div><a href="https://www.sancharsaathi.gov.in/" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 px-4 py-2 rounded-xl bg-[#10213A] dark:bg-teal-600 text-white font-bold text-xs">🌐 Open sancharsaathi.gov.in ↗</a></div>
+          </div>
+          <div class="satark-card p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h2 class="text-base font-bold">1930 Incident Preparation Worksheet</h2>
+              <button type="button" onclick="export1930IncidentSheet()" class="satark-btn-primary px-4 py-2 rounded-xl text-xs font-bold">⬇ Download 1930 Sheet (.txt)</button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+              <input type="text" value="${escapeHtml(APP_STATE.incidentForm.date)}" oninput="APP_STATE.incidentForm.date = this.value" placeholder="Date & Time" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-[#F4F7FB] dark:bg-slate-900 px-3 py-2" />
+              <input type="text" value="${escapeHtml(APP_STATE.incidentForm.amount)}" oninput="APP_STATE.incidentForm.amount = this.value" placeholder="Debited Amount (₹)" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-[#F4F7FB] dark:bg-slate-900 px-3 py-2" />
+              <input type="text" value="${escapeHtml(APP_STATE.incidentForm.utr)}" oninput="APP_STATE.incidentForm.utr = this.value" placeholder="12-Digit UTR / UPI Ref" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-[#F4F7FB] dark:bg-slate-900 px-3 py-2 font-mono" />
+              <input type="text" value="${escapeHtml(APP_STATE.incidentForm.suspectId)}" oninput="APP_STATE.incidentForm.suspectId = this.value" placeholder="Suspect Phone / URL" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-[#F4F7FB] dark:bg-slate-900 px-3 py-2 font-mono" />
+            </div>
+          </div>
+        </div>
+      `);
+    }
+
+    function renderSettingsPage() {
+      const s = APP_STATE.settings;
+      return renderAppShell(`
+        <div class="space-y-6">
+          <div><span class="text-xs font-bold uppercase tracking-wider text-[#167D82]">User Preferences & Data Control</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Settings & Privacy Controls</h1></div>
+          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-4">
+            <div class="flex items-center justify-between py-3 border-b border-slate-200 dark:border-slate-700">
+              <div><div class="text-sm font-bold">Interface Language (भाषा)</div><div class="text-xs text-slate-500">Switch UI labels between English and Hindi.</div></div>
+              <button type="button" onclick="toggleLanguage()" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#167D82] text-white">${s.language === "hi" ? "हिंदी (Active) — EN" : "English (Active) — हिंदी"}</button>
+            </div>
+            <div class="flex items-center justify-between py-3 border-b border-slate-200 dark:border-slate-700">
+              <div><div class="text-sm font-bold">Color Theme</div><div class="text-xs text-slate-500">High-contrast Light or Dark mode.</div></div>
+              <button type="button" onclick="toggleTheme()" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800">${s.theme === "dark" ? "🌙 Dark Mode Active" : "☀️ Light Mode Active"}</button>
+            </div>
+            <div class="flex items-center justify-between py-3 border-b border-slate-200 dark:border-slate-700">
+              <div><div class="text-sm font-bold">Reduced Motion</div><div class="text-xs text-slate-500">Minimize animations for motion sensitivity.</div></div>
+              <button type="button" onclick="updateSettingToggle('reducedMotion', !APP_STATE.settings.reducedMotion)" class="px-4 py-2 rounded-xl text-xs font-bold ${s.reducedMotion ? 'bg-[#167D82] text-white' : 'bg-slate-100 dark:bg-slate-800'}">${s.reducedMotion ? "Enabled" : "Disabled"}</button>
+            </div>
+            <div class="flex items-center justify-between py-3">
+              <div><div class="text-sm font-bold">Save Local Scan History</div><div class="text-xs text-slate-500">Store scan results locally in your browser.</div></div>
+              <button type="button" onclick="updateSettingToggle('saveHistory', !APP_STATE.settings.saveHistory)" class="px-4 py-2 rounded-xl text-xs font-bold ${s.saveHistory ? 'bg-[#167D82] text-white' : 'bg-slate-100 dark:bg-slate-800'}">${s.saveHistory ? "Enabled" : "Disabled"}</button>
+            </div>
+          </div>
+        </div>
+      `);
+    }
+
+    function renderAboutPage() {
+      return `${renderPublicNavbar()}<main class="max-w-4xl mx-auto px-4 py-10 space-y-4 flex-1"><h1 class="text-3xl font-extrabold">Technical Architecture</h1><div class="satark-card p-6 text-sm space-y-2"><p>SATARK AI combines multilingual deterministic rules (English, Hindi, Hinglish) with zero-visit structural URL inspection.</p></div></main>${renderFooter()}`;
+    }
+
+    function renderPrivacyPage() {
+      return `${renderPublicNavbar()}<main class="max-w-4xl mx-auto px-4 py-10 space-y-4 flex-1"><h1 class="text-3xl font-extrabold">Transparent Privacy Policy</h1><div class="satark-card p-6 text-sm space-y-2"><p>SATARK AI does not require accounts, stores scan history strictly locally in your browser, and never visits submitted URLs automatically.</p></div></main>${renderFooter()}`;
+    }
+
+    function renderNotFoundPage() {
+      return `${renderPublicNavbar()}<main class="max-w-xl mx-auto px-4 py-16 text-center space-y-4 flex-1"><h1 class="text-2xl font-extrabold">404 — Page Not Found</h1><button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary px-4 py-2 rounded-xl text-xs font-bold">Open Message Scanner</button></main>${renderFooter()}`;
+    }
+
+    function renderApp() {
+      const root = document.getElementById("app-root");
+      if (!root) return;
+      const r = APP_STATE.route;
+      let html = "";
+      if (r === "/" || r === "") html = renderLandingPage();
+      else if (r === "/app") html = renderDashboardPage();
+      else if (r === "/app/scan") html = renderMessageScannerPage();
+      else if (r === "/app/screenshot") html = renderScreenshotScannerPage();
+      else if (r === "/app/url-check") html = renderUrlCheckerPage();
+      else if (r === "/app/results/:id") html = renderAnalysisResultPage();
+      else if (r === "/app/history") html = renderHistoryPage();
+      else if (r === "/app/insights") html = renderInsightsPage();
+      else if (r === "/app/learn") html = renderAcademyPage();
+      else if (r === "/app/learn/:slug") html = renderLessonDetailPage();
+      else if (r === "/app/quiz") html = renderQuizPage();
+      else if (r === "/app/report") html = renderReportingPage();
+      else if (r === "/app/settings") html = renderSettingsPage();
+      else if (r === "/about") html = renderAboutPage();
+      else if (r === "/privacy") html = renderPrivacyPage();
+      else html = renderNotFoundPage();
+      root.innerHTML = html;
+      if (r === "/app/insights") setTimeout(initInsightsCharts, 40);
+      else if (r === "/app/scan" && APP_STATE.scannerDraft) updateScannerDraft(APP_STATE.scannerDraft);
+    }
+
+    Object.assign(window, {
+      toggleLanguage, toggleTheme, openResetDemoModal, closeModal, confirmModalAction,
+      navigateTo, scrollToLandingSection, loadSampleIntoScanner, pasteFromClipboardIntoScanner,
+      clearScannerInput, updateScannerDraft, updateScannerLangHint, handleScannerKeydown,
+      triggerMessageScan, triggerQuickUrlCheck, handleScreenshotFileSelect,
+      generateDemoScamScreenshot, enhanceOcrImageContrast, rotateOcrImage, runBrowserOcr,
+      sendOcrTextToScanner, downloadAnalysisReport, speakAnalysisSummary, copyFamilySafetyAlert,
+      deleteHistoryItem, confirmClearAllHistory, exportHistoryData, seedDemoHistoryForInsights,
+      toggleLessonCompleted, checkLessonKnowledge, selectQuizSet, submitQuizAnswer,
+      nextQuizQuestion, export1930IncidentSheet, updateSettingToggle, copyTextSafely
+    });
+
+    loadInitialState();
+    parseHashAndRender();
+  </script>
+</body>
+</html>
