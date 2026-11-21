@@ -6,7 +6,7 @@
   <title>SATARK AI — Your Personal Digital Scam Guardian</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
     if (typeof window.tailwind !== 'undefined') {
@@ -15,14 +15,15 @@
         theme: {
           extend: {
             colors: {
-              navy: { DEFAULT: '#10213A', deep: '#0B1728', card: '#13233B' },
-              teal: { DEFAULT: '#167D82', soft: '#E5F4F1', bright: '#2DD4BF' },
-              surface: { bg: '#F4F7FB', white: '#FFFFFF', dark: '#0B1728' },
-              ink: { primary: '#17263C', secondary: '#64748B' },
-              risk: { low: '#278A65', medium: '#E8A33A', high: '#D64D4D' }
+              canvas: { light: '#FAF9F6', dark: '#0C0D12' },
+              card: { light: '#FFFFFF', dark: '#151720' },
+              brand: { DEFAULT: '#4F46E5', hover: '#4338CA', soft: '#EEF2FF', light: '#6366F1' },
+              safe: { DEFAULT: '#059669', soft: '#ECFDF5' },
+              warn: { DEFAULT: '#D97706', soft: '#FFFBEB' },
+              danger: { DEFAULT: '#E11D48', soft: '#FFF1F2' }
             },
             fontFamily: {
-              heading: ['"Plus Jakarta Sans"', '"Noto Sans Devanagari"', 'sans-serif'],
+              heading: ['Outfit', '"Noto Sans Devanagari"', 'sans-serif'],
               sans: ['Inter', '"Noto Sans Devanagari"', 'sans-serif'],
               mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace']
             }
@@ -35,76 +36,76 @@
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js" defer></script>
   <style>
     :root {
-      --bg-canvas: #F4F7FB;
-      --bg-surface: #FFFFFF;
-      --bg-subtle: #EDF2F9;
-      --text-primary: #0F1D33;
-      --text-secondary: #475569;
-      --border-subtle: rgba(148, 163, 184, 0.28);
-      --shadow-card: 0 1px 3px rgba(15, 29, 51, 0.04), 0 10px 28px -6px rgba(15, 29, 51, 0.07);
-      --shadow-card-hover: 0 4px 12px rgba(15, 29, 51, 0.06), 0 18px 36px -8px rgba(22, 125, 130, 0.14);
+      --bg-page: #FAF9F6;
+      --bg-card: #FFFFFF;
+      --bg-muted: #F3F4F6;
+      --ink-main: #111827;
+      --ink-sub: #4B5563;
+      --border-line: #E5E7EB;
+      --accent: #4F46E5;
+      --accent-soft: #EEF2FF;
+      --shadow-soft: 0 2px 10px -2px rgba(17, 24, 39, 0.05), 0 1px 3px rgba(17, 24, 39, 0.04);
+      --shadow-float: 0 14px 36px -10px rgba(79, 70, 229, 0.16), 0 4px 12px -4px rgba(17, 24, 39, 0.06);
     }
     .dark {
-      --bg-canvas: #081120;
-      --bg-surface: #111F36;
-      --bg-subtle: #172946;
-      --text-primary: #F8FAFC;
-      --text-secondary: #94A3B8;
-      --border-subtle: rgba(71, 85, 105, 0.45);
-      --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.25), 0 14px 32px -8px rgba(0, 0, 0, 0.45);
-      --shadow-card-hover: 0 6px 18px rgba(0, 0, 0, 0.35), 0 20px 40px -8px rgba(45, 212, 191, 0.14);
+      --bg-page: #0C0D12;
+      --bg-card: #151720;
+      --bg-muted: #1E202C;
+      --ink-main: #F9FAFB;
+      --ink-sub: #9CA3AF;
+      --border-line: #272A38;
+      --accent: #6366F1;
+      --accent-soft: rgba(99, 102, 241, 0.16);
+      --shadow-soft: 0 4px 16px -4px rgba(0, 0, 0, 0.45);
+      --shadow-float: 0 18px 42px -12px rgba(0, 0, 0, 0.65);
     }
     body {
       font-family: 'Inter', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg-canvas);
-      color: var(--text-primary);
+      background-color: var(--bg-page);
+      color: var(--ink-main);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
     h1, h2, h3, h4, .font-heading {
-      font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif;
-      letter-spacing: -0.02em;
+      font-family: 'Outfit', 'Noto Sans Devanagari', sans-serif;
+      letter-spacing: -0.025em;
     }
-    .satark-hero-mesh {
-      background-color: #091426;
-      background-image:
-        radial-gradient(at 15% 20%, rgba(22, 125, 130, 0.28) 0px, transparent 52%),
-        radial-gradient(at 85% 15%, rgba(45, 212, 191, 0.15) 0px, transparent 48%),
-        radial-gradient(at 50% 90%, rgba(16, 33, 58, 0.9) 0px, transparent 65%),
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+    .editorial-hero-bg {
+      background:
+        radial-gradient(circle at 12% 18%, rgba(79, 70, 229, 0.09) 0%, transparent 42%),
+        radial-gradient(circle at 88% 12%, rgba(5, 150, 105, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% 95%, rgba(225, 29, 72, 0.04) 0%, transparent 50%);
     }
-    .satark-card {
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-card);
-      border-radius: 1rem;
+    .dark .editorial-hero-bg {
+      background:
+        radial-gradient(circle at 12% 18%, rgba(99, 102, 241, 0.18) 0%, transparent 44%),
+        radial-gradient(circle at 88% 12%, rgba(16, 185, 129, 0.10) 0%, transparent 40%);
+    }
+    .ui-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-line);
+      box-shadow: var(--shadow-soft);
+      border-radius: 1.25rem;
       transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
     }
-    .satark-card-interactive:hover {
+    .ui-card-hover:hover {
       transform: translateY(-2px);
-      box-shadow: var(--shadow-card-hover);
-      border-color: rgba(22, 125, 130, 0.45);
+      box-shadow: var(--shadow-float);
+      border-color: rgba(79, 70, 229, 0.4);
     }
-    .satark-glass-dark {
-      background: linear-gradient(145deg, rgba(21, 39, 68, 0.92), rgba(12, 24, 44, 0.96));
-      border: 1px solid rgba(45, 212, 191, 0.22);
-      box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.55);
-    }
-    .satark-btn-primary {
-      background: linear-gradient(135deg, #167D82 0%, #0F5E63 100%);
+    .btn-indigo {
+      background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
       color: #FFFFFF;
-      box-shadow: 0 4px 14px rgba(22, 125, 130, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      box-shadow: 0 6px 18px -4px rgba(79, 70, 229, 0.45);
       transition: all 0.18s ease;
     }
-    .satark-btn-primary:hover {
-      background: linear-gradient(135deg, #1B8E94 0%, #126E73 100%);
+    .btn-indigo:hover {
+      background: linear-gradient(135deg, #4338CA 0%, #3730A3 100%);
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(22, 125, 130, 0.42);
+      box-shadow: 0 10px 24px -4px rgba(79, 70, 229, 0.55);
     }
     .inert-url {
-      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
       word-break: break-all;
       user-select: all;
     }
@@ -124,43 +125,23 @@
 </head>
 <body class="min-h-screen flex flex-col transition-colors duration-200">
 
-  <!-- Clean Top Utility Bar (Parakram 2026 & Hybrid Engine pills removed) -->
-  <div id="top-demo-bar" class="no-print bg-[#091324] text-slate-100 text-xs border-b border-slate-800 px-3 sm:px-6 py-2">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-      <div class="flex items-center gap-2">
-        <span id="banner-tagline" class="text-slate-300 font-medium">SATARK AI — Privacy-First Multilingual Scam Guardian</span>
-      </div>
-      <div class="flex items-center gap-2 flex-wrap">
-        <button type="button" id="btn-toggle-lang" onclick="toggleLanguage()" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-100 font-semibold border border-slate-700 transition" aria-label="Switch Interface Language">
-          🌐 <span id="lang-btn-text">हिंदी / EN</span>
-        </button>
-        <button type="button" id="btn-toggle-theme" onclick="toggleTheme()" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-100 font-semibold border border-slate-700 transition" aria-label="Toggle Dark or Light Mode">
-          <span id="theme-btn-text">🌙 Dark</span>
-        </button>
-        <button type="button" id="btn-demo-reset" onclick="openResetDemoModal()" class="px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-400/30 font-semibold transition" title="Reset to clean state">
-          ↺ <span data-i18n="resetDemo">Reset Demo</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main Root Container -->
+  <!-- Main Root Container (Unified Top Bar + Content + Mobile Floating Dock) -->
   <div id="app-root" class="flex-1 flex flex-col"></div>
 
   <!-- Accessible In-Page Modal Container -->
-  <div id="modal-backdrop" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="satark-card bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl">
-      <h3 id="modal-title" class="text-lg font-bold text-slate-900 dark:text-white mb-2">Confirmation</h3>
-      <p id="modal-body" class="text-sm text-slate-600 dark:text-slate-300 mb-6"></p>
+  <div id="modal-backdrop" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="ui-card max-w-md w-full p-6 shadow-2xl">
+      <h3 id="modal-title" class="text-lg font-bold mb-2">Confirmation</h3>
+      <p id="modal-body" class="text-sm text-gray-600 dark:text-gray-300 mb-6"></p>
       <div class="flex items-center justify-end gap-3">
-        <button type="button" id="modal-cancel-btn" onclick="closeModal()" class="px-4 py-2 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 transition">Cancel</button>
-        <button type="button" id="modal-confirm-btn" onclick="confirmModalAction()" class="px-4 py-2 rounded-lg text-sm font-semibold bg-[#D64D4D] hover:bg-red-700 text-white transition">Confirm</button>
+        <button type="button" id="modal-cancel-btn" onclick="closeModal()" class="px-4 py-2 rounded-xl text-sm font-semibold bg-gray-100 dark:bg-[#1E202C] text-gray-700 dark:text-gray-200 hover:bg-gray-200 transition">Cancel</button>
+        <button type="button" id="modal-confirm-btn" onclick="confirmModalAction()" class="px-4 py-2 rounded-xl text-sm font-semibold bg-[#E11D48] hover:bg-rose-700 text-white transition">Confirm</button>
       </div>
     </div>
   </div>
 
   <!-- Toast Notification Container -->
-  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+  <div id="toast-container" class="fixed bottom-20 lg:bottom-6 right-4 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
 
   <script>
     // =========================================================================
@@ -2013,55 +1994,62 @@
       showToast("Updated preference: " + key, "info");
     }
 
+
     // =========================================================================
-    // 11. SVG ICONS, GAUGE, BRAND LOGO & NAVIGATION SHELL (FIXED ACTIVE HIGHLIGHTING)
+    // 11. NEW EDITORIAL INDIGO BRAND, ICONS, NAVIGATION & RISK VISUALS
     // =========================================================================
     function renderIcon(name, cls) {
       const c = cls || "w-4 h-4";
       const icons = {
         shield: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>`,
-        scan: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="8" x2="13" y2="8"/><line x1="7" y1="16" x2="15" y2="16"/></svg>`,
+        scan: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="14" y2="13"/><line x1="7" y1="17" x2="11" y2="17"/></svg>`,
         camera: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>`,
         link: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
-        history: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>`,
-        chart: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
-        book: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
+        history: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>`,
+        chart: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6" rx="1"/><rect x="12" y="8" width="3" height="10" rx="1"/><rect x="17" y="5" width="3" height="13" rx="1"/></svg>`,
+        book: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>`,
         quiz: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
-        alert: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
-        settings: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`
+        alert: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+        settings: `<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`
       };
       return icons[name] || icons.shield;
-    }
-
-    function renderRiskArcGauge(score, riskLevel) {
-      const clamped = Math.max(0, Math.min(100, Number(score) || 0));
-      const strokeColor = riskLevel === "high" ? "#D64D4D" : riskLevel === "medium" ? "#E8A33A" : "#278A65";
-      const radius = 44;
-      const circumference = Math.PI * radius;
-      const dashOffset = circumference - (clamped / 100) * circumference;
-      return `
-        <div class="flex flex-col items-center justify-center">
-          <svg class="w-36 h-20 overflow-visible" viewBox="0 0 110 62">
-            <path d="M 11 54 A 44 44 0 0 1 99 54" fill="none" stroke="currentColor" class="text-slate-200 dark:text-slate-800" stroke-width="10" stroke-linecap="round" />
-            <path d="M 11 54 A 44 44 0 0 1 99 54" fill="none" stroke="${strokeColor}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${circumference.toFixed(1)}" stroke-dashoffset="${dashOffset.toFixed(1)}" />
-            <text x="55" y="48" text-anchor="middle" class="fill-slate-900 dark:fill-white font-extrabold text-2xl" style="font-size:22px;font-weight:800;">${clamped}</text>
-            <text x="55" y="61" text-anchor="middle" class="fill-slate-400 text-[9px] font-bold uppercase" style="font-size:8px;letter-spacing:0.06em;">INDEX / 100</text>
-          </svg>
-        </div>
-      `;
     }
 
     function renderBrandLogo(sizeClass) {
       const sz = sizeClass || "w-9 h-9";
       return `
         <svg class="${sz} shrink-0" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="120" height="120" rx="28" fill="#10213A"/>
-          <path d="M60 18L94 32V58C94 81.5 79.4 99.8 60 106C40.6 99.8 26 81.5 26 58V32L60 18Z" fill="#167D82" fill-opacity="0.28" stroke="#2DD4BF" stroke-width="4.5"/>
-          <path d="M60 31L82 40V57C82 73.2 72.5 86.1 60 91C47.5 86.1 38 73.2 38 57V40L60 31Z" fill="#10213A" stroke="#E5F4F1" stroke-width="2.5"/>
-          <circle cx="60" cy="58" r="11" fill="#2DD4BF"/>
-          <path d="M46 46C53.7 38.3 66.3 38.3 74 46" stroke="#E5F4F1" stroke-width="3" stroke-linecap="round"/>
-          <path d="M54 58L58.5 62.5L67 53.5" stroke="#10213A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="satarkIndigoGrad" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#4F46E5"/>
+              <stop offset="100%" stop-color="#312E81"/>
+            </linearGradient>
+          </defs>
+          <rect width="120" height="120" rx="30" fill="url(#satarkIndigoGrad)"/>
+          <path d="M60 22L92 35V59C92 80.5 78.2 97.4 60 103C41.8 97.4 28 80.5 28 59V35L60 22Z" fill="#FFFFFF" fill-opacity="0.14" stroke="#FFFFFF" stroke-width="4.5" stroke-linejoin="round"/>
+          <path d="M46 60L56 70L76 49" stroke="#34D399" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
+      `;
+    }
+
+    function renderSegmentedRiskMeter(score, riskLevel) {
+      const clamped = Math.max(0, Math.min(100, Number(score) || 0));
+      const color = riskLevel === "high" ? "#E11D48" : riskLevel === "medium" ? "#D97706" : "#059669";
+      return `
+        <div class="w-full space-y-1.5">
+          <div class="flex items-baseline justify-between">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Risk Index</span>
+            <span class="text-2xl font-extrabold font-heading" style="color:${color}">${clamped}<span class="text-xs font-semibold text-gray-400">/100</span></span>
+          </div>
+          <div class="w-full h-3 rounded-full bg-gray-200 dark:bg-[#272A38] overflow-hidden p-0.5">
+            <div class="h-full rounded-full transition-all duration-300" style="width:${clamped}%; background:${color};"></div>
+          </div>
+          <div class="flex justify-between text-[10px] font-semibold text-gray-400">
+            <span>Low (0–24)</span>
+            <span>Verify (25–59)</span>
+            <span>High (60+)</span>
+          </div>
+        </div>
       `;
     }
 
@@ -2073,124 +2061,83 @@
       return false;
     }
 
-    function renderPublicNavbar() {
-      return `
-        <header class="no-print sticky top-0 z-40 bg-white/95 dark:bg-[#0B1728]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-            <button type="button" onclick="navigateTo('/')" class="flex items-center gap-3 text-left shrink-0">
-              ${renderBrandLogo("w-10 h-10")}
-              <div>
-                <span class="text-lg font-extrabold tracking-tight text-[#10213A] dark:text-white block leading-none">SATARK AI</span>
-                <span class="text-[11px] font-medium text-[#167D82] dark:text-teal-300 block mt-0.5">${escapeHtml(t("brandSub"))}</span>
-              </div>
-            </button>
-            <nav class="hidden md:flex items-center gap-5 text-sm font-medium text-slate-600 dark:text-slate-300" aria-label="Public Navigation">
-              <button type="button" onclick="scrollToLandingSection('sec-problem')" class="hover:text-[#167D82] dark:hover:text-teal-300 transition">The Problem</button>
-              <button type="button" onclick="scrollToLandingSection('sec-how-it-works')" class="hover:text-[#167D82] dark:hover:text-teal-300 transition">How It Works</button>
-              <button type="button" onclick="navigateTo('/app/learn')" class="hover:text-[#167D82] dark:hover:text-teal-300 transition">Scam Academy</button>
-              <button type="button" onclick="navigateTo('/app/report')" class="hover:text-[#167D82] dark:hover:text-teal-300 transition">Report Fraud (1930)</button>
-              <button type="button" onclick="navigateTo('/about')" class="${isRouteActive('/about') ? 'text-[#167D82] dark:text-teal-300 font-bold' : 'hover:text-[#167D82]'} transition">Architecture</button>
-              <button type="button" onclick="navigateTo('/privacy')" class="${isRouteActive('/privacy') ? 'text-[#167D82] dark:text-teal-300 font-bold' : 'hover:text-[#167D82]'} transition">Privacy</button>
-            </nav>
-            <div class="flex items-center gap-2">
-              <button type="button" onclick="navigateTo('/app')" class="px-3.5 py-2 rounded-xl text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
-                Dashboard
-              </button>
-              <button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary px-4 py-2 rounded-xl text-sm font-semibold shadow-sm">
-                ${escapeHtml(t("ctaScanNow"))} →
-              </button>
-            </div>
-          </div>
-        </header>
-      `;
-    }
-
-    function renderAppShell(innerContentHtml) {
-      const navItems = [
-        { path: "/app", icon: renderIcon("shield", "w-4 h-4"), label: t("navOverview") },
-        { path: "/app/scan", icon: renderIcon("scan", "w-4 h-4"), label: t("navScanMsg") },
-        { path: "/app/screenshot", icon: renderIcon("camera", "w-4 h-4"), label: t("navScreenshot") },
-        { path: "/app/url-check", icon: renderIcon("link", "w-4 h-4"), label: t("navUrlCheck") },
-        { path: "/app/history", icon: renderIcon("history", "w-4 h-4"), label: t("navHistory"), badge: APP_STATE.history.length || null },
-        { path: "/app/insights", icon: renderIcon("chart", "w-4 h-4"), label: t("navInsights") },
-        { path: "/app/learn", icon: renderIcon("book", "w-4 h-4"), label: t("navLearn") },
-        { path: "/app/quiz", icon: renderIcon("quiz", "w-4 h-4"), label: t("navQuiz") },
-        { path: "/app/report", icon: renderIcon("alert", "w-4 h-4"), label: t("navReport") },
-        { path: "/app/settings", icon: renderIcon("settings", "w-4 h-4"), label: t("navSettings") }
-      ];
-
-      const mobileTopItems = [
-        { path: "/app", label: "Home", id: "mob-nav-home" },
-        { path: "/app/scan", label: "Scan", id: "mob-nav-scan" },
-        { path: "/app/screenshot", label: "OCR", id: "mob-nav-ocr" },
-        { path: "/app/url-check", label: "URL", id: "mob-nav-url" },
-        { path: "/app/learn", label: "Learn", id: "mob-nav-learn" },
-        { path: "/app/history", label: "History", id: "mob-nav-history" },
-        { path: "/app/insights", label: "Insights", id: "mob-nav-insights" },
-        { path: "/app/quiz", label: "Quiz", id: "mob-nav-quiz" },
-        { path: "/app/report", label: "Report", id: "mob-nav-report" },
-        { path: "/app/settings", label: "⚙️", id: "mob-nav-settings" }
-      ];
-
-      const mobileBottomItems = [
-        { path: "/app", emoji: "🛡️", label: "Overview", id: "mob-bot-home" },
-        { path: "/app/scan", emoji: "🔍", label: "Scan", id: "mob-bot-scan" },
-        { path: "/app/url-check", emoji: "🔗", label: "URL", id: "mob-bot-url" },
-        { path: "/app/insights", emoji: "📊", label: "Insights", id: "mob-bot-insights" },
-        { path: "/app/report", emoji: "🚨", label: "1930 Help", id: "mob-bot-report", danger: true }
+    // Unified Clean Top Header + Floating Pill Navigation (Replaces Heavy Sidebar & Dark Banner)
+    function renderUnifiedHeader() {
+      const topNavItems = [
+        { path: "/app", label: "Home", id: "mob-nav-home", icon: "shield" },
+        { path: "/app/scan", label: "Scan", id: "mob-nav-scan", icon: "scan" },
+        { path: "/app/screenshot", label: "OCR", id: "mob-nav-ocr", icon: "camera" },
+        { path: "/app/url-check", label: "URL", id: "mob-nav-url", icon: "link" },
+        { path: "/app/history", label: "History", id: "mob-nav-history", icon: "history" },
+        { path: "/app/insights", label: "Insights", id: "mob-nav-insights", icon: "chart" },
+        { path: "/app/learn", label: "Learn", id: "mob-nav-learn", icon: "book" },
+        { path: "/app/quiz", label: "Quiz", id: "mob-nav-quiz", icon: "quiz" },
+        { path: "/app/report", label: "1930 Help", id: "mob-nav-report", icon: "alert" },
+        { path: "/app/settings", label: "Settings", id: "mob-nav-settings", icon: "settings" }
       ];
 
       return `
-        <div class="flex-1 flex flex-col lg:flex-row min-h-0">
-          <!-- Desktop Sidebar -->
-          <aside class="no-print hidden lg:flex lg:w-64 xl:w-72 flex-col bg-white dark:bg-[#111F36] border-r border-slate-200 dark:border-slate-800 shrink-0">
-            <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-              <button type="button" onclick="navigateTo('/')" class="flex items-center gap-3 text-left">
+        <header id="top-demo-bar" class="no-print sticky top-0 z-40 bg-white/90 dark:bg-[#151720]/90 backdrop-blur-md border-b border-gray-200/80 dark:border-[#272A38]">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <!-- Row 1: Brand + Clean Utility Controls -->
+            <div class="h-16 flex items-center justify-between gap-3">
+              <button type="button" onclick="navigateTo('/')" class="flex items-center gap-2.5 text-left shrink-0">
                 ${renderBrandLogo("w-9 h-9")}
                 <div>
-                  <span class="font-extrabold text-base text-[#10213A] dark:text-white block leading-none">SATARK AI</span>
-                  <span class="text-[11px] text-[#167D82] dark:text-teal-300 font-medium">Digital Scam Guardian</span>
+                  <span class="font-heading font-extrabold text-lg tracking-tight text-gray-900 dark:text-white block leading-none">SATARK AI</span>
+                  <span id="banner-tagline" class="text-[11px] font-medium text-indigo-600 dark:text-indigo-400 block mt-0.5">${escapeHtml(t("brandSub"))}</span>
                 </div>
               </button>
-            </div>
-            <nav class="flex-1 p-3 space-y-1 overflow-y-auto" aria-label="Main Application Navigation">
-              ${navItems.map(item => {
-                const isActive = isRouteActive(item.path);
-                return `
-                  <button type="button" onclick="navigateTo('${item.path}')" ${isActive ? 'aria-current="page"' : ''} class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition ${
-                    isActive
-                      ? "bg-[#167D82] text-white shadow-sm"
-                      : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/70"
-                  }">
-                    <span class="flex items-center gap-3">
-                      <span>${item.icon}</span>
-                      <span>${escapeHtml(item.label)}</span>
-                    </span>
-                    ${item.badge ? `<span class="px-2 py-0.5 text-[11px] rounded-full ${isActive ? 'bg-white/20 text-white' : 'bg-teal-500/20 text-teal-600 dark:text-teal-200'}">${item.badge}</span>` : ""}
-                  </button>
-                `;
-              }).join("")}
-            </nav>
-            <div class="p-4 m-3 rounded-xl bg-[#F4F7FB] dark:bg-[#152744] border border-slate-200 dark:border-slate-700 text-xs space-y-2">
-              <div class="flex items-center justify-between font-semibold text-slate-800 dark:text-slate-100">
-                <span>Emergency Cyber Helpline</span>
-                <span class="text-[#D64D4D] font-bold">1930</span>
-              </div>
-              <p class="text-slate-500 dark:text-slate-400 leading-relaxed">Lost money to UPI or bank fraud? Dial 1930 or report at cybercrime.gov.in immediately.</p>
-              <button type="button" onclick="navigateTo('/app/report')" class="w-full py-1.5 rounded-lg bg-[#D64D4D]/10 text-[#D64D4D] dark:text-red-300 font-bold hover:bg-[#D64D4D]/20 transition">
-                View Emergency Guide →
-              </button>
-            </div>
-          </aside>
 
-          <!-- Mobile Top Header (Dynamic Active Highlight + Non-Overlapping Scrollable Nav) -->
-          <div class="no-print lg:hidden bg-white dark:bg-[#111F36] border-b border-slate-200 dark:border-slate-800 px-3 py-2.5 flex items-center gap-3">
-            <button type="button" onclick="navigateTo('/')" class="flex items-center gap-2 shrink-0">
-              ${renderBrandLogo("w-8 h-8")}
-              <span class="font-extrabold text-sm text-[#10213A] dark:text-white whitespace-nowrap">SATARK AI</span>
-            </button>
-            <nav class="flex-1 min-w-0 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5" aria-label="Mobile Top Navigation">
-              ${mobileTopItems.map(item => {
+              <!-- Desktop Primary Pill Switcher -->
+              <nav class="hidden lg:flex items-center gap-1 p-1 rounded-2xl bg-gray-100/90 dark:bg-[#0C0D12] border border-gray-200/70 dark:border-[#272A38]" aria-label="Main Navigation">
+                ${topNavItems.slice(0, 7).map(item => {
+                  const active = isRouteActive(item.path);
+                  return `
+                    <button type="button" onclick="navigateTo('${item.path}')" ${active ? 'aria-current="page"' : ''} class="px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition ${
+                      active
+                        ? "bg-[#4F46E5] text-white shadow-sm"
+                        : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-white/70 dark:hover:bg-[#1E202C]"
+                    }">
+                      ${renderIcon(item.icon, "w-3.5 h-3.5")}
+                      <span>${escapeHtml(item.label)}</span>
+                    </button>
+                  `;
+                }).join("")}
+                <button type="button" onclick="navigateTo('/app/report')" class="px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 transition ${
+                  isRouteActive('/app/report')
+                    ? "bg-[#E11D48] text-white shadow-sm"
+                    : "text-[#E11D48] dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40"
+                }">
+                  ${renderIcon("alert", "w-3.5 h-3.5")}
+                  <span>1930</span>
+                </button>
+              </nav>
+
+              <!-- Right Utility Buttons -->
+              <div class="flex items-center gap-1.5 shrink-0">
+                <button type="button" id="btn-toggle-lang" onclick="toggleLanguage()" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-[#1E202C] text-gray-800 dark:text-gray-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 border border-gray-200/80 dark:border-[#272A38] transition" aria-label="Switch Language">
+                  🌐 <span id="lang-btn-text">${APP_STATE.settings.language === "hi" ? "EN" : "हिंदी"}</span>
+                </button>
+                <button type="button" id="btn-toggle-theme" onclick="toggleTheme()" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-[#1E202C] text-gray-800 dark:text-gray-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 border border-gray-200/80 dark:border-[#272A38] transition" aria-label="Toggle Theme">
+                  <span id="theme-btn-text">${APP_STATE.settings.theme === "dark" ? "☀️ Light" : "🌙 Dark"}</span>
+                </button>
+                <button type="button" onclick="navigateTo('/app/settings')" class="hidden sm:inline-flex p-2 rounded-xl text-xs font-semibold transition ${
+                  isRouteActive('/app/settings')
+                    ? "bg-[#4F46E5] text-white"
+                    : "bg-gray-100 dark:bg-[#1E202C] text-gray-700 dark:text-gray-200 hover:bg-indigo-50"
+                }" aria-label="Settings" title="Settings">
+                  ${renderIcon("settings", "w-4 h-4")}
+                </button>
+                <button type="button" id="btn-demo-reset" onclick="openResetDemoModal()" class="hidden md:inline-flex px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50 hover:bg-amber-100 transition" title="Reset Demo">
+                  ↺ <span data-i18n="resetDemo">Reset</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Row 2 (Mobile & Tablet): Clean Horizontally Scrollable Active-Highlighted Pill Strip -->
+            <nav class="lg:hidden flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-2.5 pt-0.5" aria-label="Mobile Section Navigation">
+              ${topNavItems.map(item => {
                 const active = isRouteActive(item.path);
                 return `
                   <button
@@ -2199,144 +2146,178 @@
                     data-active="${active ? 'true' : 'false'}"
                     ${active ? 'aria-current="page"' : ''}
                     onclick="navigateTo('${item.path}')"
-                    class="px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition ${
+                    class="px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 flex items-center gap-1.5 transition ${
                       active
-                        ? "bg-[#167D82] text-white shadow-sm ring-2 ring-teal-400/50"
-                        : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700"
+                        ? "bg-[#4F46E5] text-white shadow-sm ring-2 ring-indigo-300/60 dark:ring-indigo-500/40"
+                        : "bg-gray-100 dark:bg-[#1E202C] text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#272A38]"
                     }"
-                  >${escapeHtml(item.label)}</button>
+                  >
+                    ${renderIcon(item.icon, "w-3.5 h-3.5")}
+                    <span>${escapeHtml(item.label)}</span>
+                  </button>
                 `;
               }).join("")}
             </nav>
           </div>
-
-          <!-- Main Content Area -->
-          <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 pb-24 lg:pb-10 max-w-6xl w-full mx-auto">
-            ${innerContentHtml}
-          </main>
-
-          <!-- Mobile Bottom Bar (Dynamic Active Highlight for Every Button) -->
-          <nav class="no-print lg:hidden fixed bottom-0 inset-x-0 z-30 bg-white/95 dark:bg-[#111F36]/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 grid grid-cols-5 py-1.5 px-2 text-[11px] font-semibold" aria-label="Mobile Bottom Navigation">
-            ${mobileBottomItems.map(item => {
-              const active = isRouteActive(item.path);
-              const activeCls = item.danger
-                ? "text-[#D64D4D] dark:text-red-300 bg-red-500/10"
-                : "text-[#167D82] dark:text-teal-300 bg-teal-500/15";
-              const idleCls = "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200";
-              return `
-                <button
-                  type="button"
-                  id="${item.id}"
-                  data-active="${active ? 'true' : 'false'}"
-                  ${active ? 'aria-current="page"' : ''}
-                  onclick="navigateTo('${item.path}')"
-                  class="flex flex-col items-center py-1 rounded-lg transition ${active ? activeCls : idleCls}"
-                >
-                  <span>${item.emoji}</span>
-                  <span>${escapeHtml(item.label)}</span>
-                </button>
-              `;
-            }).join("")}
-          </nav>
-        </div>
+        </header>
       `;
     }
 
-    // =========================================================================
-    // 12. ROUTE VIEWS
-    // =========================================================================
-    function renderLandingPage() {
+    function renderMobileBottomDock() {
+      const dockItems = [
+        { path: "/app", icon: "shield", label: "Home", id: "mob-bot-home" },
+        { path: "/app/scan", icon: "scan", label: "Scan", id: "mob-bot-scan" },
+        { path: "/app/screenshot", icon: "camera", label: "OCR", id: "mob-bot-ocr" },
+        { path: "/app/url-check", icon: "link", label: "URL", id: "mob-bot-url" },
+        { path: "/app/report", icon: "alert", label: "1930", id: "mob-bot-report", danger: true }
+      ];
       return `
-        ${renderPublicNavbar()}
-        <main class="flex-1">
-          <section class="satark-hero-mesh relative overflow-hidden text-white py-16 lg:py-24 border-b border-slate-800/80">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div class="lg:col-span-7 space-y-6">
-                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-teal-500/15 border border-teal-400/30 text-teal-300 text-xs font-semibold shadow-sm">
-                  ${renderIcon("shield", "w-4 h-4 text-teal-300")}
-                  <span>Explainable Hybrid Scam Detection</span>
-                  <span class="text-slate-500">•</span>
-                  <span class="text-teal-200">English, हिंदी & Hinglish</span>
-                </div>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.08]">
-                  ${escapeHtml(t("heroTitle"))}
-                </h1>
-                <p class="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed font-normal">
-                  ${escapeHtml(t("heroSubtitle"))}
-                </p>
-                <div class="flex flex-wrap items-center gap-3.5 pt-2">
-                  <button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary px-6 py-3.5 rounded-xl font-bold text-base inline-flex items-center gap-2.5">
-                    ${renderIcon("scan", "w-5 h-5")}
-                    <span>${escapeHtml(t("ctaScanNow"))}</span>
-                  </button>
-                  <button type="button" onclick="scrollToLandingSection('sec-how-it-works')" class="px-5 py-3.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/90 text-slate-100 font-semibold text-base border border-slate-600/80 transition">
-                    ${escapeHtml(t("ctaHowItWorks"))}
-                  </button>
-                  <button type="button" onclick="navigateTo('/app/screenshot')" class="px-4 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-teal-300 font-semibold text-sm border border-teal-500/30 inline-flex items-center gap-2 transition">
-                    ${renderIcon("camera", "w-4 h-4")}
-                    <span>Screenshot OCR</span>
-                  </button>
-                </div>
-              </div>
-              <div class="lg:col-span-5">
-                <div class="satark-glass-dark rounded-2xl p-6 space-y-4">
-                  <div class="flex items-center justify-between border-b border-slate-700/80 pb-3.5">
-                    <span class="text-xs font-semibold text-slate-200">Live Threat Telemetry Preview</span>
-                    <span class="px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-red-500/20 text-red-300 border border-red-400/40">HIGH RISK • 88 / 100</span>
-                  </div>
-                  <div class="bg-slate-950/90 rounded-xl p-4 text-xs text-slate-200 leading-relaxed font-mono border border-slate-800/90">
-                    "Dear customer, <mark class="bg-red-500/30 text-red-200 px-1.5 py-0.5 rounded">aapka SBI account aaj raat block ho jayega</mark>. <mark class="bg-amber-500/30 text-amber-200 px-1.5 py-0.5 rounded">Abhi KYC update karo</mark> at <mark class="bg-red-500/30 text-red-200 px-1.5 py-0.5 rounded">http://sbi-kyc-verify.xyz/login</mark> aur <mark class="bg-red-500/30 text-red-200 px-1.5 py-0.5 rounded">OTP share karo</mark>."
-                  </div>
-                  <div class="grid grid-cols-2 gap-2.5">
-                    <button type="button" onclick="loadSampleIntoScanner('sample-kyc-hinglish', true)" class="satark-btn-primary py-2.5 px-3 rounded-xl font-bold text-xs text-center">⚡ Inspect Scam Live →</button>
-                    <button type="button" onclick="loadSampleIntoScanner('sample-legit-otp', true)" class="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-slate-600 text-center transition">✅ Test Benign OTP →</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+        <nav class="no-print lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 dark:bg-[#151720]/95 backdrop-blur-md border-t border-gray-200 dark:border-[#272A38] px-2 py-1.5 grid grid-cols-5 gap-1" aria-label="Mobile Bottom Dock">
+          ${dockItems.map(item => {
+            const active = isRouteActive(item.path);
+            const activeCls = item.danger
+              ? "bg-rose-50 dark:bg-rose-950/60 text-[#E11D48] dark:text-rose-300 font-bold"
+              : "bg-indigo-50 dark:bg-indigo-950/70 text-[#4F46E5] dark:text-indigo-300 font-bold";
+            const idleCls = "text-gray-500 dark:text-gray-400 font-medium";
+            return `
+              <button type="button" id="${item.id}" data-active="${active ? 'true' : 'false'}" ${active ? 'aria-current="page"' : ''} onclick="navigateTo('${item.path}')" class="flex flex-col items-center justify-center py-1.5 rounded-xl text-[11px] gap-0.5 transition ${active ? activeCls : idleCls}">
+                ${renderIcon(item.icon, "w-4 h-4")}
+                <span>${escapeHtml(item.label)}</span>
+              </button>
+            `;
+          }).join("")}
+        </nav>
+      `;
+    }
 
-          <section id="sec-problem" class="py-14 bg-white dark:bg-[#111E32] border-b border-slate-200 dark:border-slate-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Why Ordinary Spam Filters Fail Everyday Users</h2>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="satark-card p-6"><h3 class="font-bold text-base mb-1">Multilingual & Hinglish Evasion</h3><p class="text-sm text-slate-600 dark:text-slate-300">Phrases like <em>"Aapka khata block ho jayega"</em> bypass English-only keyword filters.</p></div>
-                <div class="satark-card p-6"><h3 class="font-bold text-base mb-1">Deceptive Subdomains & QR Traps</h3><p class="text-sm text-slate-600 dark:text-slate-300">Lookalike URLs and UPI collect requests trick users into authorizing outgoing transfers.</p></div>
-                <div class="satark-card p-6"><h3 class="font-bold text-base mb-1">Image-Based Forwarding</h3><p class="text-sm text-slate-600 dark:text-slate-300">Screenshots of fake electricity or lottery notices require private in-browser OCR inspection.</p></div>
-              </div>
-            </div>
-          </section>
-
-          <section id="sec-how-it-works" class="py-14 bg-[#F4F7FB] dark:bg-[#0B1728] border-b border-slate-200 dark:border-slate-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-              <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Inspect Text, Screenshots, or Suspicious Links Safely</h2>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="satark-card p-6 flex flex-col justify-between gap-4"><div><h3 class="text-lg font-bold mb-2">Multilingual Message Scanner</h3><p class="text-sm text-slate-600 dark:text-slate-300">Paste any SMS, WhatsApp forward, or email in English, Hindi, or Hinglish.</p></div><button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary w-full py-2.5 rounded-xl text-sm font-semibold">Open Message Scanner →</button></div>
-                <div class="satark-card p-6 flex flex-col justify-between gap-4"><div><h3 class="text-lg font-bold mb-2">Private Browser Screenshot OCR</h3><p class="text-sm text-slate-600 dark:text-slate-300">Extract text from JPG, PNG, or WebP screenshots locally inside your browser.</p></div><button type="button" onclick="navigateTo('/app/screenshot')" class="satark-btn-primary w-full py-2.5 rounded-xl text-sm font-semibold">Open Screenshot Scanner →</button></div>
-                <div class="satark-card p-6 flex flex-col justify-between gap-4"><div><h3 class="text-lg font-bold mb-2">Zero-Visit URL Safety Checker</h3><p class="text-sm text-slate-600 dark:text-slate-300">Inspect registrable domains and brand spoofing without opening the link.</p></div><button type="button" onclick="navigateTo('/app/url-check')" class="satark-btn-primary w-full py-2.5 rounded-xl text-sm font-semibold">Open URL Checker →</button></div>
-              </div>
-            </div>
-          </section>
+    function renderAppShell(innerContentHtml) {
+      return `
+        ${renderUnifiedHeader()}
+        <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 pb-24 lg:pb-12">
+          ${innerContentHtml}
         </main>
         ${renderFooter()}
+        ${renderMobileBottomDock()}
       `;
     }
 
     function renderFooter() {
       return `
-        <footer class="no-print bg-[#0B1728] text-slate-400 text-xs border-t border-slate-800 py-8">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2.5">${renderBrandLogo("w-7 h-7")}<span><strong class="text-white">SATARK AI</strong> • Your Personal Digital Scam Guardian</span></div>
-            <div class="flex flex-wrap items-center gap-4">
-              <button type="button" onclick="navigateTo('/')" class="hover:text-white transition">Home</button>
-              <button type="button" onclick="navigateTo('/app')" class="hover:text-white transition">Dashboard</button>
-              <button type="button" onclick="navigateTo('/app/learn')" class="hover:text-white transition">Academy</button>
-              <button type="button" onclick="navigateTo('/app/report')" class="hover:text-white transition">1930 Helpline Guide</button>
-              <button type="button" onclick="navigateTo('/about')" class="hover:text-white transition">Architecture</button>
-              <button type="button" onclick="navigateTo('/privacy')" class="hover:text-white transition">Privacy Policy</button>
+        <footer class="no-print border-t border-gray-200 dark:border-[#272A38] bg-white dark:bg-[#151720] text-gray-500 dark:text-gray-400 text-xs py-7 pb-24 lg:pb-8">
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2.5">
+              ${renderBrandLogo("w-7 h-7")}
+              <span><strong class="text-gray-900 dark:text-white">SATARK AI</strong> — Explainable Digital Scam Protection</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-4 font-medium">
+              <button type="button" onclick="navigateTo('/')" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Home</button>
+              <button type="button" onclick="navigateTo('/app/scan')" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Scanner</button>
+              <button type="button" onclick="navigateTo('/app/learn')" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Academy</button>
+              <button type="button" onclick="navigateTo('/app/quiz')" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Quiz</button>
+              <button type="button" onclick="navigateTo('/app/report')" class="hover:text-rose-600 transition">1930 Help</button>
+              <button type="button" onclick="navigateTo('/about')" class="hover:text-indigo-600 transition">About</button>
+              <button type="button" onclick="navigateTo('/privacy')" class="hover:text-indigo-600 transition">Privacy</button>
             </div>
           </div>
         </footer>
+      `;
+    }
+
+    // =========================================================================
+    // 12. COMPLETELY REDESIGNED EASY-TO-USE ROUTE VIEWS
+    // =========================================================================
+    function renderLandingPage() {
+      return `
+        ${renderUnifiedHeader()}
+        <main class="flex-1">
+          <!-- Airy Warm-Alabaster Editorial Hero with Instant Action Box -->
+          <section class="editorial-hero-bg py-12 sm:py-16 lg:py-20 border-b border-gray-200/80 dark:border-[#272A38]">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-6">
+              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/80 dark:border-indigo-800/70 text-indigo-700 dark:text-indigo-300 text-xs font-bold">
+                ${renderIcon("shield", "w-4 h-4")}
+                <span>English • हिंदी • Hinglish Scam Protection</span>
+              </div>
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-[1.08] max-w-3xl mx-auto">
+                ${escapeHtml(t("heroTitle"))}
+              </h1>
+              <p class="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                ${escapeHtml(t("heroSubtitle"))}
+              </p>
+
+              <!-- Universal Instant-Check Hub right inside the Hero -->
+              <div class="ui-card max-w-3xl mx-auto p-4 sm:p-6 text-left space-y-4 mt-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Instant Message Check</span>
+                  <div class="flex flex-wrap gap-1.5">
+                    <button type="button" onclick="loadSampleIntoScanner('sample-kyc-hinglish', true)" class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-rose-50 dark:bg-rose-950/50 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60 hover:bg-rose-100 transition">Try Hinglish KYC Scam</button>
+                    <button type="button" onclick="loadSampleIntoScanner('sample-upi-hi', true)" class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60 hover:bg-amber-100 transition">Try Hindi UPI Trap</button>
+                    <button type="button" onclick="loadSampleIntoScanner('sample-legit-otp', true)" class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 hover:bg-emerald-100 transition">Try Legit OTP</button>
+                  </div>
+                </div>
+                <textarea id="scanner-textarea" rows="3" oninput="updateScannerDraft(this.value)" onkeydown="handleScannerKeydown(event)" placeholder="Paste any suspicious SMS, WhatsApp forward, or email here..." class="w-full rounded-xl border border-gray-200 dark:border-[#272A38] bg-[#FAF9F6] dark:bg-[#0C0D12] p-3.5 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#4F46E5]">${escapeHtml(APP_STATE.scannerDraft)}</textarea>
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <div class="flex flex-wrap gap-2">
+                    <button type="button" onclick="navigateTo('/app/screenshot')" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-[#1E202C] text-gray-700 dark:text-gray-200 hover:bg-indigo-50 flex items-center gap-1.5 transition">${renderIcon("camera", "w-3.5 h-3.5")} Screenshot OCR</button>
+                    <button type="button" onclick="navigateTo('/app/url-check')" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-[#1E202C] text-gray-700 dark:text-gray-200 hover:bg-indigo-50 flex items-center gap-1.5 transition">${renderIcon("link", "w-3.5 h-3.5")} Check a URL</button>
+                  </div>
+                  <button type="button" id="btn-run-scan" onclick="triggerMessageScan()" class="btn-indigo px-6 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2">
+                    ${renderIcon("scan", "w-4 h-4")}
+                    <span>${escapeHtml(t("analyzeBtn"))} →</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3 Simple Ways to Stay Safe -->
+          <section id="sec-how-it-works" class="py-14 max-w-6xl mx-auto px-4 sm:px-6 space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Simple & Transparent</span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white">Three Effortless Ways to Verify Suspicious Content</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="ui-card ui-card-hover p-6 flex flex-col justify-between gap-4">
+                <div class="space-y-2">
+                  <div class="w-11 h-11 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">${renderIcon("scan", "w-5 h-5")}</div>
+                  <h3 class="text-lg font-bold">1. Paste Any Message</h3>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">Spot hidden urgency, KYC phishing, OTP theft, and UPI PIN traps in English, Hindi, or Hinglish with exact highlighted phrases.</p>
+                </div>
+                <button type="button" onclick="navigateTo('/app/scan')" class="w-full py-2.5 rounded-xl text-xs font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white transition">Open Message Scanner →</button>
+              </div>
+              <div class="ui-card ui-card-hover p-6 flex flex-col justify-between gap-4">
+                <div class="space-y-2">
+                  <div class="w-11 h-11 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">${renderIcon("camera", "w-5 h-5")}</div>
+                  <h3 class="text-lg font-bold">2. Scan a Screenshot</h3>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">Upload WhatsApp or SMS screenshots—text is extracted privately inside your browser with zero server uploads.</p>
+                </div>
+                <button type="button" onclick="navigateTo('/app/screenshot')" class="w-full py-2.5 rounded-xl text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-600 hover:text-white transition">Open Screenshot OCR →</button>
+              </div>
+              <div class="ui-card ui-card-hover p-6 flex flex-col justify-between gap-4">
+                <div class="space-y-2">
+                  <div class="w-11 h-11 rounded-2xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center">${renderIcon("link", "w-5 h-5")}</div>
+                  <h3 class="text-lg font-bold">3. Inspect Links Safely</h3>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">Reveal lookalike bank domains, raw IPs, and deceptive subdomains without ever opening or clicking the link.</p>
+                </div>
+                <button type="button" onclick="navigateTo('/app/url-check')" class="w-full py-2.5 rounded-xl text-xs font-bold bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 hover:bg-rose-600 hover:text-white transition">Open URL Checker →</button>
+              </div>
+            </div>
+          </section>
+
+          <section id="sec-problem" class="py-12 max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="ui-card p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 bg-indigo-50/60 dark:bg-indigo-950/25 border-indigo-200/70 dark:border-indigo-900/60">
+              <div class="space-y-1.5">
+                <h2 class="text-xl sm:text-2xl font-extrabold">Learn & Practice Before Scammers Strike</h2>
+                <p class="text-sm text-gray-600 dark:text-gray-300 max-w-xl">Explore 10 interactive cyber-safety lessons, test your judgment with our 3-set Scam Quiz, or access India's 1930 financial fraud helpline guide.</p>
+              </div>
+              <div class="flex flex-wrap gap-2.5 shrink-0">
+                <button type="button" onclick="navigateTo('/app/learn')" class="btn-indigo px-5 py-2.5 rounded-xl text-xs font-bold">Explore 10 Lessons</button>
+                <button type="button" onclick="navigateTo('/app/quiz')" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-[#151720] border border-gray-200 dark:border-[#272A38] hover:border-indigo-400 transition">Take Scam Quiz</button>
+              </div>
+            </div>
+          </section>
+        </main>
+        ${renderFooter()}
+        ${renderMobileBottomDock()}
       `;
     }
 
@@ -2346,60 +2327,79 @@
       const mediumRiskCount = APP_STATE.history.filter(h => h.risk_level === "medium").length;
       return renderAppShell(`
         <div class="space-y-6">
-          <div class="satark-hero-mesh text-white rounded-2xl p-6 sm:p-7 border border-slate-800 shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-5">
-            <div class="space-y-1.5">
-              <span class="text-xs font-bold uppercase tracking-wider text-teal-300">Protection Dashboard</span>
-              <h1 class="text-2xl sm:text-3xl font-extrabold">${escapeHtml(t("dashboardGreeting"))}</h1>
-              <p class="text-sm text-slate-300 max-w-2xl">${escapeHtml(t("dashboardSub"))}</p>
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Personal Protection Hub</span>
+              <h1 class="text-2xl sm:text-3xl font-extrabold mt-1">${escapeHtml(t("dashboardGreeting"))}</h1>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">${escapeHtml(t("dashboardSub"))}</p>
             </div>
-            <div class="flex flex-wrap gap-2.5 shrink-0">
-              <button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary px-4 py-2.5 rounded-xl font-bold text-sm">🔍 Scan Message</button>
-              <button type="button" onclick="navigateTo('/app/screenshot')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-semibold text-sm border border-slate-600 transition">📷 Screenshot OCR</button>
-            </div>
-          </div>
-
-          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-5 sm:p-6 space-y-4">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <h2 class="text-base font-bold text-slate-900 dark:text-white">Quick Message Inspection</h2>
-              <div class="flex flex-wrap gap-1.5">
-                <button type="button" onclick="loadSampleIntoScanner('sample-kyc-en', false)" class="text-xs px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium">Sample: Fake SBI KYC</button>
-                <button type="button" onclick="loadSampleIntoScanner('sample-kyc-hinglish', false)" class="text-xs px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium">Sample: Hinglish OTP</button>
-                <button type="button" onclick="loadSampleIntoScanner('sample-legit-otp', false)" class="text-xs px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium">Sample: Legit Bank OTP</button>
-              </div>
-            </div>
-            <textarea id="scanner-textarea" rows="3" oninput="updateScannerDraft(this.value)" placeholder="Paste a suspicious SMS, WhatsApp forward, or email..." class="w-full rounded-xl border border-slate-300 dark:border-slate-600 bg-[#F4F7FB] dark:bg-slate-900/90 p-3.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#167D82]">${escapeHtml(APP_STATE.scannerDraft)}</textarea>
-            <div class="flex flex-wrap items-center justify-between gap-3">
-              <span id="scanner-char-count" class="text-xs text-slate-500">${(APP_STATE.scannerDraft || "").length} / 5000 chars</span>
-              <div class="flex items-center gap-2">
-                <button type="button" onclick="clearScannerInput()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">${escapeHtml(t("clearBtn"))}</button>
-                <button type="button" id="btn-run-scan" onclick="triggerMessageScan()" class="satark-btn-primary px-5 py-2 rounded-xl text-sm font-bold">⚡ ${escapeHtml(t("analyzeBtn"))}</button>
-              </div>
+            <div class="flex gap-2">
+              <button type="button" onclick="navigateTo('/app/scan')" class="btn-indigo px-4 py-2.5 rounded-xl text-xs font-bold">New Message Scan</button>
+              <button type="button" onclick="navigateTo('/app/url-check')" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-white dark:bg-[#151720] border border-gray-200 dark:border-[#272A38]">Check URL</button>
             </div>
           </div>
 
+          <!-- 4 Clean Quick Action Tiles -->
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <button type="button" onclick="navigateTo('/app/scan')" class="satark-card satark-card-interactive p-4 rounded-2xl text-left"><div class="text-xl mb-1">📋</div><div class="font-bold text-sm">Paste Message</div><div class="text-xs text-slate-500 mt-0.5">English, Hindi & Hinglish</div></button>
-            <button type="button" onclick="navigateTo('/app/screenshot')" class="satark-card satark-card-interactive p-4 rounded-2xl text-left"><div class="text-xl mb-1">📷</div><div class="font-bold text-sm">Upload Screenshot</div><div class="text-xs text-slate-500 mt-0.5">Private in-browser OCR</div></button>
-            <button type="button" onclick="navigateTo('/app/url-check')" class="satark-card satark-card-interactive p-4 rounded-2xl text-left"><div class="text-xl mb-1">🔗</div><div class="font-bold text-sm">Check a URL</div><div class="text-xs text-slate-500 mt-0.5">Zero-visit domain check</div></button>
-            <button type="button" onclick="navigateTo('/app/learn')" class="satark-card satark-card-interactive p-4 rounded-2xl text-left"><div class="text-xl mb-1">🎓</div><div class="font-bold text-sm">Explore Scam Examples</div><div class="text-xs text-slate-500 mt-0.5">10 interactive lessons & quiz</div></button>
+            <button type="button" onclick="navigateTo('/app/scan')" class="ui-card ui-card-hover p-5 text-left space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">${renderIcon("scan", "w-5 h-5")}</div>
+              <div class="font-bold text-sm">Message Scanner</div>
+              <div class="text-xs text-gray-500 dark:text-gray-400">Paste SMS or WhatsApp</div>
+            </button>
+            <button type="button" onclick="navigateTo('/app/screenshot')" class="ui-card ui-card-hover p-5 text-left space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">${renderIcon("camera", "w-5 h-5")}</div>
+              <div class="font-bold text-sm">Screenshot OCR</div>
+              <div class="text-xs text-gray-500 dark:text-gray-400">Private browser scan</div>
+            </button>
+            <button type="button" onclick="navigateTo('/app/url-check')" class="ui-card ui-card-hover p-5 text-left space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center">${renderIcon("link", "w-5 h-5")}</div>
+              <div class="font-bold text-sm">URL Inspector</div>
+              <div class="text-xs text-gray-500 dark:text-gray-400">Zero-visit link check</div>
+            </button>
+            <button type="button" onclick="navigateTo('/app/report')" class="ui-card ui-card-hover p-5 text-left space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center">${renderIcon("alert", "w-5 h-5")}</div>
+              <div class="font-bold text-sm">1930 Emergency</div>
+              <div class="text-xs text-gray-500 dark:text-gray-400">Report cyber fraud fast</div>
+            </button>
           </div>
 
-          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-4">
-            <h2 class="text-base font-bold text-slate-900 dark:text-white">Local Protection Overview</h2>
+          <!-- Quick Paste Box -->
+          <div class="ui-card p-5 sm:p-6 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h2 class="text-base font-bold">Quick Message Check</h2>
+              <div class="flex flex-wrap gap-1.5">
+                <button type="button" onclick="loadSampleIntoScanner('sample-kyc-en', false)" class="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-[#1E202C] hover:bg-indigo-50 font-medium">Fake SBI KYC</button>
+                <button type="button" onclick="loadSampleIntoScanner('sample-kyc-hinglish', false)" class="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-[#1E202C] hover:bg-indigo-50 font-medium">Hinglish OTP</button>
+                <button type="button" onclick="loadSampleIntoScanner('sample-legit-otp', false)" class="text-xs px-3 py-1 rounded-full bg-gray-100 dark:bg-[#1E202C] hover:bg-emerald-50 font-medium">Legit OTP</button>
+              </div>
+            </div>
+            <textarea id="scanner-textarea" rows="3" oninput="updateScannerDraft(this.value)" onkeydown="handleScannerKeydown(event)" placeholder="Paste a suspicious message to inspect..." class="w-full rounded-xl border border-gray-200 dark:border-[#272A38] bg-[#FAF9F6] dark:bg-[#0C0D12] p-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#4F46E5]">${escapeHtml(APP_STATE.scannerDraft)}</textarea>
+            <div class="flex items-center justify-between gap-3">
+              <span id="scanner-char-count" class="text-xs text-gray-500">${(APP_STATE.scannerDraft || "").length} / 5000 chars</span>
+              <div class="flex gap-2">
+                <button type="button" onclick="clearScannerInput()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-[#1E202C]">${escapeHtml(t("clearBtn"))}</button>
+                <button type="button" id="btn-run-scan" onclick="triggerMessageScan()" class="btn-indigo px-5 py-2 rounded-xl text-xs font-bold">${escapeHtml(t("analyzeBtn"))} →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Local Stats Summary -->
+          <div class="ui-card p-6 space-y-4">
+            <div class="flex items-center justify-between">
+              <h2 class="text-base font-bold">Your Local Protection Summary</h2>
+              <button type="button" onclick="navigateTo('/app/insights')" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline">View Charts →</button>
+            </div>
             ${totalScans === 0 ? `
-              <div class="p-6 rounded-xl bg-[#F4F7FB] dark:bg-slate-900/60 border border-dashed border-slate-300 dark:border-slate-700 text-center space-y-3">
-                <h3 class="text-sm font-bold">No Local Scans Recorded Yet</h3>
-                <p class="text-xs text-slate-500 max-w-lg mx-auto">Scan a message above or load 6 sample records to populate your personal security metrics.</p>
-                <div class="flex justify-center gap-2">
-                  <button type="button" onclick="loadSampleIntoScanner('sample-kyc-en', true)" class="satark-btn-primary px-3.5 py-2 rounded-lg text-xs font-bold">Scan Sample Message</button>
-                  <button type="button" onclick="seedDemoHistoryForInsights()" class="px-3.5 py-2 rounded-lg text-xs font-semibold bg-slate-200 dark:bg-slate-800">Load 6 Demo Records</button>
-                </div>
+              <div class="p-6 rounded-2xl bg-[#FAF9F6] dark:bg-[#0C0D12] border border-dashed border-gray-300 dark:border-[#272A38] text-center space-y-3">
+                <p class="text-sm font-semibold">No local scans saved yet.</p>
+                <p class="text-xs text-gray-500">All scan history stays strictly inside your browser. Run a scan or load sample records to preview insights.</p>
+                <button type="button" onclick="seedDemoHistoryForInsights()" class="btn-indigo px-4 py-2 rounded-xl text-xs font-bold">Load 6 Demo Scans</button>
               </div>
             ` : `
-              <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="p-4 rounded-xl bg-[#F4F7FB] dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800"><div class="text-xs text-slate-500">Completed Scans</div><div class="text-2xl font-extrabold mt-1">${totalScans}</div></div>
-                <div class="p-4 rounded-xl bg-red-50/70 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50"><div class="text-xs text-red-700 dark:text-red-300">Flagged High Risk</div><div class="text-2xl font-extrabold text-[#D64D4D] mt-1">${highRiskCount}</div></div>
-                <div class="p-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50"><div class="text-xs text-amber-800 dark:text-amber-300">Requires Verification</div><div class="text-2xl font-extrabold text-amber-600 mt-1">${mediumRiskCount}</div></div>
+              <div class="grid grid-cols-3 gap-4">
+                <div class="p-4 rounded-2xl bg-[#FAF9F6] dark:bg-[#0C0D12] border border-gray-200/80 dark:border-[#272A38]"><div class="text-xs text-gray-500">Total Scans</div><div class="text-2xl font-extrabold mt-1">${totalScans}</div></div>
+                <div class="p-4 rounded-2xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/50"><div class="text-xs text-rose-700 dark:text-rose-300">High Risk</div><div class="text-2xl font-extrabold text-[#E11D48] mt-1">${highRiskCount}</div></div>
+                <div class="p-4 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50"><div class="text-xs text-amber-800 dark:text-amber-300">Verify</div><div class="text-2xl font-extrabold text-amber-600 mt-1">${mediumRiskCount}</div></div>
               </div>
             `}
           </div>
@@ -2409,57 +2409,60 @@
 
     function renderMessageScannerPage() {
       const detectedLang = detectLanguageJS(APP_STATE.scannerDraft || "", APP_STATE.scannerLanguageHint);
-      const langNames = { en: "English", hi: "Hindi (देवनागरी)", hinglish: "Hinglish (Mixed)" };
+      const langNames = { en: "English", hi: "Hindi (देवनागरी)", hinglish: "Hinglish" };
       return renderAppShell(`
         <div class="space-y-6">
           <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-[#167D82] dark:text-teal-400">Primary Feature • Hybrid Analysis</span>
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Suspicious Message Scanner</h1>
-            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Paste any SMS, WhatsApp forward, email, or social media message in English, Hindi, or Hinglish.</p>
+            <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Step-by-Step Analysis</span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Message Scam Scanner</h1>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Paste any suspicious SMS, WhatsApp forward, or email in English, Hindi, or Hinglish.</p>
           </div>
 
-          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-4">
-            <div class="flex flex-wrap items-center justify-between gap-3">
-              <div class="flex items-center gap-2">
-                <label for="scanner-textarea" class="text-sm font-bold">Message Content</label>
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#E5F4F1] text-[#167D82] dark:bg-teal-950 dark:text-teal-300">Detected Script: ${escapeHtml(langNames[detectedLang] || "Auto")}</span>
-              </div>
-              <select id="lang-hint-select" onchange="updateScannerLangHint(this.value)" class="text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-[#F4F7FB] dark:bg-slate-800 px-2.5 py-1.5">
-                <option value="auto" ${APP_STATE.scannerLanguageHint === 'auto' ? 'selected' : ''}>Auto-Detect</option>
-                <option value="en" ${APP_STATE.scannerLanguageHint === 'en' ? 'selected' : ''}>English</option>
-                <option value="hi" ${APP_STATE.scannerLanguageHint === 'hi' ? 'selected' : ''}>Hindi (हिंदी)</option>
-                <option value="hinglish" ${APP_STATE.scannerLanguageHint === 'hinglish' ? 'selected' : ''}>Hinglish</option>
-              </select>
-            </div>
-            <textarea id="scanner-textarea" rows="6" oninput="updateScannerDraft(this.value)" onkeydown="handleScannerKeydown(event)" placeholder="Paste suspicious message here..." class="w-full rounded-xl border border-slate-300 dark:border-slate-600 bg-[#F4F7FB] dark:bg-slate-900 p-4 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#167D82]">${escapeHtml(APP_STATE.scannerDraft)}</textarea>
-            <div id="live-prescan-telemetry" class="px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 text-xs">
-              <span class="text-slate-400">Type or paste any message above for instant live pre-scan signal detection (Press <kbd class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-mono text-[10px]">Ctrl+Enter</kbd> to scan).</span>
-            </div>
-            <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
-              <div class="flex items-center gap-2">
-                <button type="button" onclick="pasteFromClipboardIntoScanner()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800">📋 ${escapeHtml(t("pasteBtn"))}</button>
-                <button type="button" onclick="clearScannerInput()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800">✕ ${escapeHtml(t("clearBtn"))}</button>
-                <span id="scanner-char-count" class="text-xs text-slate-500 ml-1">${(APP_STATE.scannerDraft || "").length} / 5000 chars</span>
-              </div>
-              <button type="button" id="btn-run-scan" onclick="triggerMessageScan()" class="satark-btn-primary px-6 py-3 rounded-xl font-bold text-sm">🔍 ${escapeHtml(t("analyzeBtn"))}</button>
-            </div>
-          </div>
-
-          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-4">
-            <h2 class="text-base font-bold">Try Labeled Sample Messages</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-              ${SAMPLE_MESSAGES.map(s => `
-                <div class="p-3.5 rounded-xl bg-[#F4F7FB] dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex flex-col justify-between gap-2.5">
-                  <div>
-                    <div class="flex items-center justify-between gap-1 mb-1"><span class="text-xs font-bold text-[#167D82] dark:text-teal-300">${escapeHtml(s.category_hint)}</span><span class="text-[10px] uppercase px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 font-semibold">${escapeHtml(s.lang)}</span></div>
-                    <p class="text-xs text-slate-700 dark:text-slate-300 line-clamp-2 font-mono">${escapeHtml(s.text)}</p>
-                  </div>
-                  <div class="flex gap-2">
-                    <button type="button" onclick="loadSampleIntoScanner('${s.id}', false)" class="flex-1 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700">Load Text</button>
-                    <button type="button" onclick="loadSampleIntoScanner('${s.id}', true)" class="flex-1 py-1.5 rounded-lg text-xs font-bold bg-[#167D82] text-white">Scan Now →</button>
-                  </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-8 ui-card p-6 space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                  <label for="scanner-textarea" class="text-sm font-bold">Suspicious Message</label>
+                  <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300">${escapeHtml(langNames[detectedLang] || "Auto")}</span>
                 </div>
-              `).join("")}
+                <select id="lang-hint-select" onchange="updateScannerLangHint(this.value)" class="text-xs rounded-xl border border-gray-200 dark:border-[#272A38] bg-[#FAF9F6] dark:bg-[#0C0D12] px-3 py-1.5 font-medium">
+                  <option value="auto" ${APP_STATE.scannerLanguageHint === 'auto' ? 'selected' : ''}>Auto-Detect Language</option>
+                  <option value="en" ${APP_STATE.scannerLanguageHint === 'en' ? 'selected' : ''}>English</option>
+                  <option value="hi" ${APP_STATE.scannerLanguageHint === 'hi' ? 'selected' : ''}>Hindi (हिंदी)</option>
+                  <option value="hinglish" ${APP_STATE.scannerLanguageHint === 'hinglish' ? 'selected' : ''}>Hinglish</option>
+                </select>
+              </div>
+
+              <textarea id="scanner-textarea" rows="6" oninput="updateScannerDraft(this.value)" onkeydown="handleScannerKeydown(event)" placeholder="Paste suspicious message here..." class="w-full rounded-2xl border border-gray-200 dark:border-[#272A38] bg-[#FAF9F6] dark:bg-[#0C0D12] p-4 text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#4F46E5]">${escapeHtml(APP_STATE.scannerDraft)}</textarea>
+
+              <div id="live-prescan-telemetry" class="px-3.5 py-2.5 rounded-xl bg-gray-50 dark:bg-[#0C0D12] border border-gray-200/80 dark:border-[#272A38] text-xs">
+                <span class="text-gray-400">Type or paste any message above for instant live pre-scan signal detection (Press <kbd class="px-1.5 py-0.5 rounded bg-gray-200 dark:bg-[#1E202C] font-mono text-[10px]">Ctrl+Enter</kbd> to scan).</span>
+              </div>
+
+              <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+                <div class="flex items-center gap-2">
+                  <button type="button" onclick="pasteFromClipboardIntoScanner()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-[#1E202C] hover:bg-gray-200 transition">📋 ${escapeHtml(t("pasteBtn"))}</button>
+                  <button type="button" onclick="clearScannerInput()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-[#1E202C] hover:bg-gray-200 transition">✕ ${escapeHtml(t("clearBtn"))}</button>
+                  <span id="scanner-char-count" class="text-xs text-gray-500 ml-1">${(APP_STATE.scannerDraft || "").length} / 5000 chars</span>
+                </div>
+                <button type="button" id="btn-run-scan" onclick="triggerMessageScan()" class="btn-indigo px-6 py-3 rounded-xl font-bold text-sm">🔍 ${escapeHtml(t("analyzeBtn"))}</button>
+              </div>
+            </div>
+
+            <div class="lg:col-span-4 ui-card p-5 space-y-4">
+              <h2 class="text-sm font-bold">1-Tap Demo Examples</h2>
+              <p class="text-xs text-gray-500">Tap any realistic sample below to test how SATARK AI catches scams and avoids false alarms.</p>
+              <div class="space-y-2.5 max-h-[380px] overflow-y-auto pr-1">
+                ${SAMPLE_MESSAGES.map(s => `
+                  <button type="button" onclick="loadSampleIntoScanner('${s.id}', true)" class="w-full text-left p-3 rounded-xl bg-[#FAF9F6] dark:bg-[#0C0D12] border border-gray-200/80 dark:border-[#272A38] hover:border-indigo-500 transition space-y-1">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400">${escapeHtml(s.category_hint)}</span>
+                      <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-gray-200 dark:bg-[#1E202C]">${escapeHtml(s.lang)}</span>
+                    </div>
+                    <p class="text-[11px] text-gray-600 dark:text-gray-400 line-clamp-2 font-mono">${escapeHtml(s.text)}</p>
+                  </button>
+                `).join("")}
+              </div>
             </div>
           </div>
         </div>
@@ -2470,50 +2473,53 @@
       return renderAppShell(`
         <div class="space-y-6">
           <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-[#167D82] dark:text-teal-400">In-Browser OCR • Privacy-Preserving</span>
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Screenshot Scam Scanner</h1>
-            <p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Extract text from suspicious SMS or WhatsApp screenshots directly inside your browser using Tesseract.js.</p>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Private Browser OCR</span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Screenshot Scam Scanner</h1>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Upload any SMS or WhatsApp screenshot—text extraction runs locally in your browser.</p>
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div class="lg:col-span-6 satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-4">
-              <h2 class="text-base font-bold">Step 1: Select Image or Generate Sample Screenshot</h2>
-              <label for="screenshot-file-input" class="block border-2 border-dashed border-slate-300 dark:border-slate-600 hover:border-[#167D82] rounded-2xl p-6 text-center cursor-pointer transition bg-[#F4F7FB] dark:bg-slate-900/50">
-                <div class="text-3xl mb-2">🖼️</div>
-                <div class="text-sm font-bold">Click to Upload Screenshot (JPG, PNG, WebP)</div>
-                <div class="text-xs text-slate-500 mt-1">Max file size 10 MB • Processed locally in browser</div>
+            <div class="lg:col-span-6 ui-card p-6 space-y-4">
+              <h2 class="text-base font-bold">1. Upload or Generate a Screenshot</h2>
+              <label for="screenshot-file-input" class="block border-2 border-dashed border-indigo-300 dark:border-indigo-800 hover:border-indigo-500 rounded-2xl p-7 text-center cursor-pointer transition bg-indigo-50/40 dark:bg-indigo-950/20">
+                <div class="w-12 h-12 mx-auto mb-2 rounded-2xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">${renderIcon("camera", "w-6 h-6")}</div>
+                <div class="text-sm font-bold">Tap to Choose Screenshot (JPG, PNG, WebP)</div>
+                <div class="text-xs text-gray-500 mt-1">Stays on your device • Max 10 MB</div>
                 <input id="screenshot-file-input" type="file" accept="image/jpeg,image/png,image/webp" onchange="handleScreenshotFileSelect(event)" class="hidden" />
               </label>
-              <div class="flex flex-wrap gap-2">
-                <button type="button" onclick="generateDemoScamScreenshot('kyc')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">🎨 SBI KYC Screenshot</button>
-                <button type="button" onclick="generateDemoScamScreenshot('hinglish')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">🎨 Hinglish OTP Screenshot</button>
-                <button type="button" onclick="generateDemoScamScreenshot('upi')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">🎨 UPI Refund Screenshot</button>
-                <button type="button" onclick="generateDemoScamScreenshot('electricity')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">🎨 Electricity Cut Notice</button>
-                <button type="button" onclick="generateDemoScamScreenshot('legit')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-800">✅ Legitimate OTP Screenshot</button>
+              <div class="space-y-2">
+                <div class="text-xs font-semibold text-gray-500">Or generate a sample screenshot to test OCR instantly:</div>
+                <div class="flex flex-wrap gap-2">
+                  <button type="button" onclick="generateDemoScamScreenshot('kyc')" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 dark:bg-[#1E202C] hover:bg-indigo-50">SBI KYC Alert</button>
+                  <button type="button" onclick="generateDemoScamScreenshot('hinglish')" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 dark:bg-[#1E202C] hover:bg-indigo-50">Hinglish OTP</button>
+                  <button type="button" onclick="generateDemoScamScreenshot('upi')" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 dark:bg-[#1E202C] hover:bg-indigo-50">UPI Refund</button>
+                  <button type="button" onclick="generateDemoScamScreenshot('electricity')" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-gray-100 dark:bg-[#1E202C] hover:bg-indigo-50">Electricity Cut</button>
+                  <button type="button" onclick="generateDemoScamScreenshot('legit')" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300">Legit OTP</button>
+                </div>
               </div>
               ${APP_STATE.ocrImageDataUrl ? `
-                <div class="space-y-3 pt-2 border-t border-slate-200 dark:border-slate-700">
+                <div class="space-y-3 pt-3 border-t border-gray-200 dark:border-[#272A38]">
                   <div class="flex items-center justify-between gap-2 flex-wrap">
                     <span class="text-xs font-bold truncate">${escapeHtml(APP_STATE.ocrImageName)}</span>
-                    <div class="flex gap-2">
-                      <button type="button" onclick="enhanceOcrImageContrast()" class="px-2.5 py-1 rounded text-xs font-semibold bg-slate-100 dark:bg-slate-800">◐ Enhance Contrast</button>
-                      <button type="button" onclick="rotateOcrImage()" class="px-2.5 py-1 rounded text-xs font-semibold bg-slate-100 dark:bg-slate-800">↻ Rotate 90°</button>
-                      <button type="button" onclick="runBrowserOcr()" class="px-3.5 py-1 rounded text-xs font-bold bg-[#167D82] text-white">⚡ Run Local OCR</button>
+                    <div class="flex gap-1.5">
+                      <button type="button" onclick="enhanceOcrImageContrast()" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 dark:bg-[#1E202C]">◐ Contrast</button>
+                      <button type="button" onclick="rotateOcrImage()" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-gray-100 dark:bg-[#1E202C]">↻ Rotate</button>
+                      <button type="button" onclick="runBrowserOcr()" class="btn-indigo px-3.5 py-1.5 rounded-lg text-xs font-bold">⚡ Extract Text</button>
                     </div>
                   </div>
-                  <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-950 p-2 flex justify-center">
+                  <div class="rounded-xl overflow-hidden border border-gray-200 dark:border-[#272A38] bg-gray-950 p-2 flex justify-center">
                     <img src="${APP_STATE.ocrImageDataUrl}" alt="Selected screenshot preview" class="max-h-56 max-w-full h-auto object-contain rounded" />
                   </div>
-                  <div class="w-full h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden"><div id="ocr-progress-bar" class="h-full bg-[#167D82]" style="width: ${APP_STATE.ocrProgress}%"></div></div>
-                  <p id="ocr-status-label" class="text-xs text-slate-600 dark:text-slate-300">${escapeHtml(APP_STATE.ocrStatusText)}</p>
+                  <div class="w-full h-2 rounded-full bg-gray-200 dark:bg-[#272A38] overflow-hidden"><div id="ocr-progress-bar" class="h-full bg-[#4F46E5]" style="width:${APP_STATE.ocrProgress}%"></div></div>
+                  <p id="ocr-status-label" class="text-xs text-gray-600 dark:text-gray-300">${escapeHtml(APP_STATE.ocrStatusText)}</p>
                 </div>
               ` : ""}
             </div>
-            <div class="lg:col-span-6 satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 flex flex-col justify-between space-y-4">
+            <div class="lg:col-span-6 ui-card p-6 flex flex-col justify-between space-y-4">
               <div class="space-y-3">
-                <h2 class="text-base font-bold">Step 2: Review & Edit Extracted Text</h2>
-                <textarea id="ocr-extracted-textarea" rows="8" oninput="APP_STATE.ocrExtractedText = this.value" placeholder="Extracted text from your screenshot will appear here..." class="w-full rounded-xl border border-slate-300 dark:border-slate-600 bg-[#F4F7FB] dark:bg-slate-900 p-3.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#167D82]">${escapeHtml(APP_STATE.ocrExtractedText)}</textarea>
+                <h2 class="text-base font-bold">2. Review & Scan Extracted Text</h2>
+                <textarea id="ocr-extracted-textarea" rows="8" oninput="APP_STATE.ocrExtractedText = this.value" placeholder="Extracted text will appear here. You can edit any words before scanning..." class="w-full rounded-2xl border border-gray-200 dark:border-[#272A38] bg-[#FAF9F6] dark:bg-[#0C0D12] p-4 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#4F46E5]">${escapeHtml(APP_STATE.ocrExtractedText)}</textarea>
               </div>
-              <button type="button" onclick="sendOcrTextToScanner()" class="satark-btn-primary w-full py-3 rounded-xl font-bold text-sm">🔍 Analyze Extracted Screenshot Text →</button>
+              <button type="button" onclick="sendOcrTextToScanner()" class="btn-indigo w-full py-3 rounded-xl font-bold text-sm">Analyze Extracted Text →</button>
             </div>
           </div>
         </div>
@@ -2522,53 +2528,54 @@
 
     function renderUrlCheckerPage() {
       const res = APP_STATE.lastUrlCheckResult || inspectUrlLocally(APP_STATE.urlInputDraft);
-      const badgeColor = res.risk_level === "high"
-        ? "bg-red-100 text-red-800 border-red-300 dark:bg-red-950/70 dark:text-red-200 dark:border-red-800"
+      const pillStyle = res.risk_level === "high"
+        ? "bg-rose-100 text-rose-800 dark:bg-rose-950/70 dark:text-rose-200"
         : res.risk_level === "medium"
-        ? "bg-amber-100 text-amber-800 border-amber-300 dark:bg-amber-950/70 dark:text-amber-200 dark:border-amber-800"
-        : "bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-emerald-950/70 dark:text-emerald-200 dark:border-emerald-800";
+        ? "bg-amber-100 text-amber-800 dark:bg-amber-950/70 dark:text-amber-200"
+        : "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-200";
 
       return renderAppShell(`
         <div class="space-y-6">
           <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-[#167D82] dark:text-teal-400">Zero-Visit Structural Inspection • SSRF Safe</span>
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">URL & Domain Safety Checker</h1>
+            <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Zero-Visit Link Inspection</span>
+            <h1 class="text-2xl sm:text-3xl font-extrabold mt-1">URL & Domain Safety Checker</h1>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">Paste any suspicious link to inspect its true owner domain without ever opening it.</p>
           </div>
-          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-4">
-            <label for="url-input-field" class="block text-sm font-bold">Enter URL or Domain to Inspect</label>
+          <div class="ui-card p-6 space-y-4">
             <div class="flex flex-col sm:flex-row gap-3">
-              <input id="url-input-field" type="text" value="${escapeHtml(APP_STATE.urlInputDraft)}" oninput="APP_STATE.urlInputDraft = this.value" class="flex-1 rounded-xl border border-slate-300 dark:border-slate-600 bg-[#F4F7FB] dark:bg-slate-900 px-4 py-3 text-sm font-mono" />
-              <button type="button" id="btn-inspect-url" onclick="triggerQuickUrlCheck()" class="satark-btn-primary px-6 py-3 rounded-xl font-bold text-sm shrink-0">🔗 Inspect URL Safely</button>
+              <input id="url-input-field" type="text" value="${escapeHtml(APP_STATE.urlInputDraft)}" oninput="APP_STATE.urlInputDraft = this.value" placeholder="https://..." class="flex-1 rounded-xl border border-gray-200 dark:border-[#272A38] bg-[#FAF9F6] dark:bg-[#0C0D12] px-4 py-3 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#4F46E5]" />
+              <button type="button" id="btn-inspect-url" onclick="triggerQuickUrlCheck()" class="btn-indigo px-6 py-3 rounded-xl font-bold text-sm shrink-0">Inspect Link</button>
             </div>
-            <div class="flex flex-wrap items-center gap-2 text-xs">
-              <span class="text-slate-500 font-medium">Test Presets:</span>
-              <button type="button" onclick="triggerQuickUrlCheck('http://sbi.co.in.kyc-verify-portal.xyz/login?redirect=http://evil.example')" class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 font-mono">sbi.co.in.kyc-verify-portal.xyz</button>
-              <button type="button" onclick="triggerQuickUrlCheck('http://192.168.1.105/hdfc-netbanking/update')" class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 font-mono">192.168.1.105/hdfc...</button>
-              <button type="button" onclick="triggerQuickUrlCheck('https://retail.onlinesbi.sbi/')" class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 font-mono">retail.onlinesbi.sbi (Official)</button>
+            <div class="flex flex-wrap gap-2 text-xs">
+              <button type="button" onclick="triggerQuickUrlCheck('http://sbi.co.in.kyc-verify-portal.xyz/login?redirect=http://evil.example')" class="px-3 py-1 rounded-full bg-gray-100 dark:bg-[#1E202C] font-mono">sbi.co.in.kyc-verify-portal.xyz</button>
+              <button type="button" onclick="triggerQuickUrlCheck('http://192.168.1.105/hdfc-netbanking/update')" class="px-3 py-1 rounded-full bg-gray-100 dark:bg-[#1E202C] font-mono">192.168.1.105/hdfc</button>
+              <button type="button" onclick="triggerQuickUrlCheck('https://retail.onlinesbi.sbi/')" class="px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 font-mono">retail.onlinesbi.sbi (Official)</button>
             </div>
           </div>
 
-          <div id="url-result-card" class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-5">
-            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-700 pb-5">
-              <div class="space-y-2 flex-1 min-w-[260px]">
-                <span class="px-3 py-1 rounded-full border text-xs font-extrabold uppercase ${badgeColor}">${escapeHtml(res.risk_level)} Risk</span>
-                <div class="inert-url text-sm font-bold bg-slate-100 dark:bg-slate-900/90 px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700">${escapeHtml(res.submitted_url)}</div>
-                <div class="flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
-                  <span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800">Scheme: <strong>${escapeHtml(res.scheme)}://</strong></span>
-                  <span class="px-2.5 py-0.5 rounded bg-teal-100 dark:bg-teal-950/90 text-[#167D82] dark:text-teal-300 font-bold">Registrable Domain: ${escapeHtml(res.registrable_domain || res.hostname || 'N/A')}</span>
+          <div id="url-result-card" class="ui-card p-6 space-y-5">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center border-b border-gray-200 dark:border-[#272A38] pb-5">
+              <div class="md:col-span-8 space-y-2.5">
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold uppercase ${pillStyle}">${escapeHtml(res.risk_level)} Risk</span>
+                <div class="inert-url text-sm font-bold bg-[#FAF9F6] dark:bg-[#0C0D12] px-3.5 py-2.5 rounded-xl border border-gray-200 dark:border-[#272A38]">${escapeHtml(res.submitted_url)}</div>
+                <div class="flex flex-wrap gap-2 text-xs font-mono">
+                  <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-[#1E202C]">Protocol: <strong>${escapeHtml(res.scheme)}</strong></span>
+                  <span class="px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 font-bold">True Domain: ${escapeHtml(res.registrable_domain || res.hostname || 'N/A')}</span>
                 </div>
               </div>
-              <div class="bg-[#F4F7FB] dark:bg-slate-900/90 px-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-800">${renderRiskArcGauge(res.risk_index, res.risk_level)}</div>
+              <div class="md:col-span-4 bg-[#FAF9F6] dark:bg-[#0C0D12] p-4 rounded-2xl border border-gray-200 dark:border-[#272A38]">
+                ${renderSegmentedRiskMeter(res.risk_index, res.risk_level)}
+              </div>
             </div>
             <p class="text-sm font-medium">${escapeHtml(res.summary)}</p>
             ${res.impersonated_brand ? `
-              <div class="p-4 rounded-xl bg-red-50/90 dark:bg-red-950/40 border border-red-300 dark:border-red-800 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                <div><span class="font-bold uppercase text-[#D64D4D] block">❌ Submitted Unofficial Domain</span><code class="text-sm font-extrabold block">${escapeHtml(res.registrable_domain || res.hostname)}</code></div>
-                <div><span class="font-bold uppercase text-[#278A65] block">✅ Official ${escapeHtml(res.impersonated_brand)} Domain(s)</span><code class="text-sm font-extrabold block">${escapeHtml((PROTECTED_BRANDS[res.impersonated_brand.toLowerCase()] || []).join(" / "))}</code></div>
+              <div class="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                <div><span class="font-bold uppercase text-[#E11D48] block">❌ Unofficial Domain Submitted</span><code class="text-sm font-extrabold block mt-0.5">${escapeHtml(res.registrable_domain || res.hostname)}</code></div>
+                <div><span class="font-bold uppercase text-[#059669] block">✅ Official ${escapeHtml(res.impersonated_brand)} Domain(s)</span><code class="text-sm font-extrabold block mt-0.5">${escapeHtml((PROTECTED_BRANDS[res.impersonated_brand.toLowerCase()] || []).join(" / "))}</code></div>
               </div>
             ` : ""}
             <div class="space-y-2">
-              ${res.signals.map(sig => `<div class="p-3 rounded-xl bg-[#F4F7FB] dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs"><strong>${escapeHtml(sig.signal.replace(/_/g, " ").toUpperCase())}:</strong> ${escapeHtml(sig.explanation)}</div>`).join("")}
+              ${res.signals.map(sig => `<div class="p-3.5 rounded-xl bg-[#FAF9F6] dark:bg-[#0C0D12] border border-gray-200 dark:border-[#272A38] text-xs"><strong>${escapeHtml(sig.signal.replace(/_/g, " ").toUpperCase())}:</strong> ${escapeHtml(sig.explanation)}</div>`).join("")}
             </div>
           </div>
         </div>
@@ -2576,14 +2583,14 @@
     }
 
     function highlightEvidenceInText(rawText, evidenceList) {
-      if (!rawText) return "<em>No raw message text stored for this analysis.</em>";
+      if (!rawText) return "<em>No raw message text stored.</em>";
       let safe = escapeHtml(rawText);
       const phrases = (evidenceList || []).map(e => e.text).filter(Boolean).sort((a, b) => b.length - a.length);
       for (const phrase of phrases) {
         const escPhrase = escapeHtml(phrase);
         if (escPhrase.length < 3) continue;
         const re = new RegExp("(" + escPhrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
-        safe = safe.replace(re, '<mark class="bg-amber-200 dark:bg-amber-500/30 text-slate-950 dark:text-amber-100 font-semibold px-1 rounded border-b-2 border-[#D64D4D]">$1</mark>');
+        safe = safe.replace(re, '<mark class="bg-rose-100 dark:bg-rose-500/30 text-rose-900 dark:text-rose-100 font-bold px-1 rounded border-b-2 border-[#E11D48]">$1</mark>');
       }
       return safe;
     }
@@ -2595,69 +2602,66 @@
         res = APP_STATE.history.find(h => h.analysis_id === targetId) || APP_STATE.currentResult;
       }
       if (!res) {
-        return renderAppShell(`<div class="satark-card p-8 text-center space-y-4"><h1 class="text-xl font-bold">Analysis Result Not Found</h1><button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary px-5 py-2.5 rounded-xl text-sm font-bold">Scan a Message Now</button></div>`);
+        return renderAppShell(`<div class="ui-card p-8 text-center space-y-4"><h1 class="text-xl font-bold">Result Not Found</h1><button type="button" onclick="navigateTo('/app/scan')" class="btn-indigo px-5 py-2.5 rounded-xl text-sm font-bold">Scan a Message</button></div>`);
       }
       const isHindi = APP_STATE.settings.language === "hi";
-      const bannerStyles = res.risk_level === "high"
-        ? "bg-red-50 dark:bg-red-950/40 border-red-300 dark:border-red-800 text-red-950 dark:text-red-100"
+      const verdictBg = res.risk_level === "high"
+        ? "bg-rose-50 dark:bg-rose-950/35 border-rose-300 dark:border-rose-800"
         : res.risk_level === "medium"
-        ? "bg-amber-50 dark:bg-amber-950/40 border-amber-300 dark:border-amber-800 text-amber-950 dark:text-amber-100"
-        : "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-800 text-emerald-950 dark:text-emerald-100";
-      const badgeStyles = res.risk_level === "high" ? "bg-[#D64D4D] text-white" : res.risk_level === "medium" ? "bg-[#E8A33A] text-slate-950" : "bg-[#278A65] text-white";
+        ? "bg-amber-50 dark:bg-amber-950/35 border-amber-300 dark:border-amber-800"
+        : "bg-emerald-50 dark:bg-emerald-950/35 border-emerald-300 dark:border-emerald-800";
+      const badgeCls = res.risk_level === "high" ? "bg-[#E11D48] text-white" : res.risk_level === "medium" ? "bg-[#D97706] text-white" : "bg-[#059669] text-white";
       const summaryText = isHindi && res.summary_hi ? res.summary_hi : res.summary;
       const actionsList = isHindi && res.recommended_actions_hi ? res.recommended_actions_hi : res.recommended_actions;
 
       return renderAppShell(`
         <div class="space-y-6">
-          <div class="no-print flex flex-wrap items-center justify-between gap-3">
-            <button type="button" onclick="navigateTo('/app/scan')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700">← Scan Another Message</button>
-            <div class="flex flex-wrap items-center gap-2">
-              <button type="button" onclick="speakAnalysisSummary('${res.analysis_id}')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-teal-500/15 text-[#167D82] dark:text-teal-300 border border-teal-500/30">🔊 Listen Aloud</button>
-              <button type="button" onclick="copyFamilySafetyAlert('${res.analysis_id}')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-500/15 text-[#278A65] dark:text-emerald-300 border border-emerald-500/30">📲 Share Family Alert</button>
-              <button type="button" onclick="downloadAnalysisReport('${res.analysis_id}')" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700">⬇ Download Report</button>
-              <button type="button" onclick="deleteHistoryItem('${res.analysis_id}'); navigateTo('/app/scan');" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:text-red-500">🗑️ Delete</button>
+          <div class="no-print flex flex-wrap items-center justify-between gap-2">
+            <button type="button" onclick="navigateTo('/app/scan')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-white dark:bg-[#151720] border border-gray-200 dark:border-[#272A38]">← Scan Another</button>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" onclick="speakAnalysisSummary('${res.analysis_id}')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300">🔊 Listen</button>
+              <button type="button" onclick="copyFamilySafetyAlert('${res.analysis_id}')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300">📲 Share Family Alert</button>
+              <button type="button" onclick="downloadAnalysisReport('${res.analysis_id}')" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-[#151720] border border-gray-200 dark:border-[#272A38]">⬇ Report</button>
+              <button type="button" onclick="deleteHistoryItem('${res.analysis_id}'); navigateTo('/app/scan');" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-[#1E202C] hover:text-rose-600">🗑️ Delete</button>
             </div>
           </div>
 
-          <div class="rounded-2xl p-6 border-2 ${bannerStyles} space-y-4">
-            <div class="flex flex-wrap items-center justify-between gap-4">
-              <div class="space-y-1 flex-1 min-w-[240px]">
-                <div class="flex flex-wrap items-center gap-2">
-                  <span id="results-risk-badge" class="px-3 py-1 rounded-lg text-xs font-extrabold uppercase ${badgeStyles}">${escapeHtml(res.risk_band)}</span>
-                  <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-white/80 dark:bg-slate-900/80 text-slate-800 dark:text-slate-200">${escapeHtml(res.category_label)}</span>
-                </div>
-                <h1 class="text-xl sm:text-2xl font-extrabold mt-2">${escapeHtml(summaryText)}</h1>
+          <div class="rounded-3xl p-6 sm:p-7 border-2 ${verdictBg} grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+            <div class="md:col-span-8 space-y-2.5">
+              <div class="flex flex-wrap items-center gap-2">
+                <span id="results-risk-badge" class="px-3.5 py-1 rounded-full text-xs font-extrabold uppercase ${badgeCls}">${escapeHtml(res.risk_band)}</span>
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-white/90 dark:bg-[#151720] text-gray-800 dark:text-gray-200 border border-gray-200/70 dark:border-[#272A38]">${escapeHtml(res.category_label)}</span>
               </div>
-              <div class="bg-white/95 dark:bg-slate-900/95 px-5 py-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 text-center min-w-[170px]">
-                <div class="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 mb-1">Heuristic Risk Index</div>
-                ${renderRiskArcGauge(res.risk_index, res.risk_level)}
-              </div>
+              <h1 class="text-xl sm:text-2xl font-extrabold leading-snug">${escapeHtml(summaryText)}</h1>
+            </div>
+            <div class="md:col-span-4 bg-white dark:bg-[#151720] p-4 rounded-2xl border border-gray-200 dark:border-[#272A38] shadow-sm">
+              ${renderSegmentedRiskMeter(res.risk_index, res.risk_level)}
             </div>
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div class="lg:col-span-6 satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-3">
-              <h2 class="text-base font-bold">Inspected Message & Highlighted Phrases</h2>
-              <div class="p-4 rounded-xl bg-[#F4F7FB] dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm leading-relaxed font-mono whitespace-pre-wrap break-words">${highlightEvidenceInText(res.raw_text, res.evidence)}</div>
+            <div class="lg:col-span-6 ui-card p-6 space-y-3">
+              <h2 class="text-base font-bold">Highlighted Message</h2>
+              <div class="p-4 rounded-2xl bg-[#FAF9F6] dark:bg-[#0C0D12] border border-gray-200 dark:border-[#272A38] text-sm leading-relaxed font-mono whitespace-pre-wrap break-words">${highlightEvidenceInText(res.raw_text, res.evidence)}</div>
             </div>
-            <div class="lg:col-span-6 satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-3">
-              <h2 class="text-base font-bold">Verified Evidence (${res.evidence.length})</h2>
+            <div class="lg:col-span-6 ui-card p-6 space-y-3">
+              <h2 class="text-base font-bold">Why It Was Flagged (${res.evidence.length})</h2>
               <div id="results-evidence-list" class="space-y-2.5">
-                ${res.evidence.length === 0 ? `<div class="p-4 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 text-xs">No deterministic scam phrases were triggered.</div>` : res.evidence.map(ev => `
-                  <div class="p-3.5 rounded-xl bg-[#F4F7FB] dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-1">
-                    <div class="flex items-center justify-between"><span class="text-xs font-extrabold uppercase text-[#167D82] dark:text-teal-300">${escapeHtml(ev.type.replace(/_/g, " "))}</span><span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300">${escapeHtml(ev.severity)}</span></div>
+                ${res.evidence.length === 0 ? `<div class="p-4 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 text-xs">No deterministic scam patterns were triggered in this text.</div>` : res.evidence.map(ev => `
+                  <div class="p-3.5 rounded-2xl bg-[#FAF9F6] dark:bg-[#0C0D12] border border-gray-200 dark:border-[#272A38] space-y-1">
+                    <div class="flex items-center justify-between"><span class="text-xs font-extrabold uppercase text-indigo-600 dark:text-indigo-400">${escapeHtml(ev.type.replace(/_/g, " "))}</span><span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300">${escapeHtml(ev.severity)}</span></div>
                     <div class="text-xs font-mono font-bold">"${escapeHtml(ev.text)}"</div>
-                    <p class="text-xs text-slate-600 dark:text-slate-300">${escapeHtml(isHindi && ev.explanation_hi ? ev.explanation_hi : ev.explanation)}</p>
+                    <p class="text-xs text-gray-600 dark:text-gray-300">${escapeHtml(isHindi && ev.explanation_hi ? ev.explanation_hi : ev.explanation)}</p>
                   </div>
                 `).join("")}
               </div>
             </div>
           </div>
 
-          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-3">
-            <h2 class="text-base font-bold">Recommended Safety Actions</h2>
+          <div class="ui-card p-6 space-y-3">
+            <h2 class="text-base font-bold">What You Should Do Next</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              ${actionsList.map((act, idx) => `<div class="p-3.5 rounded-xl bg-[#F4F7FB] dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 flex items-start gap-3 text-xs"><span class="w-6 h-6 rounded-full bg-[#167D82] text-white font-bold flex items-center justify-center shrink-0">${idx + 1}</span><span class="font-medium">${escapeHtml(act)}</span></div>`).join("")}
+              ${actionsList.map((act, idx) => `<div class="p-4 rounded-2xl bg-[#FAF9F6] dark:bg-[#0C0D12] border border-gray-200 dark:border-[#272A38] flex items-start gap-3 text-xs"><span class="w-6 h-6 rounded-full bg-[#4F46E5] text-white font-bold flex items-center justify-center shrink-0">${idx + 1}</span><span class="font-medium leading-relaxed">${escapeHtml(act)}</span></div>`).join("")}
             </div>
           </div>
         </div>
@@ -2674,24 +2678,24 @@
       return renderAppShell(`
         <div class="space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-4">
-            <div><span class="text-xs font-bold uppercase tracking-wider text-[#167D82]">Private Browser Storage</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Local Scan History</h1></div>
+            <div><span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Stored Locally Only</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Scan History</h1></div>
             <div class="flex gap-2">
-              <button type="button" onclick="exportHistoryData('json')" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700">⬇ JSON</button>
-              <button type="button" onclick="exportHistoryData('csv')" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700">⬇ CSV</button>
-              <button type="button" onclick="confirmClearAllHistory()" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-red-500/10 text-[#D64D4D]">🗑️ Clear All</button>
+              <button type="button" onclick="exportHistoryData('json')" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-[#151720] border border-gray-200 dark:border-[#272A38]">⬇ JSON</button>
+              <button type="button" onclick="exportHistoryData('csv')" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-white dark:bg-[#151720] border border-gray-200 dark:border-[#272A38]">⬇ CSV</button>
+              <button type="button" onclick="confirmClearAllHistory()" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-rose-50 dark:bg-rose-950/50 text-[#E11D48]">🗑️ Clear</button>
             </div>
           </div>
-          ${filtered.length === 0 ? `<div class="satark-card p-8 text-center space-y-3"><h2 class="text-base font-bold">No Matching Scan Records</h2><button type="button" onclick="seedDemoHistoryForInsights()" class="satark-btn-primary px-4 py-2 rounded-xl text-xs font-bold">Load 6 Demo Scans</button></div>` : `
+          ${filtered.length === 0 ? `<div class="ui-card p-8 text-center space-y-3"><h2 class="text-base font-bold">No Scan Records Yet</h2><button type="button" onclick="seedDemoHistoryForInsights()" class="btn-indigo px-4 py-2 rounded-xl text-xs font-bold">Load 6 Demo Scans</button></div>` : `
             <div class="space-y-3">
               ${filtered.map(item => `
-                <div class="satark-card bg-white dark:bg-[#111F36] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="ui-card p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div class="space-y-1 min-w-0">
-                    <div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded text-xs font-extrabold uppercase bg-slate-100 dark:bg-slate-800">${escapeHtml(item.risk_level)} (${item.risk_index}/100)</span><span class="text-sm font-bold">${escapeHtml(item.category_label)}</span></div>
-                    <p class="text-xs text-slate-600 dark:text-slate-300 font-mono line-clamp-2">${escapeHtml(item.raw_text || item.summary)}</p>
+                    <div class="flex items-center gap-2"><span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold uppercase bg-gray-100 dark:bg-[#1E202C]">${escapeHtml(item.risk_level)} (${item.risk_index}/100)</span><span class="text-sm font-bold">${escapeHtml(item.category_label)}</span></div>
+                    <p class="text-xs text-gray-600 dark:text-gray-400 font-mono line-clamp-2">${escapeHtml(item.raw_text || item.summary)}</p>
                   </div>
                   <div class="flex gap-2 shrink-0">
-                    <button type="button" onclick="navigateTo('/app/results/${item.analysis_id}')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#167D82] text-white">View</button>
-                    <button type="button" onclick="deleteHistoryItem('${item.analysis_id}')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800">Delete</button>
+                    <button type="button" onclick="navigateTo('/app/results/${item.analysis_id}')" class="btn-indigo px-3.5 py-2 rounded-xl text-xs font-bold">View</button>
+                    <button type="button" onclick="deleteHistoryItem('${item.analysis_id}')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-gray-100 dark:bg-[#1E202C]">Delete</button>
                   </div>
                 </div>
               `).join("")}
@@ -2707,13 +2711,13 @@
       return renderAppShell(`
         <div class="space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-4">
-            <div><span class="text-xs font-bold uppercase tracking-wider text-[#167D82]">Personal Analytics</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Personal Security Insights</h1></div>
-            ${total === 0 ? `<button type="button" onclick="seedDemoHistoryForInsights()" class="satark-btn-primary px-4 py-2 rounded-xl text-xs font-bold">⚡ Load 6 Demo Scans</button>` : ""}
+            <div><span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Personal Analytics</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Security Insights</h1></div>
+            ${total === 0 ? `<button type="button" onclick="seedDemoHistoryForInsights()" class="btn-indigo px-4 py-2 rounded-xl text-xs font-bold">⚡ Load 6 Demo Scans</button>` : ""}
           </div>
-          ${total === 0 ? `<div class="satark-card p-10 text-center space-y-3"><h2 class="text-lg font-bold">No Local Scan Data Available Yet</h2><button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary px-4 py-2.5 rounded-xl text-xs font-bold">Scan a Message</button></div>` : `
+          ${total === 0 ? `<div class="ui-card p-10 text-center space-y-3"><h2 class="text-lg font-bold">No Local Scan Data Yet</h2><button type="button" onclick="navigateTo('/app/scan')" class="btn-indigo px-5 py-2.5 rounded-xl text-xs font-bold">Scan a Message</button></div>` : `
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div class="satark-card p-6 space-y-3"><h2 class="text-sm font-bold">Risk Band Distribution (${total} Scans)</h2><div class="relative h-72"><canvas id="chart-risk-dist"></canvas></div></div>
-              <div class="satark-card p-6 space-y-3"><h2 class="text-sm font-bold">Detected Scam Categories</h2><div class="relative h-72"><canvas id="chart-cat-dist"></canvas></div></div>
+              <div class="ui-card p-6 space-y-3"><h2 class="text-sm font-bold">Risk Distribution (${total} Scans)</h2><div class="relative h-72"><canvas id="chart-risk-dist"></canvas></div></div>
+              <div class="ui-card p-6 space-y-3"><h2 class="text-sm font-bold">Detected Scam Categories</h2><div class="relative h-72"><canvas id="chart-cat-dist"></canvas></div></div>
             </div>
           `}
         </div>
@@ -2724,7 +2728,7 @@
       if (APP_STATE.route !== "/app/insights" || APP_STATE.history.length === 0) return;
       const riskCanvas = document.getElementById("chart-risk-dist");
       const catCanvas = document.getElementById("chart-cat-dist");
-      if (!riskCanvas || !catCanvas) return;
+      if (!riskCanvas || !catCanvas || !window.Chart) return;
       const high = APP_STATE.history.filter(h => h.risk_level === "high").length;
       const med = APP_STATE.history.filter(h => h.risk_level === "medium").length;
       const low = APP_STATE.history.filter(h => h.risk_level === "low").length;
@@ -2733,41 +2737,39 @@
         const lbl = h.category_label || h.category;
         catCounts[lbl] = (catCounts[lbl] || 0) + 1;
       }
-      if (window.Chart) {
-        if (activeRiskChart) activeRiskChart.destroy();
-        if (activeCatChart) activeCatChart.destroy();
-        activeRiskChart = new Chart(riskCanvas, {
-          type: "doughnut",
-          data: { labels: ["High Risk", "Uncertain", "No Strong Indicators"], datasets: [{ data: [high, med, low], backgroundColor: ["#D64D4D", "#E8A33A", "#278A65"] }] },
-          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } } }
-        });
-        activeCatChart = new Chart(catCanvas, {
-          type: "bar",
-          data: { labels: Object.keys(catCounts), datasets: [{ label: "Scans", data: Object.values(catCounts), backgroundColor: "#167D82", borderRadius: 6 }] },
-          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } }
-        });
-      }
+      if (activeRiskChart) activeRiskChart.destroy();
+      if (activeCatChart) activeCatChart.destroy();
+      activeRiskChart = new Chart(riskCanvas, {
+        type: "doughnut",
+        data: { labels: ["High Risk", "Verify", "No Strong Indicators"], datasets: [{ data: [high, med, low], backgroundColor: ["#E11D48", "#D97706", "#059669"] }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom" } } }
+      });
+      activeCatChart = new Chart(catCanvas, {
+        type: "bar",
+        data: { labels: Object.keys(catCounts), datasets: [{ label: "Scans", data: Object.values(catCounts), backgroundColor: "#4F46E5", borderRadius: 8 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } }
+      });
     }
 
     function renderAcademyPage() {
       return renderAppShell(`
         <div class="space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-4">
-            <div><span class="text-xs font-bold uppercase tracking-wider text-[#167D82]">10 Interactive Modules</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Scam Awareness Academy</h1></div>
+            <div><span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">10 Interactive Modules</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Scam Awareness Academy</h1></div>
             <div class="flex items-center gap-3">
-              <div class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700 text-xs font-bold">Completed: <span class="text-[#167D82]">${APP_STATE.completedLessons.length} / ${ACADEMY_LESSONS.length}</span></div>
-              <button type="button" onclick="navigateTo('/app/quiz')" class="satark-btn-primary px-4 py-2.5 rounded-xl font-bold text-xs">🧠 Take Scam Quiz →</button>
+              <span class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#151720] border border-gray-200 dark:border-[#272A38] text-xs font-bold">Done: <span class="text-indigo-600">${APP_STATE.completedLessons.length}/${ACADEMY_LESSONS.length}</span></span>
+              <button type="button" onclick="navigateTo('/app/quiz')" class="btn-indigo px-4 py-2.5 rounded-xl font-bold text-xs">Take Scam Quiz →</button>
             </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             ${ACADEMY_LESSONS.map(lesson => `
-              <div class="satark-card p-5 flex flex-col justify-between gap-4">
+              <div class="ui-card ui-card-hover p-5 flex flex-col justify-between gap-4">
                 <div class="space-y-2">
-                  <div class="flex items-center justify-between text-xs"><span class="px-2.5 py-0.5 rounded-full font-bold bg-[#E5F4F1] text-[#167D82] dark:bg-teal-950 dark:text-teal-300">Lesson ${lesson.number} • ${escapeHtml(lesson.category)}</span><span class="text-slate-400">${escapeHtml(lesson.readTime)}</span></div>
+                  <div class="flex items-center justify-between text-xs"><span class="px-2.5 py-0.5 rounded-full font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300">Lesson ${lesson.number} • ${escapeHtml(lesson.category)}</span><span class="text-gray-400">${escapeHtml(lesson.readTime)}</span></div>
                   <h2 class="text-base font-bold">${escapeHtml(APP_STATE.settings.language === 'hi' ? lesson.title_hi : lesson.title)}</h2>
-                  <p class="text-xs text-slate-600 dark:text-slate-300">${escapeHtml(lesson.summary)}</p>
+                  <p class="text-xs text-gray-600 dark:text-gray-300">${escapeHtml(lesson.summary)}</p>
                 </div>
-                <button type="button" onclick="navigateTo('/app/learn/${lesson.slug}')" class="w-full py-2.5 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-[#167D82] hover:text-white transition">Open Lesson →</button>
+                <button type="button" onclick="navigateTo('/app/learn/${lesson.slug}')" class="w-full py-2.5 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#1E202C] hover:bg-[#4F46E5] hover:text-white transition">Open Lesson →</button>
               </div>
             `).join("")}
           </div>
@@ -2779,14 +2781,14 @@
       const lesson = ACADEMY_LESSONS.find(l => l.slug === APP_STATE.routeParam) || ACADEMY_LESSONS[0];
       return renderAppShell(`
         <div class="space-y-6">
-          <button type="button" onclick="navigateTo('/app/learn')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700">← Back to All Lessons</button>
-          <div class="satark-card p-6 sm:p-8 space-y-5">
+          <button type="button" onclick="navigateTo('/app/learn')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-white dark:bg-[#151720] border border-gray-200 dark:border-[#272A38]">← Back to Academy</button>
+          <div class="ui-card p-6 sm:p-8 space-y-5">
             <h1 class="text-2xl font-extrabold">${escapeHtml(lesson.title)}</h1>
-            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">${escapeHtml(lesson.explanation)}</p>
-            <div class="p-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-300 text-xs font-mono">${escapeHtml(lesson.fictionalExample)}</div>
-            <div class="p-5 rounded-2xl bg-[#F4F7FB] dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3">
+            <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">${escapeHtml(lesson.explanation)}</p>
+            <div class="p-4 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-800 text-xs font-mono">${escapeHtml(lesson.fictionalExample)}</div>
+            <div class="p-5 rounded-2xl bg-[#FAF9F6] dark:bg-[#0C0D12] border border-gray-200 dark:border-[#272A38] space-y-3">
               <p class="text-sm font-bold">${escapeHtml(lesson.quizQuestion)}</p>
-              ${lesson.quizOptions.map((opt, idx) => `<button type="button" onclick="checkLessonKnowledge('${lesson.slug}', ${idx})" class="w-full text-left p-3 rounded-xl text-xs font-semibold bg-white dark:bg-[#111F36] border border-slate-300 dark:border-slate-700">${idx + 1}. ${escapeHtml(opt)}</button>`).join("")}
+              ${lesson.quizOptions.map((opt, idx) => `<button type="button" onclick="checkLessonKnowledge('${lesson.slug}', ${idx})" class="w-full text-left p-3 rounded-xl text-xs font-semibold bg-white dark:bg-[#151720] border border-gray-200 dark:border-[#272A38] hover:border-indigo-500 transition">${idx + 1}. ${escapeHtml(opt)}</button>`).join("")}
               <div id="lesson-quiz-feedback" class="hidden"></div>
             </div>
             <button type="button" onclick="toggleLessonCompleted('${lesson.slug}')" class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white">${APP_STATE.completedLessons.includes(lesson.slug) ? "✓ Completed" : "Mark as Completed"}</button>
@@ -2802,28 +2804,28 @@
       return renderAppShell(`
         <div class="space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-4">
-            <div><span class="text-xs font-bold uppercase tracking-wider text-[#167D82]">Balanced Judgment Training</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Interactive Scam Recognition Quiz</h1></div>
+            <div><span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Scam vs. Legitimate</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Interactive Scam Quiz</h1></div>
             <div class="flex gap-2">
-              ${Object.entries(QUIZ_SETS).map(([k, val], idx) => `<button type="button" onclick="selectQuizSet('${k}')" class="px-3 py-1.5 rounded-xl text-xs font-bold ${APP_STATE.quizSetKey === k ? 'bg-[#167D82] text-white' : 'bg-white dark:bg-[#111F36] border border-slate-200 dark:border-slate-700'}">Set ${idx + 1}</button>`).join("")}
+              ${Object.entries(QUIZ_SETS).map(([k, val], idx) => `<button type="button" onclick="selectQuizSet('${k}')" class="px-3.5 py-1.5 rounded-full text-xs font-bold ${APP_STATE.quizSetKey === k ? 'bg-[#4F46E5] text-white' : 'bg-white dark:bg-[#151720] border border-gray-200 dark:border-[#272A38]'}">Set ${idx + 1}</button>`).join("")}
             </div>
           </div>
           ${APP_STATE.quizFinished ? `
-            <div id="quiz-final-summary" class="satark-card p-8 text-center space-y-4">
+            <div id="quiz-final-summary" class="ui-card p-8 text-center space-y-4">
               <h2 class="text-2xl font-extrabold">Quiz Complete: ${APP_STATE.quizScore} / ${totalQ} Correct!</h2>
-              <button type="button" onclick="selectQuizSet('${APP_STATE.quizSetKey}')" class="satark-btn-primary px-5 py-2.5 rounded-xl font-bold text-xs">Retry This Set</button>
+              <button type="button" onclick="selectQuizSet('${APP_STATE.quizSetKey}')" class="btn-indigo px-5 py-2.5 rounded-xl font-bold text-xs">Retry This Set</button>
             </div>
           ` : `
-            <div class="satark-card p-6 space-y-5">
-              <div class="flex justify-between text-xs font-bold text-slate-500"><span>${escapeHtml(currentSet.title)}</span><span>Question ${APP_STATE.quizIndex + 1} of ${totalQ}</span></div>
-              <div class="p-4 rounded-xl bg-[#F4F7FB] dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
-                <div class="text-xs font-bold text-slate-500">Sender: ${escapeHtml(q.sender)}</div>
+            <div class="ui-card p-6 space-y-5">
+              <div class="flex justify-between text-xs font-bold text-gray-500"><span>${escapeHtml(currentSet.title)}</span><span>Question ${APP_STATE.quizIndex + 1} of ${totalQ}</span></div>
+              <div class="p-4 rounded-2xl bg-[#FAF9F6] dark:bg-[#0C0D12] border border-gray-200 dark:border-[#272A38] space-y-2">
+                <div class="text-xs font-bold text-gray-500">Sender: ${escapeHtml(q.sender)}</div>
                 <div class="text-sm font-mono">${escapeHtml(q.message)}</div>
               </div>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <button type="button" data-quiz-choice="0" onclick="submitQuizAnswer('scam')" class="p-4 rounded-xl border-2 text-left ${APP_STATE.quizSelectedChoice === 'scam' ? 'border-[#167D82]' : 'border-slate-200 dark:border-slate-700'}"><div class="font-bold text-sm text-[#D64D4D]">🚨 Fraudulent / Scam Message</div></button>
-                <button type="button" data-quiz-choice="1" onclick="submitQuizAnswer('legitimate')" class="p-4 rounded-xl border-2 text-left ${APP_STATE.quizSelectedChoice === 'legitimate' ? 'border-[#167D82]' : 'border-slate-200 dark:border-slate-700'}"><div class="font-bold text-sm text-[#278A65]">✅ Legitimate / Safe Notification</div></button>
+                <button type="button" data-quiz-choice="0" onclick="submitQuizAnswer('scam')" class="p-4 rounded-2xl border-2 text-left transition ${APP_STATE.quizSelectedChoice === 'scam' ? 'border-[#E11D48] bg-rose-50/50 dark:bg-rose-950/30' : 'border-gray-200 dark:border-[#272A38] hover:border-[#E11D48]'}"><div class="font-bold text-sm text-[#E11D48]">🚨 Fraudulent / Scam</div></button>
+                <button type="button" data-quiz-choice="1" onclick="submitQuizAnswer('legitimate')" class="p-4 rounded-2xl border-2 text-left transition ${APP_STATE.quizSelectedChoice === 'legitimate' ? 'border-[#059669] bg-emerald-50/50 dark:bg-emerald-950/30' : 'border-gray-200 dark:border-[#272A38] hover:border-[#059669]'}"><div class="font-bold text-sm text-[#059669]">✅ Legitimate / Safe</div></button>
               </div>
-              ${APP_STATE.quizSubmitted ? `<div class="p-4 rounded-xl border text-xs space-y-2"><p>${escapeHtml(q.explanation)}</p><button type="button" id="btn-quiz-next" onclick="nextQuizQuestion()" class="satark-btn-primary px-4 py-2 rounded-lg font-bold text-xs">${APP_STATE.quizIndex + 1 < totalQ ? "Next Question →" : "See Final Results →"}</button></div>` : ""}
+              ${APP_STATE.quizSubmitted ? `<div class="p-4 rounded-2xl border border-indigo-200 dark:border-indigo-900 bg-indigo-50/50 dark:bg-indigo-950/20 text-xs space-y-2"><p>${escapeHtml(q.explanation)}</p><button type="button" id="btn-quiz-next" onclick="nextQuizQuestion()" class="btn-indigo px-4 py-2 rounded-xl font-bold text-xs">${APP_STATE.quizIndex + 1 < totalQ ? "Next Question →" : "See Final Results →"}</button></div>` : ""}
             </div>
           `}
         </div>
@@ -2833,22 +2835,22 @@
     function renderReportingPage() {
       return renderAppShell(`
         <div class="space-y-6">
-          <div><span class="text-xs font-bold uppercase tracking-wider text-[#D64D4D]">Official India Cyber Safety Channels</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Reporting & Safety Assistance</h1></div>
+          <div><span class="text-xs font-bold uppercase tracking-wider text-[#E11D48]">Official India Cyber Safety</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Report Fraud & Get Help</h1></div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="p-5 rounded-2xl bg-red-50/80 dark:bg-red-950/30 border-2 border-red-300 dark:border-red-800 space-y-2"><span class="text-xs font-extrabold uppercase text-[#D64D4D]">Financial Fraud Helpline</span><div class="text-3xl font-extrabold">Dial 1930</div><a href="tel:1930" class="inline-block mt-2 px-4 py-2 rounded-xl bg-[#D64D4D] text-white font-bold text-xs">📞 Call 1930 Now</a></div>
-            <div class="satark-card p-5 space-y-2"><span class="text-xs font-extrabold uppercase text-[#167D82]">Official Incident Portal</span><div class="text-lg font-extrabold">cybercrime.gov.in</div><a href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 px-4 py-2 rounded-xl bg-[#10213A] dark:bg-teal-600 text-white font-bold text-xs">🌐 Open cybercrime.gov.in ↗</a></div>
-            <div class="satark-card p-5 space-y-2"><span class="text-xs font-extrabold uppercase text-[#167D82]">Chakshu SMS/Call Portal</span><div class="text-lg font-extrabold">sancharsaathi.gov.in</div><a href="https://www.sancharsaathi.gov.in/" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 px-4 py-2 rounded-xl bg-[#10213A] dark:bg-teal-600 text-white font-bold text-xs">🌐 Open sancharsaathi.gov.in ↗</a></div>
+            <div class="p-6 rounded-3xl bg-rose-50 dark:bg-rose-950/35 border-2 border-rose-300 dark:border-rose-800 space-y-2"><span class="text-xs font-extrabold uppercase text-[#E11D48]">Financial Fraud Helpline</span><div class="text-3xl font-extrabold">Dial 1930</div><a href="tel:1930" class="inline-block mt-2 px-4 py-2 rounded-xl bg-[#E11D48] text-white font-bold text-xs">📞 Call 1930 Now</a></div>
+            <div class="ui-card p-6 space-y-2"><span class="text-xs font-extrabold uppercase text-indigo-600 dark:text-indigo-400">Official Incident Portal</span><div class="text-lg font-extrabold">cybercrime.gov.in</div><a href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-indigo inline-block mt-2 px-4 py-2 rounded-xl font-bold text-xs">🌐 Open Portal ↗</a></div>
+            <div class="ui-card p-6 space-y-2"><span class="text-xs font-extrabold uppercase text-emerald-600 dark:text-emerald-400">Chakshu SMS/Call Portal</span><div class="text-lg font-extrabold">sancharsaathi.gov.in</div><a href="https://www.sancharsaathi.gov.in/" target="_blank" rel="noopener noreferrer" class="inline-block mt-2 px-4 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs">🌐 Open Chakshu ↗</a></div>
           </div>
-          <div class="satark-card p-6 space-y-4">
+          <div class="ui-card p-6 space-y-4">
             <div class="flex flex-wrap items-center justify-between gap-2">
-              <h2 class="text-base font-bold">1930 Incident Preparation Worksheet</h2>
-              <button type="button" onclick="export1930IncidentSheet()" class="satark-btn-primary px-4 py-2 rounded-xl text-xs font-bold">⬇ Download 1930 Sheet (.txt)</button>
+              <h2 class="text-base font-bold">1930 Complaint Preparation Worksheet</h2>
+              <button type="button" onclick="export1930IncidentSheet()" class="btn-indigo px-4 py-2 rounded-xl text-xs font-bold">⬇ Download 1930 Sheet</button>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
-              <input type="text" value="${escapeHtml(APP_STATE.incidentForm.date)}" oninput="APP_STATE.incidentForm.date = this.value" placeholder="Date & Time" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-[#F4F7FB] dark:bg-slate-900 px-3 py-2" />
-              <input type="text" value="${escapeHtml(APP_STATE.incidentForm.amount)}" oninput="APP_STATE.incidentForm.amount = this.value" placeholder="Debited Amount (₹)" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-[#F4F7FB] dark:bg-slate-900 px-3 py-2" />
-              <input type="text" value="${escapeHtml(APP_STATE.incidentForm.utr)}" oninput="APP_STATE.incidentForm.utr = this.value" placeholder="12-Digit UTR / UPI Ref" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-[#F4F7FB] dark:bg-slate-900 px-3 py-2 font-mono" />
-              <input type="text" value="${escapeHtml(APP_STATE.incidentForm.suspectId)}" oninput="APP_STATE.incidentForm.suspectId = this.value" placeholder="Suspect Phone / URL" class="rounded-xl border border-slate-300 dark:border-slate-700 bg-[#F4F7FB] dark:bg-slate-900 px-3 py-2 font-mono" />
+              <input type="text" value="${escapeHtml(APP_STATE.incidentForm.date)}" oninput="APP_STATE.incidentForm.date = this.value" placeholder="Date & Time" class="rounded-xl border border-gray-200 dark:border-[#272A38] bg-[#FAF9F6] dark:bg-[#0C0D12] px-3 py-2.5" />
+              <input type="text" value="${escapeHtml(APP_STATE.incidentForm.amount)}" oninput="APP_STATE.incidentForm.amount = this.value" placeholder="Debited Amount (₹)" class="rounded-xl border border-gray-200 dark:border-[#272A38] bg-[#FAF9F6] dark:bg-[#0C0D12] px-3 py-2.5" />
+              <input type="text" value="${escapeHtml(APP_STATE.incidentForm.utr)}" oninput="APP_STATE.incidentForm.utr = this.value" placeholder="12-Digit UTR / UPI Ref" class="rounded-xl border border-gray-200 dark:border-[#272A38] bg-[#FAF9F6] dark:bg-[#0C0D12] px-3 py-2.5 font-mono" />
+              <input type="text" value="${escapeHtml(APP_STATE.incidentForm.suspectId)}" oninput="APP_STATE.incidentForm.suspectId = this.value" placeholder="Suspect Phone / URL" class="rounded-xl border border-gray-200 dark:border-[#272A38] bg-[#FAF9F6] dark:bg-[#0C0D12] px-3 py-2.5 font-mono" />
             </div>
           </div>
         </div>
@@ -2859,23 +2861,23 @@
       const s = APP_STATE.settings;
       return renderAppShell(`
         <div class="space-y-6">
-          <div><span class="text-xs font-bold uppercase tracking-wider text-[#167D82]">User Preferences & Data Control</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Settings & Privacy Controls</h1></div>
-          <div class="satark-card bg-white dark:bg-[#111F36] rounded-2xl p-6 space-y-4">
-            <div class="flex items-center justify-between py-3 border-b border-slate-200 dark:border-slate-700">
-              <div><div class="text-sm font-bold">Interface Language (भाषा)</div><div class="text-xs text-slate-500">Switch UI labels between English and Hindi.</div></div>
-              <button type="button" onclick="toggleLanguage()" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#167D82] text-white">${s.language === "hi" ? "हिंदी (Active) — EN" : "English (Active) — हिंदी"}</button>
+          <div><span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Preferences</span><h1 class="text-2xl sm:text-3xl font-extrabold mt-1">Settings & Privacy Controls</h1></div>
+          <div class="ui-card p-6 space-y-4">
+            <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-[#272A38]">
+              <div><div class="text-sm font-bold">Interface Language (भाषा)</div><div class="text-xs text-gray-500">Switch UI labels between English and Hindi.</div></div>
+              <button type="button" onclick="toggleLanguage()" class="btn-indigo px-4 py-2 rounded-xl text-xs font-bold">${s.language === "hi" ? "हिंदी (Active) — EN" : "English (Active) — हिंदी"}</button>
             </div>
-            <div class="flex items-center justify-between py-3 border-b border-slate-200 dark:border-slate-700">
-              <div><div class="text-sm font-bold">Color Theme</div><div class="text-xs text-slate-500">High-contrast Light or Dark mode.</div></div>
-              <button type="button" onclick="toggleTheme()" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800">${s.theme === "dark" ? "🌙 Dark Mode Active" : "☀️ Light Mode Active"}</button>
+            <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-[#272A38]">
+              <div><div class="text-sm font-bold">Color Theme</div><div class="text-xs text-gray-500">Warm Alabaster Light or Obsidian Dark mode.</div></div>
+              <button type="button" onclick="toggleTheme()" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#1E202C]">${s.theme === "dark" ? "🌙 Obsidian Dark" : "☀️ Alabaster Light"}</button>
             </div>
-            <div class="flex items-center justify-between py-3 border-b border-slate-200 dark:border-slate-700">
-              <div><div class="text-sm font-bold">Reduced Motion</div><div class="text-xs text-slate-500">Minimize animations for motion sensitivity.</div></div>
-              <button type="button" onclick="updateSettingToggle('reducedMotion', !APP_STATE.settings.reducedMotion)" class="px-4 py-2 rounded-xl text-xs font-bold ${s.reducedMotion ? 'bg-[#167D82] text-white' : 'bg-slate-100 dark:bg-slate-800'}">${s.reducedMotion ? "Enabled" : "Disabled"}</button>
+            <div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-[#272A38]">
+              <div><div class="text-sm font-bold">Reduced Motion</div><div class="text-xs text-gray-500">Minimize animations for comfort.</div></div>
+              <button type="button" onclick="updateSettingToggle('reducedMotion', !APP_STATE.settings.reducedMotion)" class="px-4 py-2 rounded-xl text-xs font-bold ${s.reducedMotion ? 'bg-[#4F46E5] text-white' : 'bg-gray-100 dark:bg-[#1E202C]'}">${s.reducedMotion ? "Enabled" : "Disabled"}</button>
             </div>
             <div class="flex items-center justify-between py-3">
-              <div><div class="text-sm font-bold">Save Local Scan History</div><div class="text-xs text-slate-500">Store scan results locally in your browser.</div></div>
-              <button type="button" onclick="updateSettingToggle('saveHistory', !APP_STATE.settings.saveHistory)" class="px-4 py-2 rounded-xl text-xs font-bold ${s.saveHistory ? 'bg-[#167D82] text-white' : 'bg-slate-100 dark:bg-slate-800'}">${s.saveHistory ? "Enabled" : "Disabled"}</button>
+              <div><div class="text-sm font-bold">Save Local Scan History</div><div class="text-xs text-gray-500">Store scan history locally in your browser.</div></div>
+              <button type="button" onclick="updateSettingToggle('saveHistory', !APP_STATE.settings.saveHistory)" class="px-4 py-2 rounded-xl text-xs font-bold ${s.saveHistory ? 'bg-[#4F46E5] text-white' : 'bg-gray-100 dark:bg-[#1E202C]'}">${s.saveHistory ? "Enabled" : "Disabled"}</button>
             </div>
           </div>
         </div>
@@ -2883,15 +2885,15 @@
     }
 
     function renderAboutPage() {
-      return `${renderPublicNavbar()}<main class="max-w-4xl mx-auto px-4 py-10 space-y-4 flex-1"><h1 class="text-3xl font-extrabold">Technical Architecture</h1><div class="satark-card p-6 text-sm space-y-2"><p>SATARK AI combines multilingual deterministic rules (English, Hindi, Hinglish) with zero-visit structural URL inspection.</p></div></main>${renderFooter()}`;
+      return renderAppShell(`<div class="max-w-3xl mx-auto space-y-4"><h1 class="text-3xl font-extrabold">About SATARK AI</h1><div class="ui-card p-6 text-sm space-y-2"><p>SATARK AI combines multilingual deterministic rules (English, Hindi, and Hinglish) with zero-visit structural URL inspection and private in-browser screenshot OCR.</p></div></div>`);
     }
 
     function renderPrivacyPage() {
-      return `${renderPublicNavbar()}<main class="max-w-4xl mx-auto px-4 py-10 space-y-4 flex-1"><h1 class="text-3xl font-extrabold">Transparent Privacy Policy</h1><div class="satark-card p-6 text-sm space-y-2"><p>SATARK AI does not require accounts, stores scan history strictly locally in your browser, and never visits submitted URLs automatically.</p></div></main>${renderFooter()}`;
+      return renderAppShell(`<div class="max-w-3xl mx-auto space-y-4"><h1 class="text-3xl font-extrabold">Privacy Policy</h1><div class="ui-card p-6 text-sm space-y-2"><p>SATARK AI requires no account, stores scan history strictly on your device, and inspects URLs structurally without ever opening them.</p></div></div>`);
     }
 
     function renderNotFoundPage() {
-      return `${renderPublicNavbar()}<main class="max-w-xl mx-auto px-4 py-16 text-center space-y-4 flex-1"><h1 class="text-2xl font-extrabold">404 — Page Not Found</h1><button type="button" onclick="navigateTo('/app/scan')" class="satark-btn-primary px-4 py-2 rounded-xl text-xs font-bold">Open Message Scanner</button></main>${renderFooter()}`;
+      return renderAppShell(`<div class="max-w-md mx-auto py-12 text-center space-y-4"><h1 class="text-2xl font-extrabold">404 — Page Not Found</h1><button type="button" onclick="navigateTo('/app/scan')" class="btn-indigo px-5 py-2.5 rounded-xl text-xs font-bold">Open Message Scanner</button></div>`);
     }
 
     function renderApp() {
